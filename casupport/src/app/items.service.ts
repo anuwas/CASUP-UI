@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 
-export class StudentService {
+export class ItemsService {
 
   private baseUrl = 'http://localhost:8091/api/';
 
@@ -32,4 +32,4 @@ export class StudentService {
     return this.http.post(`${this.baseUrl}/update-student/${id}`, value);
   }
   
-}                                           
+} 
