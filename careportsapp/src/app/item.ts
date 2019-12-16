@@ -10,4 +10,12 @@ export class Item {
     associatedItem:String;
     itemCreatedDate:Date;
     itemCloseDate:Date;
+    applicationName:String;
+    priority:number;
+    aged:String;
+    bounce:number;
+    primarySlaBreached:String;
+    secondarySlaBreached:String;
+    tertirySlaBreached:String;
+    resoluation:String
 }

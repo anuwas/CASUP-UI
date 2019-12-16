@@ -16,7 +16,7 @@ private baseUrl = 'http://localhost:8091/api';
   }
 
   createItem(item: object): Observable<object> {
-    return this.http.post(`${this.baseUrl}`+'save-item', item);
+    return this.http.post(`${this.baseUrl}`+'/save-item', item);
   }
 
   getItem(id: number): Observable<Object> {

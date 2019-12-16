@@ -42,7 +42,6 @@ items: Observable<Item[]>;
     getPage(page: number) {
     
     this.config.currentPage=page;
-        this.loading = true;
         this.itemservice.getItemList(page).subscribe(data =>{
         //console.log(data);
         this.items =data.content;
@@ -62,6 +61,14 @@ items: Observable<Item[]>;
     item_created_date:new FormControl(),
     item_close_date:new FormControl(),
     associated_item:new FormControl(),
+    application_name:new FormControl(),
+    aged_item:new FormControl(),
+    priority_item:new FormControl(),
+    bounce_item:new FormControl(),
+    primary_sla_breahed:new FormControl(),
+    secondary_sla_breahed:new FormControl(),
+    tertirary_sla_breahed:new FormControl(),
+    item_resolution:new FormControl(),
   });
 
     saveAndUpdateItem(saveItem){
@@ -75,9 +82,17 @@ items: Observable<Item[]>;
     this.item.itemCreatedDate=this.ItemCreatedDate.value;
     this.item.itemCloseDate=this.ItemCloseDate.value;
     this.item.associatedItem=this.ItemAssociatedItem.value;
+    this.item.applicationName=this.ApplicationName.value;
+    this.item.priority=this.PriorityItem.value;
+    this.item.aged=this.AgedItem.value;
+    this.item.bounce=this.BounceItem.value;
+    this.item.primarySlaBreached=this.PrimarySlaBreahed.value;
+    this.item.secondarySlaBreached=this.SecondarySlaBreahed.value;
+    this.item.tertirySlaBreached=this.TertirarySlaBreahed.value;
+    this.item.resoluation=this.ItemResolution.value;
     
     this.submitted = true;
-    if(this.ItemType.value==''){
+    if(this.ItemId.value==null){
          this.saveItem();
     }else{
         this.item.id=this.ItemId.value;
@@ -118,7 +133,7 @@ items: Observable<Item[]>;
   getUpdateItem(itemid){
     this.item=new Item();
     this.itemservice.getItem(itemid).subscribe(data =>{
-         this.itemsaveform.setValue({item_id:data.id,item_number:data.itemNumber,item_type:data.itemType,item_subject:data.itemSubject,item_owner:data.itemOwner,item_status:data.itemStatus,item_description:data.itemDescription,item_created_date:data.itemCreatedDate,item_close_date:data.itemCloseDate,associated_item:data.associatedItem});
+         this.itemsaveform.setValue({item_id:data.id,item_number:data.itemNumber,item_type:data.itemType,item_subject:data.itemSubject,item_owner:data.itemOwner,item_status:data.itemStatus,item_description:data.itemDescription,item_created_date:data.itemCreatedDate,item_close_date:data.itemCloseDate,associated_item:data.associatedItem,application_name:data.applicationName,aged_item:data.aged,priority_item:data.priority,bounce_item:data.bounce,primary_sla_breahed:data.primarySlaBreached,secondary_sla_breahed:data.secondarySlaBreached,tertirary_sla_breahed:data.tertirySlaBreached,item_resolution:data.resoluation});
 
     });
     
@@ -168,6 +183,37 @@ items: Observable<Item[]>;
     return this.itemsaveform.get('associated_item');
   }
 
+   get ApplicationName(){
+    return this.itemsaveform.get('application_name');
+  }
+
+  get AgedItem(){
+    return this.itemsaveform.get('aged_item');
+  }
+
+  get PriorityItem(){
+    return this.itemsaveform.get('priority_item');
+  }
+
+  get BounceItem(){
+    return this.itemsaveform.get('bounce_item');
+  }
+
+  get PrimarySlaBreahed(){
+    return this.itemsaveform.get('primary_sla_breahed');
+  }
+
+  get SecondarySlaBreahed(){
+    return this.itemsaveform.get('secondary_sla_breahed');
+  }
+
+  get TertirarySlaBreahed(){
+    return this.itemsaveform.get('tertirary_sla_breahed');
+  }
+
+  get ItemResolution(){
+    return this.itemsaveform.get('item_resolution');
+  }
 
 
 }
