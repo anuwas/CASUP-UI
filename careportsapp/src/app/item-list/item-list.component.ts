@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,Pipe, PipeTransform } from '@angular/core';
 import {FormControl,FormGroup,Validators} from '@angular/forms';
 import { ItemService } from '../item.service';
 import { Item } from '../item';
 import { Observable,Subject } from "rxjs";
+import { DatePipe } from '@angular/common';
 
 
 interface IServerResponse {
@@ -32,6 +33,7 @@ submitted = false;
 
 item : Item=new Item();
 items: Observable<Item[]>;
+
   
 
     ngOnInit() {
@@ -133,7 +135,26 @@ items: Observable<Item[]>;
   getUpdateItem(itemid){
     this.item=new Item();
     this.itemservice.getItem(itemid).subscribe(data =>{
-         this.itemsaveform.setValue({item_id:data.id,item_number:data.itemNumber,item_type:data.itemType,item_subject:data.itemSubject,item_owner:data.itemOwner,item_status:data.itemStatus,item_description:data.itemDescription,item_created_date:data.itemCreatedDate,item_close_date:data.itemCloseDate,associated_item:data.associatedItem,application_name:data.applicationName,aged_item:data.aged,priority_item:data.priority,bounce_item:data.bounce,primary_sla_breahed:data.primarySlaBreached,secondary_sla_breahed:data.secondarySlaBreached,tertirary_sla_breahed:data.tertirySlaBreached,item_resolution:data.resoluation});
+         var datePipe=new DatePipe("en-US");
+         this.itemsaveform.patchValue({
+         item_id:this.UpdatableItem(data,'id'),
+         item_number:this.UpdatableItem(data,'itemNumber'),
+         item_type:this.UpdatableItem(data,'itemType'),
+         item_subject:this.UpdatableItem(data,'itemSubject'),
+         item_owner:this.UpdatableItem(data,'itemOwner'),
+         item_status:this.UpdatableItem(data,'itemStatus'),
+         item_description:this.UpdatableItem(data,'itemDescription'),
+         item_created_date:datePipe.transform(this.UpdatableItem(data,'itemCreatedDate'),'yyyy-MM-dd hh:mm:ss'),
+         item_close_date:datePipe.transform(this.UpdatableItem(data,'itemCloseDate'),'yyyy-MM-dd hh:mm:ss'),
+         associated_item:this.UpdatableItem(data,'associatedItem'),
+         application_name:this.UpdatableItem(data,'applicationName'),
+         aged_item:this.UpdatableItem(data,'aged'),
+         priority_item:this.UpdatableItem(data,'priority'),
+         bounce_item:this.UpdatableItem(data,'bounce'),
+         primary_sla_breahed:this.UpdatableItem(data,'primarySlaBreached'),
+         secondary_sla_breahed:this.UpdatableItem(data,'secondarySlaBreached'),
+         tertirary_sla_breahed:this.UpdatableItem(data,'tertirySlaBreached'),
+         item_resolution:this.UpdatableItem(data,'resoluation')});
 
     });
     
@@ -143,12 +164,20 @@ items: Observable<Item[]>;
     this.itemsaveform.reset();
   }
 
+  UpdatableItem(updateItemObject:Object,updateItemName:any){
+    return updateItemObject[updateItemName];
+  }
+
   get ItemId(){
     return this.itemsaveform.get('item_id');
   }
 
   get ItemNumber(){
     return this.itemsaveform.get('item_number');
+  }
+
+  get UItemNumber(){
+    return 123;
   }
 
   get ItemType(){

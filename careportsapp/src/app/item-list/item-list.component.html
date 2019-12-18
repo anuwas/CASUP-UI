@@ -42,7 +42,7 @@
                         <th>Owner</th>
                         <th>Open Date</th>
                         <th width="80"><span class="label pull-right">
-                      <a href="#modal" data-toggle="modal" class="btn btn-xs btn-success add-item-button"><i class="fa fa-plus" aria-hidden="true"></i> Add</a>
+                      <a href="#modal" data-toggle="modal" class="btn btn-xs btn-success add-item-button" data-backdrop="static" data-keyboard="false"><i class="fa fa-plus" aria-hidden="true"></i> Add</a>
                     </span></th>
                       </tr>
                     </thead>
@@ -97,37 +97,37 @@
                     <div class="form-group">
                       <input type="text" name="item_created_date" formControlName="item_created_date" class="form-control" placeholder="created On" >
                     </div>
-                    <div class="form-group">
+                    <div class="form-group" id="form_group_item_close_date">
                       <input type="text" name="item_close_date" formControlName="item_close_date" class="form-control" placeholder="Close On" >
                     </div>
                     <div class="form-group">
                       <input type="text" name="associated_item" formControlName="associated_item" class="form-control" placeholder="Associated" >
                     </div> 
-                    <div class="form-group">
+                    <div class="form-group" id="form_group_aged_item">
                       <input type="text" name="aged_item" formControlName="aged_item" class="form-control" placeholder="Aged Item" >
                     </div> 
-                    <div class="form-group">
+                    <div class="form-group" >
                       <input type="text" name="priority_item" formControlName="priority_item" class="form-control" placeholder="Priority" >
                     </div> 
-                    <div class="form-group">
+                    <div class="form-group" id="form_group_bounce_item">
                       <input type="text" name="bounce_item" formControlName="bounce_item" class="form-control" placeholder="Bounce" >
                     </div> 
-                    <div class="form-group">
+                    <div class="form-group" id="form_group_primary_sla_breahed">
                       <input type="text" name="primary_sla_breahed" formControlName="primary_sla_breahed" class="form-control" placeholder="Primary SLA" >
                     </div>
-                    <div class="form-group">
+                    <div class="form-group" id="form_group_secondary_sla_breahed">
                       <input type="text" name="secondary_sla_breahed" formControlName="secondary_sla_breahed" class="form-control" placeholder="Secondary SLA" >
                     </div> 
-                    <div class="form-group">
+                    <div class="form-group" id="form_group_tertirary_sla_breahed">
                       <input type="text" name="tertirary_sla_breahed" formControlName="tertirary_sla_breahed" class="form-control" placeholder="Tertiry SLA" >
                     </div> 
-                    <div class="form-group">
+                    <div class="form-group" id="form_group_item_resolution">
                       <input type="text" name="item_resolution" formControlName="item_resolution" class="form-control" placeholder="Resoluation" >
                     </div>                 
                   
                 </div>
                 <div class="modal-footer">
-                  <button type="button" class="btn btn-white" data-dismiss="modal" (click)="addItemModalClose()">Close</button>
+                  <button type="button" class="btn btn-white" data-dismiss="modal" (click)="addItemModalClose()" >Close</button>
                   <!-- <button type="submit" class="btn btn-info" data-loading-text="Updating..." id="itemSubmitButton">Save changes</button> -->
                   <button type="submit" class="btn btn-info" data-loading-text="Updating..." id="itemSubmitButton">Save changes</button>
                 </div>

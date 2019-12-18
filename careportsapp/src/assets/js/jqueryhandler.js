@@ -12,11 +12,30 @@ $( document ).ready(function() {
    	
    	$(document).on('click','.edit-item-button', function(){
     	$('.modal-title').text('Edit Item');
+      $('#form_group_item_close_date').show();
+      $('#form_group_primary_sla_breahed').show();
+      $('#form_group_secondary_sla_breahed').show();
+      $('#form_group_tertirary_sla_breahed').show();
+      $('#form_group_item_resolution').show();
+      $('#form_group_aged_item').show();
+      $('#form_group_bounce_item').show();
  	});
 
  	$(document).on('click','.add-item-button', function(){
     	$('.modal-title').text('Add New Item');
+      $('#form_group_item_close_date').hide();
+      $('#form_group_primary_sla_breahed').hide();
+      $('#form_group_secondary_sla_breahed').hide();
+      $('#form_group_tertirary_sla_breahed').hide();
+      $('#form_group_item_resolution').hide();
+      $('#form_group_aged_item').hide();
+      $('#form_group_bounce_item').hide();
+      
+      
+      
  	});
+
+
 
 });
 
