@@ -12,7 +12,11 @@ private baseUrl = 'http://localhost:8091/api';
   constructor(private http:HttpClient) { }
 
   getItemList(page: number): Observable<any> {
-    return this.http.get(`${this.baseUrl}/itemlist/${page}`);
+    return this.http.get(`${this.baseUrl}/all-item-list/${page}`);
+  }
+
+  getItemListByItemNumber(page: number,itemNumber: number): Observable<any> {
+    return this.http.get(`${this.baseUrl}/all-item-list/${page}/${itemNumber}`);
   }
 
   createItem(item: object): Observable<object> {
@@ -29,5 +33,9 @@ private baseUrl = 'http://localhost:8091/api';
 
    deleteItem(id: number): Observable<any> {
     return this.http.delete(`${this.baseUrl}/item/${id}`, { responseType: 'text' });
+  }
+
+  getActiveItemList(): Observable<any> {
+    return this.http.get(`${this.baseUrl}/active-item-list`);
   }
 }

@@ -24,7 +24,7 @@ constructor(private itemservice:ItemService) {
 
 this.config = {
       currentPage: 1,
-      itemsPerPage: 20,
+      itemsPerPage: 50,
       totalItems:3
     };
  }
@@ -52,6 +52,10 @@ items: Observable<Item[]>;
         
     }
 
+    itemsearchform = new FormGroup({
+      search_item_number:new FormControl(),
+    });
+
     itemsaveform=new FormGroup({
     item_id:new FormControl(),
     item_number:new FormControl(),
@@ -71,7 +75,18 @@ items: Observable<Item[]>;
     secondary_sla_breahed:new FormControl(),
     tertirary_sla_breahed:new FormControl(),
     item_resolution:new FormControl(),
+    item_assigned:new FormControl(),
   });
+
+  searchItemSubmit(searchItem){
+  console.log("aaa");
+      this.itemservice.getItemListByItemNumber(1,this.ItemNumberSearch.value)
+            .subscribe(data => {
+            this.items =data.content;
+            this.config.totalItems = data.totalElements;
+            
+        });
+  }
 
     saveAndUpdateItem(saveItem){
     this.item=new Item(); 
@@ -92,6 +107,7 @@ items: Observable<Item[]>;
     this.item.secondarySlaBreached=this.SecondarySlaBreahed.value;
     this.item.tertirySlaBreached=this.TertirarySlaBreahed.value;
     this.item.resoluation=this.ItemResolution.value;
+    this.item.itemAssigned=this.ItemAssigned.value;
     
     this.submitted = true;
     if(this.ItemId.value==null){
@@ -107,7 +123,7 @@ items: Observable<Item[]>;
   saveItem() {
     this.itemservice.createItem(this.item)
       .subscribe(data => {
-        console.log(data);
+        this.getPage(this.config.currentPage);
       });
     this.item = new Item();
   }
@@ -115,7 +131,7 @@ items: Observable<Item[]>;
   updateItem(){
     this.itemservice.updateItem(this.item.id,this.item)
       .subscribe(data => {
-        console.log(data);
+        this.getPage(this.config.currentPage);
       });
     this.item = new Item();
   }
@@ -125,9 +141,8 @@ items: Observable<Item[]>;
         console.log("Implement delete functionality here");
         this.itemservice.deleteItem(itemid)
             .subscribe(data => {
-            console.log(data);
+            this.getPage(this.config.currentPage);
         });
-        window.location.reload();
         }
     
     }
@@ -154,7 +169,8 @@ items: Observable<Item[]>;
          primary_sla_breahed:this.UpdatableItem(data,'primarySlaBreached'),
          secondary_sla_breahed:this.UpdatableItem(data,'secondarySlaBreached'),
          tertirary_sla_breahed:this.UpdatableItem(data,'tertirySlaBreached'),
-         item_resolution:this.UpdatableItem(data,'resoluation')});
+         item_resolution:this.UpdatableItem(data,'resoluation'),
+         item_assigned:this.UpdatableItem(data,'itemAssigned')});
 
     });
     
@@ -176,8 +192,8 @@ items: Observable<Item[]>;
     return this.itemsaveform.get('item_number');
   }
 
-  get UItemNumber(){
-    return 123;
+  get ItemNumberSearch(){
+    return this.itemsearchform.get('search_item_number');
   }
 
   get ItemType(){
@@ -242,6 +258,10 @@ items: Observable<Item[]>;
 
   get ItemResolution(){
     return this.itemsaveform.get('item_resolution');
+  }
+
+  get ItemAssigned(){
+    return this.itemsaveform.get('item_assigned');
   }
 
 

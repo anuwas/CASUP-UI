@@ -1,0 +1,8 @@
+:host /deep/ ng2-smart-table-title a:focus { color: #009ECE; }
+
+:host /deep/ ng2-smart-table thead > table> td> tr > th > div { color: #717171; font-size: 14px;}
+
+
+:host /deep/ ng2-smart-table thead > tr > th > div {cursor: pointer;color: #009ECE; }
+:host /deep/ th.ng2-smart-actions a {cursor: pointer;color: #009ECE; }
+

@@ -1,0 +1,4 @@
+#ng generate component [component-name]
+#npm install ngx-pagination --save
+#npm install --save ng2-smart-table
+#npm install ng2-completer --save

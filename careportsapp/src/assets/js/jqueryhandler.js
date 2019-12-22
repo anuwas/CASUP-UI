@@ -19,6 +19,7 @@ $( document ).ready(function() {
       $('#form_group_item_resolution').show();
       $('#form_group_aged_item').show();
       $('#form_group_bounce_item').show();
+      $('#form-group_item_owner').show();
  	});
 
  	$(document).on('click','.add-item-button', function(){
@@ -30,6 +31,7 @@ $( document ).ready(function() {
       $('#form_group_item_resolution').hide();
       $('#form_group_aged_item').hide();
       $('#form_group_bounce_item').hide();
+      $('#form-group_item_owner').hide();
       
       
       

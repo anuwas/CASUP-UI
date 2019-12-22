@@ -6,7 +6,7 @@ export class Item {
     itemOwner:String;
     itemStatus:String;
     itemDescription:String;
-    itemCreatedBy:String;
+    itemAssigned:String;
     associatedItem:String;
     itemCreatedDate:Date;
     itemCloseDate:Date;
@@ -17,5 +17,5 @@ export class Item {
     primarySlaBreached:String;
     secondarySlaBreached:String;
     tertirySlaBreached:String;
-    resoluation:String
+    resoluation:String;
 }

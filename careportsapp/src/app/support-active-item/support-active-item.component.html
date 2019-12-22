@@ -1,0 +1,32 @@
+        <section class="scrollable wrapper">
+          <div class="row">
+          <div class="col-md-12">
+            <section class="panel">
+                <header class="panel-heading">
+                  All Active Items
+                </header>
+                
+                <div >
+                  <ng2-smart-table class="table table-striped b-t text-sm" [settings]="settings" [source]="itemData" (deleteConfirm)="onDeleteConfirm($event)" (editConfirm)="onSaveConfirm($event)"
+ (createConfirm)="onCreateConfirm($event)"></ng2-smart-table>
+                  
+                </div>
+
+                <footer class="panel-footer">
+                  <div class="row">
+                    <div class="col-sm-4 hidden-xs">
+                      
+                             &nbsp;
+                    </div>
+                    <div class="col-sm-4 text-center">
+                      
+                    </div>
+                    
+                      
+                    
+                  </div>
+                </footer>
+              </section>
+          </div>
+          </div>          
+        </section>

@@ -2465,6 +2465,9 @@ fieldset[disabled] .btn-gplus.active {
 .text-sm {
   font-size: 12px;
 }
+.text-sm2 {
+  font-size: 14px;
+}
 .text-xs {
   font-size: 10px;
 }
