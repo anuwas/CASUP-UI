@@ -4,7 +4,7 @@ import { ItemService } from '../item.service';
 import { Item } from '../item';
 import { Observable,Subject } from "rxjs";
 import { DatePipe } from '@angular/common';
-
+import { parse } from 'date-fns';
 
 interface IServerResponse {
     items: any[];
@@ -33,7 +33,6 @@ submitted = false;
 
 item : Item=new Item();
 items: Observable<Item[]>;
-
   
 
     ngOnInit() {
@@ -96,8 +95,9 @@ items: Observable<Item[]>;
     this.item.itemSubject=this.ItemSubject.value;
     this.item.itemDescription=this.ItemDescription.value;
     this.item.itemOwner=this.ItemOwner.value;
-    this.item.itemCreatedDate=this.ItemCreatedDate.value;
-    this.item.itemCloseDate=this.ItemCloseDate.value;
+    this.item.itemCreatedDate=parse(this.ItemCreatedDate.value, 'yyyy-MM-dd hh:mm:ss', new Date());
+    console.log(this.item.itemCreatedDate);
+    this.item.itemCloseDate=parse(this.ItemCloseDate.value, 'yyyy-MM-dd hh:mm:ss', new Date());
     this.item.associatedItem=this.ItemAssociatedItem.value;
     this.item.applicationName=this.ApplicationName.value;
     this.item.priority=this.PriorityItem.value;
@@ -213,7 +213,8 @@ items: Observable<Item[]>;
   }
 
   get ItemCreatedDate(){
-    return this.itemsaveform.get('item_created_date');
+  
+     return this.itemsaveform.get('item_created_date');
   }
 
   get ItemCloseDate(){
