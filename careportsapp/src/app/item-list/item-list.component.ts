@@ -1,10 +1,11 @@
 import { Component, OnInit,Pipe, PipeTransform } from '@angular/core';
 import {FormControl,FormGroup,Validators} from '@angular/forms';
 import { ItemService } from '../item.service';
-import { Item } from '../item';
+import { Supitem } from '../entity/supitem';
 import { Observable,Subject } from "rxjs";
 import { DatePipe } from '@angular/common';
 import { parse } from 'date-fns';
+import { NgxSpinnerService } from "ngx-spinner";
 
 interface IServerResponse {
     items: any[];
@@ -20,7 +21,7 @@ interface IServerResponse {
 
 export class ItemListComponent  implements OnInit{
 
-constructor(private itemservice:ItemService) {
+constructor(private itemservice:ItemService,private spinner: NgxSpinnerService) {
 
 this.config = {
       currentPage: 1,
@@ -31,24 +32,27 @@ this.config = {
 config: any; 
 submitted = false;
 
-item : Item=new Item();
-items: Observable<Item[]>;
+item : Supitem=new Supitem();
+items: Observable<Supitem[]>;
   
 
     ngOnInit() {
+        
         this.getPage(1);
         this.submitted=false;
+
     }
 
     getPage(page: number) {
-    
+    this.spinner.show();
     this.config.currentPage=page;
         this.itemservice.getItemList(page).subscribe(data =>{
         //console.log(data);
         this.items =data.content;
         this.config.totalItems = data.totalElements;
+        this.spinner.hide();
     })
-        
+         
     }
 
     itemsearchform = new FormGroup({
@@ -88,7 +92,7 @@ items: Observable<Item[]>;
   }
 
     saveAndUpdateItem(saveItem){
-    this.item=new Item(); 
+    this.item=new Supitem(); 
     this.item.itemNumber=this.ItemNumber.value;
     this.item.itemType=this.ItemType.value;
     this.item.itemStatus=this.ItemStatus.value;
@@ -125,7 +129,7 @@ items: Observable<Item[]>;
       .subscribe(data => {
         this.getPage(this.config.currentPage);
       });
-    this.item = new Item();
+    this.item = new Supitem();
   }
 
   updateItem(){
@@ -133,7 +137,7 @@ items: Observable<Item[]>;
       .subscribe(data => {
         this.getPage(this.config.currentPage);
       });
-    this.item = new Item();
+    this.item = new Supitem();
   }
 
     getRemoveItem(itemid){
@@ -148,7 +152,7 @@ items: Observable<Item[]>;
     }
 
   getUpdateItem(itemid){
-    this.item=new Item();
+    this.item=new Supitem();
     this.itemservice.getItem(itemid).subscribe(data =>{
          var datePipe=new DatePipe("en-US");
          this.itemsaveform.patchValue({

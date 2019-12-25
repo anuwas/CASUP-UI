@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ItemService } from '../item.service';
 import { Observable,Subject } from "rxjs";
-import { Item } from '../item';
+import { Supitem } from '../entity/supitem';
 
 
 @Component({
@@ -14,7 +14,7 @@ export class SupportActiveItemComponent implements OnInit {
   constructor(private itemservice:ItemService) { }
 
   itemData: Observable<any>;
-  item : Item=new Item();
+  item : Supitem=new Supitem();
 
   ngOnInit() {
   	this.getPage();
@@ -23,8 +23,11 @@ export class SupportActiveItemComponent implements OnInit {
   settings = {
  
   actions: {
-     
-      position: 'right'
+      custom: [
+      { name: 'viewrecord', title: '<i class="fa fa-eye"></i>'}
+    ],
+      position: 'right',
+
     },
     delete: {
       confirmDelete: true,
@@ -95,7 +98,7 @@ data = [ ];
   onCreateConfirm(event) {
     console.log("Create Event In Console")
     console.log(event.newData);
-    this.item=new Item(); 
+    this.item=new Supitem(); 
     this.item.itemNumber=event.newData.itemNumber;
     this.item.itemType=event.newData.itemType;
     this.item.itemStatus=event.newData.itemStatus;
@@ -105,7 +108,7 @@ data = [ ];
       .subscribe(data => {
         this.getPage();
       });
-    this.item = new Item();
+    this.item = new Supitem();
     event.confirm.reject();
   }
 
@@ -117,7 +120,19 @@ data = [ ];
       .subscribe(data => {
         this.getPage();
       });
-    this.item = new Item();
+    this.item = new Supitem();
   }
+
+  onCustomAction(event) {
+      switch ( event.action) {
+        case 'viewrecord':
+          this.viewRecord(event.data);
+          break;
+      }
+    }
+
+    viewRecord(data:any){
+    console.log(data);
+    }
 
 }

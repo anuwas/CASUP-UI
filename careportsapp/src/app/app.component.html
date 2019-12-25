@@ -13,7 +13,9 @@
           <a class="btn btn-link visible-xs" data-toggle="class:nav-off-screen" data-target="#nav">
             <i class="fa fa-bars"></i>
           </a>
-          <a href="#" class="nav-brand" data-toggle="fullscreen">CA</a>
+          <a routerLink="/dashboard" routerLinkActive="active" class="nav-brand">
+            <img src="assets/images/logo.svg">
+          </a>
           <a class="btn btn-link visible-xs" data-toggle="class:show" data-target=".nav-user">
             <i class="fa fa-comment-o"></i>
           </a>
@@ -47,22 +49,22 @@
           <!-- nav -->
           <nav class="nav-primary hidden-xs">
             <ul class="nav">
-              <li class="active">
-                <a href="home.html">
+              <li>
+                <a routerLink="/dashboard" routerLinkActive="active">
                   <i class="fa fa-eye"></i>
                   <span>Dashboard</span>
                 </a>
               </li>
               <li>
-                <a href="events.html">
+                <a routerLink="/view-item" routerLinkActive="active">
                   <i class="fa fa-calendar" aria-hidden="true"></i>
-                  <span>Events</span>
+                  <span>All Item</span>
                 </a>
               </li>
               <li>
-                <a href="user.html">
+                <a routerLink="/support-active-item" routerLinkActive="active">
                   <i class="fa fa-users" aria-hidden="true"></i>
-                  <span>All User</span>
+                  <span>Active Item</span>
                 </a>
               </li>
               
@@ -91,7 +93,7 @@
     <section id="content">
       <section class="vbox">
         <header class="header bg-white b-b">
-          <p>Welcome CA reporting app</p>
+          <p>Welcome to CA Reporting App</p>
         </header>
         <router-outlet></router-outlet>
       </section>

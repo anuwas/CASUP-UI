@@ -8,8 +8,30 @@
                 
                 <div >
                   <ng2-smart-table class="table table-striped b-t text-sm" [settings]="settings" [source]="itemData" (deleteConfirm)="onDeleteConfirm($event)" (editConfirm)="onSaveConfirm($event)"
- (createConfirm)="onCreateConfirm($event)"></ng2-smart-table>
+ (createConfirm)="onCreateConfirm($event)" (custom)="onCustomAction($event)"></ng2-smart-table>
                   
+                </div>
+                <div>
+                  <div class="modal fade" id="modal">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                  <h4 class="modal-title">Add Item</h4>
+                </div>
+                <div class="modal-body">
+                  <!-- <form  role="form"> -->
+                          
+                  
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-white" data-dismiss="modal"  >Close</button>
+                  <!-- <button type="submit" class="btn btn-info" data-loading-text="Updating..." id="itemSubmitButton">Save changes</button> -->
+                  <button type="submit" class="btn btn-info" data-loading-text="Updating..." id="itemSubmitButton">Save changes</button>
+                </div>
+              </div><!-- /.modal-content -->
+            </div><!-- /.modal-dialog -->
+          </div>
                 </div>
 
                 <footer class="panel-footer">
@@ -28,5 +50,6 @@
                 </footer>
               </section>
           </div>
-          </div>          
+          </div>    
+                
         </section>
