@@ -1,1 +1,168 @@
-<p>support-all-item works!</p>
+        <section class="scrollable wrapper">
+          <div class="row">
+          <div class="col-md-12">
+            <section class="panel">
+                <header class="panel-heading">
+                  All Items
+                </header>
+                <div class="row text-sm wrapper">
+                  <div class="col-sm-9 m-b-xs">
+                    <select class="input-sm form-control input-s-sm inline">
+                      <option value="1">Delete selected</option>
+                      <option value="3">Export</option>
+                    </select>
+                    <button class="btn btn-sm btn-white">Apply</button>                
+                  </div>
+                  
+                  <div class="col-sm-3">
+                    <form [formGroup]="itemsearchform" id="searchItem" (ngSubmit)="searchItemSubmit(searchItem)">
+                    <div class="input-group">
+                       <input type="text" name="search_item_number" formControlName="search_item_number" class="input-sm form-control" placeholder="Item Number" >
+                      <span class="input-group-btn">
+                        <button type="submit" class="btn btn-sm btn-white" >Go!</button>
+
+                      </span>
+                    </div>
+                  </form>
+                  </div>
+                </div>
+                <div class="table-responsive">
+                  <table class="table table-striped b-t text-sm">
+                    <thead>
+                      <tr>
+                        <th width="20" class="th-sortable" data-toggle="class">ID</th>
+                        <th>Item Number</th>                        
+                        <th>Item Type</th>
+                        <th>Status</th>
+                        <th>Subject</th>
+                        <th>Assigned</th>
+                        <th>Open Date</th>
+                        <th width="80"><span class="label pull-right">
+                      <a href="#modal" data-toggle="modal" class="btn btn-xs btn-success add-item-button" data-backdrop="static" data-keyboard="false"><i class="fa fa-plus" aria-hidden="true"></i> Add</a>
+                    </span></th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let itemObj of items | paginate: config">
+                        <td>{{ itemObj.id }}</td>
+                        <td>{{ itemObj.itemNumber }}</td>
+                        <td>{{ itemObj.itemType }}</td>
+                         <td>{{ itemObj.itemStatus }}</td>
+                        <td>{{ itemObj.itemSubject }}</td>                        
+                        <td>{{ itemObj.itemAssigned }}</td> 
+                        <td>{{ itemObj.itemCreatedDate | date:'yyyy-MM-dd hh:mm:ss'}}</td> 
+                        <td><a href="#modal" data-toggle="modal" data-backdrop="static" data-keyboard="false"><i class="fa fa-edit fa-lg edit-item-button" (click)="getUpdateItem(itemObj.id)"></i></a> &nbsp;<a href="javascript:void(0)"><i class="fa fa-trash-o fa-lg" (click)="getRemoveItem(itemObj.id)"></i></a></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                <form [formGroup]="itemsaveform" id="saveitem" (ngSubmit)="saveAndUpdateItem(saveItem)">
+                <div class="modal fade" id="modal">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                  <h4 class="modal-title">Add Item</h4>
+                </div>
+                <div class="modal-body">
+                  <!-- <form  role="form"> -->
+                    <input type="hidden" class="form-control"  formControlName="item_id">
+                    <div class="form-group">
+                      <input type="text" name="item_number" formControlName="item_number" class="form-control" placeholder="Item Number" >
+                    </div>
+                    <div class="form-group">
+                      <input type="text" name="item_type" formControlName="item_type" class="form-control" placeholder="Item Type" >
+                    </div>
+                    <div class="form-group">
+                      <input type="text" name="application_name" formControlName="application_name" class="form-control" placeholder="Application Name" >
+                    </div>
+                    <div class="form-group">
+                      <input type="text" name="item_subject" formControlName="item_subject" class="form-control" placeholder="Item Subject" >
+                    </div>
+                    <div class="form-group">
+                      <input type="text" name="item_assigned" formControlName="item_assigned" class="form-control" placeholder="Assigned to" >
+                    </div>
+                    <div class="form-group">
+                      <input type="text" name="item_status" formControlName="item_status" class="form-control" placeholder="Status" >
+                    </div>
+                    <div class="form-group">
+                      <textarea name="item_description" formControlName="item_description" class="form-control" placeholder="Item Description"></textarea>
+                    </div>
+                    <div class="form-group">
+                      <input type="text" name="item_created_date" formControlName="item_created_date" class="form-control" placeholder="created On" >
+                    </div>
+                    <div class="form-group" id="form_group_item_close_date">
+                      <input type="text" name="item_close_date" formControlName="item_close_date" class="form-control" placeholder="Close On" >
+                    </div>
+                    <div class="form-group">
+                      <input type="text" name="associated_item" formControlName="associated_item" class="form-control" placeholder="Associated" >
+                    </div>
+                    <div class="form-group" id="form-group_item_owner">
+                      <input type="text" name="item_owner" formControlName="item_owner" class="form-control" placeholder="Item Owner" >
+                    </div> 
+                    <div class="form-group" id="form_group_aged_item">
+                      <input type="text" name="aged_item" formControlName="aged_item" class="form-control" placeholder="Aged Item" >
+                    </div> 
+                    <div class="form-group" >
+                      <input type="text" name="priority_item" formControlName="priority_item" class="form-control" placeholder="Priority" >
+                    </div> 
+                    <div class="form-group" id="form_group_bounce_item">
+                      <input type="text" name="bounce_item" formControlName="bounce_item" class="form-control" placeholder="Bounce" >
+                    </div> 
+                    <div class="form-group" id="form_group_primary_sla_breahed">
+                      <input type="text" name="primary_sla_breahed" formControlName="primary_sla_breahed" class="form-control" placeholder="Primary SLA" >
+                    </div>
+                    <div class="form-group" id="form_group_secondary_sla_breahed">
+                      <input type="text" name="secondary_sla_breahed" formControlName="secondary_sla_breahed" class="form-control" placeholder="Secondary SLA" >
+                    </div> 
+                    <div class="form-group" id="form_group_tertirary_sla_breahed">
+                      <input type="text" name="tertirary_sla_breahed" formControlName="tertirary_sla_breahed" class="form-control" placeholder="Tertiry SLA" >
+                    </div> 
+                    <div class="form-group" id="form_group_item_resolution">
+                      <input type="text" name="item_resolution" formControlName="item_resolution" class="form-control" placeholder="Resoluation" >
+                    </div>                 
+                  
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-white" data-dismiss="modal" (click)="addItemModalClose()" >Close</button>
+                  <!-- <button type="submit" class="btn btn-info" data-loading-text="Updating..." id="itemSubmitButton">Save changes</button> -->
+                  <button type="submit" class="btn btn-info" data-loading-text="Updating..." id="itemSubmitButton">Save changes</button>
+                </div>
+              </div><!-- /.modal-content -->
+            </div><!-- /.modal-dialog -->
+          </div>
+          </form>
+                <footer class="panel-footer">
+                  <div class="row">
+                    <div class="col-sm-4 hidden-xs">
+                      <select class="input-sm form-control input-s-sm inline">
+                        <option value="1">Delete selected</option>
+                        <option value="3">Export</option>
+                      </select>
+                      <button class="btn btn-sm btn-white">Apply</button>                  
+                    </div>
+                    <div class="col-sm-4 text-center">
+                      <small class="text-muted inline m-t-sm m-b-sm">showing 20-30 of {{config.totalItems}} items</small>
+                    </div>
+                    <div class="col-sm-4 text-right text-center-xs">                
+                      <!-- <ul class="pagination pagination-sm m-t-none m-b-none">
+                        <li><a href="#"><i class="fa fa-chevron-left"></i></a></li>
+                        <li><a href="#">1</a></li>
+                        <li><a href="#">2</a></li>
+                        <li><a href="#">3</a></li>
+                        <li><a href="#">4</a></li>
+                        <li><a href="#">5</a></li>
+                        <li><a href="#"><i class="fa fa-chevron-right"></i></a></li>
+                      </ul> -->
+                      <div class="has-text-centered">
+    <div class="spinner" [ngClass]="{ 'hidden': !loading }"></div>
+    <pagination-controls (pageChange)="getPage($event)" ></pagination-controls>
+</div> 
+                    </div>
+                  </div>
+                </footer>
+              </section>
+          </div>
+          </div>          
+        </section>
+        <ngx-spinner></ngx-spinner>

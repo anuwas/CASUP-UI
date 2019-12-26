@@ -7,6 +7,7 @@ import { Observable } from 'rxjs';
 })
 export class ItemService {
 
+//private baseUrl = 'http://10.74.209.146:8091/api';
 private baseUrl = 'http://localhost:8091/api';
 
   constructor(private http:HttpClient) { }
@@ -19,8 +20,16 @@ private baseUrl = 'http://localhost:8091/api';
     return this.http.get(`${this.baseUrl}/all-item-list/${page}/${itemNumber}`);
   }
 
+  getItemActivityListByItemNumber(itemId: number): Observable<any> {
+    return this.http.get(`${this.baseUrl}/sup-item-activity-list/${itemId}`);
+  }
+
   createItem(item: object): Observable<object> {
     return this.http.post(`${this.baseUrl}`+'/save-item', item);
+  }
+
+  saveSupItemActivity(supitemactivity: object): Observable<object> {
+    return this.http.post(`${this.baseUrl}`+'/save-supitem-activity', supitemactivity);
   }
 
   getItem(id: number): Observable<Object> {

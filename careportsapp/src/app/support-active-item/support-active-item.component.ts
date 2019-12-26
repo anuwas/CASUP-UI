@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { ItemService } from '../item.service';
+import {FormControl,FormGroup,Validators} from '@angular/forms';
+import { ItemService } from '../service/item.service';
 import { Observable,Subject } from "rxjs";
 import { Supitem } from '../entity/supitem';
+import { Supitemactivity } from '../entity/supitemactivity';
 
-
+declare var $: any;
 @Component({
   selector: 'app-support-active-item',
   templateUrl: './support-active-item.component.html',
@@ -15,24 +17,35 @@ export class SupportActiveItemComponent implements OnInit {
 
   itemData: Observable<any>;
   item : Supitem=new Supitem();
+  supitemactivity : Supitemactivity=new Supitemactivity();
+  supitemactivityList: Observable<Supitemactivity[]>;
+  currentAPO : any;
 
   ngOnInit() {
   	this.getPage();
   }
 
+  supitemactivityform=new FormGroup({
+    sup_item_id:new FormControl(),
+    sup_item_activity:new FormControl(),
+  });
+
   settings = {
  
   actions: {
       custom: [
-      { name: 'viewrecord', title: '<i class="fa fa-eye"></i>'}
-    ],
+                { name: 'viewrecord', title: '<i class="fa fa-eye active_item_activity_btn" title="Add Activity"></i>'}
+              ],
       position: 'right',
-
     },
+    pager:{
+      perPage:20
+    },
+
     delete: {
       confirmDelete: true,
 
-      deleteButtonContent: 'Delete',
+      deleteButtonContent: '<i class="fa fa-trash-o fa-lg" title="Delete Item"></i>',
       saveButtonContent: 'save',
       cancelButtonContent: 'cancel'
     },
@@ -43,6 +56,7 @@ export class SupportActiveItemComponent implements OnInit {
     },
     edit: {
       confirmSave: true,
+      editButtonContent:'<i class="fa fa-edit fa-lg edit-item-button" title="Edit Item"></i>'
     },
     columns: {
       
@@ -52,17 +66,32 @@ export class SupportActiveItemComponent implements OnInit {
       },
       itemType: {
         title: 'Item Type',
+        width: '15%',
       },
       itemStatus: {
         title: 'Item Status',
       },
+      itemSubject: {
+        title: 'Subject',
+      },
       itemAssigned: {
         title: 'Assigned',
+        filter: {
+        type: 'list',
+        config: {
+                  selectText: 'Show All',
+                  list: [
+                        { value: 'Abhiroop', title: 'Abhiroop Chakraborty' },
+                        { value: 'Alamgir', title: 'Alamgir Ali SK' },
+                        { value: 'Tuhin', title: 'Tuhin Ghosh' },
+                        { value: 'Pralaysankar', title: 'Pralaysankar Saha' },
+                  ]
+                }
+        }
       },
       applicationName: {
         title: 'Application',
-      },
-      
+      },      
     },
     defaultStyle: false,
     attr: {
@@ -131,8 +160,41 @@ data = [ ];
       }
     }
 
-    viewRecord(data:any){
-    console.log(data);
+    viewRecord(activityData:any){
+    $('#modal').modal({ backdrop: 'static', keyboard: false})
+    $("#modal").modal('show');
+    this.itemservice.getItemActivityListByItemNumber(activityData.id)
+      .subscribe(data => {
+        this.supitemactivityList = data;
+        this.currentAPO=activityData.itemAssigned;
+      });
+    this.supitemactivityform.patchValue({
+         sup_item_id:this.UpdatableItemActivity(activityData,'id')});
+    
     }
 
+    
+
+  saveAndUpdateSupItemActivity(supItemActivity){
+  this.supitemactivity=new Supitemactivity();
+  this.supitemactivity.itemId=this.SupItemId.value;
+  this.supitemactivity.itemActivity=this.SupItemActivity.value;
+  this.itemservice.saveSupItemActivity(this.supitemactivity)
+      .subscribe(data => {
+        console.log(data);
+      });
+    this.supitemactivity = new Supitemactivity();
+  };
+
+UpdatableItemActivity(updateItemObject:Object,updateItemName:any){
+    return updateItemObject[updateItemName];
+  }
+
+   get SupItemId(){
+    return this.supitemactivityform.get('sup_item_id');
+  }
+
+  get SupItemActivity(){
+    return this.supitemactivityform.get('sup_item_activity');
+  }
 }
