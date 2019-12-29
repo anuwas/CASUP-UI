@@ -2491,6 +2491,9 @@ fieldset[disabled] .btn-gplus.active {
 .wrapper-xl {
   padding: 50px;
 }
+.wrapper-advance-search{
+  padding: 1px 15px 1px 15px;
+}
 .padder {
   padding-left: 15px;
   padding-right: 15px;

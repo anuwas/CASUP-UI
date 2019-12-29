@@ -6,26 +6,91 @@
                   All Items
                 </header>
                 <div class="row text-sm wrapper">
-                  <div class="col-sm-9 m-b-xs">
+                  <div class="col-sm-7 m-b-xs">
                     <select class="input-sm form-control input-s-sm inline">
                       <option value="1">Delete selected</option>
                       <option value="3">Export</option>
                     </select>
-                    <button class="btn btn-sm btn-white">Apply</button>                
+                    <button class="btn btn-sm btn-white" style="margin-left: 2px;">Apply</button>                
                   </div>
                   
-                  <div class="col-sm-3">
-                    <form [formGroup]="itemsearchform" id="searchItem" (ngSubmit)="searchItemSubmit(searchItem)">
+                  <div class="col-sm-5">
                     <div class="input-group">
-                       <input type="text" name="search_item_number" formControlName="search_item_number" class="input-sm form-control" placeholder="Item Number" >
-                      <span class="input-group-btn">
-                        <button type="submit" class="btn btn-sm btn-white" >Go!</button>
-
+                      <input type="text" class="input-sm form-control" placeholder="Item Number">
+                      <span class="input-group-btn" style="padding-left: 2px;">
+                        <button class="btn btn-sm btn-white" type="button">Go!</button>
+                      </span>
+                      <span class="input-group-btn" style="padding-left: 2px;">
+                        <button class="btn btn-sm btn-white" type="button" (click)="advanceSearchToggleBtnclickEvent()" >Advance Search</button>
                       </span>
                     </div>
-                  </form>
                   </div>
                 </div>
+                <div [ngClass]="advanceSearchToggleBtnclickEventstats ? 'row text-sm wrapper-advance-search ' : 'none'">
+                <div class="row text-sm wrapper">
+                  <div class="col-sm-3">
+                    <div class="input-group">
+                       <input type="text" name="search_from_date"  class="input-sm form-control" placeholder="From Date" >
+                       
+                    </div>
+                  </div>
+                  <div class="col-sm-3">
+                    <div class="input-group">
+                       <input type="text" name="search_to_date" class="input-sm form-control" placeholder="To Date" >
+                    </div>
+                  </div>
+                  <div class="col-sm-6">
+                    <div class="input-group">
+                       <input  type="radio" name="gender"    value="male" checked> 
+                       <span  style="padding-left: 2px;"> Open Date  </span>
+                       <input  type="radio" name="gender"    value="female">
+                       <span  style="padding-left: 2px;"> Close Date  </span> 
+                       <input  type="radio" name="gender"    value="other"> 
+                       <span  style="padding-left: 2px;"> Combine  </span> 
+                        
+                    </div>
+                  </div>                 
+                  
+                </div>
+                <div class="row text-sm wrapper">
+                  <div class="col-sm-2 m-b-xs">
+                    <select class="input-sm form-control input-s-sm inline">
+                      <option value="1">Item Status</option>
+                      <option value="3">Export</option>
+                    </select>                
+                  </div>
+                  <div class="col-sm-2 m-b-xs">
+                    <select class="input-sm form-control input-s-sm inline">
+                      <option value="1">Item Type</option>
+                      <option value="3">Export</option>
+                    </select>                
+                  </div>
+                  <div class="col-sm-2 m-b-xs">
+                    <select class="input-sm form-control input-s-sm inline">
+                      <option value="1">Assigned</option>
+                      <option value="3">Export</option>
+                    </select>                
+                  </div>
+                  <div class="col-sm-2 m-b-xs">
+                    <select class="input-sm form-control input-s-sm inline">
+                      <option value="1">Non Aged</option>
+                      <option value="3">Export</option>
+                    </select>                
+                  </div>
+                  <div class="col-sm-2 m-b-xs">
+                    <select class="input-sm form-control input-s-sm inline">
+                      <option value="1">Select Debt</option>
+                      <option value="3">Export</option>
+                    </select>                
+                  </div>
+                  
+                  <div class="col-sm-2">
+                    <div class="input-group">
+                       <button class="btn btn-sm btn-white" type="button">Search</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
                 <div class="table-responsive">
                   <table class="table table-striped b-t text-sm">
                     <thead>

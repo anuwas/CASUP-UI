@@ -4,6 +4,7 @@ import { ItemService } from '../service/item.service';
 import { Observable,Subject } from "rxjs";
 import { Supitem } from '../entity/supitem';
 import { Supitemactivity } from '../entity/supitemactivity';
+import { NgxSpinnerService } from "ngx-spinner";
 
 declare var $: any;
 @Component({
@@ -13,10 +14,10 @@ declare var $: any;
 })
 export class SupportActiveItemComponent implements OnInit {
 
-  constructor(private itemservice:ItemService) { }
+  constructor(private itemservice:ItemService,private spinner: NgxSpinnerService) { }
 
   itemData: Observable<any>;
-  item : Supitem=new Supitem();
+  supitem : Supitem=new Supitem();
   supitemactivity : Supitemactivity=new Supitemactivity();
   supitemactivityList: Observable<Supitemactivity[]>;
   currentAPO : any;
@@ -70,6 +71,7 @@ export class SupportActiveItemComponent implements OnInit {
       },
       itemStatus: {
         title: 'Item Status',
+        width: '15%',
       },
       itemSubject: {
         title: 'Subject',
@@ -102,9 +104,11 @@ export class SupportActiveItemComponent implements OnInit {
   };
 
   getPage(){
+  this.spinner.show();
   this.itemservice.getActiveItemList().subscribe(data =>{
         //console.log(data);
         this.itemData =data;
+        this.spinner.hide();
     })
   }
   
@@ -127,29 +131,29 @@ data = [ ];
   onCreateConfirm(event) {
     console.log("Create Event In Console")
     console.log(event.newData);
-    this.item=new Supitem(); 
-    this.item.itemNumber=event.newData.itemNumber;
-    this.item.itemType=event.newData.itemType;
-    this.item.itemStatus=event.newData.itemStatus;
-    this.item.itemAssigned=event.newData.itemAssigned;
-    this.item.applicationName=event.newData.applicationName;
-    this.itemservice.createItem(this.item)
+    this.supitem=new Supitem(); 
+    this.supitem.itemNumber=event.newData.itemNumber;
+    this.supitem.itemType=event.newData.itemType;
+    this.supitem.itemStatus=event.newData.itemStatus;
+    this.supitem.itemAssigned=event.newData.itemAssigned;
+    this.supitem.applicationName=event.newData.applicationName;
+    this.itemservice.createItem(this.supitem)
       .subscribe(data => {
         this.getPage();
       });
-    this.item = new Supitem();
+    this.supitem = new Supitem();
     event.confirm.reject();
   }
 
   onSaveConfirm(event) {
     console.log("Edit Event In Console")
     console.log(event);
-    this.item = event.newData;
-    this.itemservice.updateItem(this.item.id,this.item)
+    this.supitem = event.newData;
+    this.itemservice.updateItem(this.supitem.id,this.supitem)
       .subscribe(data => {
         this.getPage();
       });
-    this.item = new Supitem();
+    this.supitem = new Supitem();
   }
 
   onCustomAction(event) {
@@ -163,26 +167,34 @@ data = [ ];
     viewRecord(activityData:any){
     $('#modal').modal({ backdrop: 'static', keyboard: false})
     $("#modal").modal('show');
-    this.itemservice.getItemActivityListByItemNumber(activityData.id)
-      .subscribe(data => {
-        this.supitemactivityList = data;
-        this.currentAPO=activityData.itemAssigned;
-      });
+    this.supitem = activityData;
+    this.loadItemActivityItem();
     this.supitemactivityform.patchValue({
          sup_item_id:this.UpdatableItemActivity(activityData,'id')});
-    
+    }
+
+    loadItemActivityItem(){    
+    this.itemservice.getItemActivityListByItemNumber(this.supitem.id)
+      .subscribe(data => {
+        this.supitemactivityList = data;
+        this.currentAPO=this.supitem.itemAssigned;
+      });
+      
     }
 
     
 
   saveAndUpdateSupItemActivity(supItemActivity){
+  this.spinner.show();
   this.supitemactivity=new Supitemactivity();
   this.supitemactivity.itemId=this.SupItemId.value;
   this.supitemactivity.itemActivity=this.SupItemActivity.value;
   this.itemservice.saveSupItemActivity(this.supitemactivity)
       .subscribe(data => {
-        console.log(data);
+        this.loadItemActivityItem();
+        this.spinner.hide();
       });
+    this.supitemactivityform.reset();  
     this.supitemactivity = new Supitemactivity();
   };
 

@@ -6,3 +6,6 @@
 #npm install ngx-spinner --save
 #npm i @angular/animations@latest --save
 #npm i angular-animations --save
+#npm install @syncfusion/ej2-angular-calendars --save
+#npm install ng-pick-datetime --save
+#npm install --save @ng-bootstrap/ng-bootstrap

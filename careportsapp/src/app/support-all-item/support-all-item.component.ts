@@ -25,6 +25,7 @@ this.config = {
 
 config: any; 
 submitted = false;
+advanceSearchToggleBtnclickEventstats: boolean = false;
 
 item : Supitem=new Supitem();
 items: Observable<Supitem[]>;
@@ -47,6 +48,10 @@ items: Observable<Supitem[]>;
 
     itemsearchform = new FormGroup({
       search_item_number:new FormControl(),
+      search_from_item_type:new FormControl(),
+      search_from_item_status:new FormControl(),
+      search_from_date:new FormControl(),
+      search_to_date:new FormControl(),
     });
 
     itemsaveform=new FormGroup({
@@ -165,6 +170,11 @@ items: Observable<Supitem[]>;
          item_resolution:this.UpdatableItem(data,'resoluation'),
          item_assigned:this.UpdatableItem(data,'itemAssigned')});
     });
+  }
+
+  
+  advanceSearchToggleBtnclickEvent(){
+    this.advanceSearchToggleBtnclickEventstats = !this.advanceSearchToggleBtnclickEventstats; 
   }
 
   addItemModalClose(){
