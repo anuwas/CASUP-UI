@@ -66,11 +66,35 @@ export class SupportActiveItemComponent implements OnInit {
         width: '12%',
       },
       itemType: {
-        title: 'Item Type',
+        title: 'Type',
+        editor: {
+        type: 'list',
+        config: {
+                  selectText: 'Show All',
+                  list: [
+                        { value: 'Incident', title: 'Incident' },
+                        { value: 'Service Request', title: 'Service Record' },
+                        { value: 'Problem Record', title: 'Problem Record' },
+                        { value: 'Change Request', title: 'Change Request' },
+                  ]
+                }
+        },
+        filter: {
+        type: 'list',
+        config: {
+                  selectText: 'Show All',
+                  list: [
+                         { value: 'Incident', title: 'Incident' },
+                        { value: 'Service Request', title: 'Service Record' },
+                        { value: 'Problem Record', title: 'Problem Record' },
+                        { value: 'Change Request', title: 'Change Request' },
+                  ]
+                }
+        },
         width: '15%',
       },
       itemStatus: {
-        title: 'Item Status',
+        title: 'Status',
         width: '15%',
       },
       itemSubject: {
@@ -78,6 +102,19 @@ export class SupportActiveItemComponent implements OnInit {
       },
       itemAssigned: {
         title: 'Assigned',
+        editor: {
+        type: 'list',
+        config: {
+                  selectText: 'Show All',
+                  list: [
+                        { value: 'Abhiroop Chakraborty', title: 'Abhiroop Chakraborty' },
+                        { value: 'Alamgir Ali SK', title: 'Alamgir Ali SK' },
+                        { value: 'Tuhin Ghosh', title: 'Tuhin Ghosh' },
+                        { value: 'Pralaysankar Saha', title: 'Pralaysankar Saha' },
+                        { value: 'Vivek Sen', title: 'Vivek Sen' },
+                  ]
+                }
+        },
         filter: {
         type: 'list',
         config: {
@@ -87,12 +124,37 @@ export class SupportActiveItemComponent implements OnInit {
                         { value: 'Alamgir', title: 'Alamgir Ali SK' },
                         { value: 'Tuhin', title: 'Tuhin Ghosh' },
                         { value: 'Pralaysankar', title: 'Pralaysankar Saha' },
+                        { value: 'Vivek', title: 'Vivek Sen' },
                   ]
                 }
         }
       },
       applicationName: {
         title: 'Application',
+        editor: {
+        type: 'list',
+        config: {
+                  selectText: 'Show All',
+                  list: [
+                        { value: 'STS', title: 'STS' },
+                        { value: 'RVS', title: 'RVS' },
+                        { value: 'BULATS', title: 'BULATS' },
+                        { value: 'Direct', title: 'Direct' },
+                  ]
+                }
+        },
+        filter: {
+        type: 'list',
+        config: {
+                  selectText: 'Show All',
+                  list: [
+                        { value: 'STS', title: 'STS' },
+                        { value: 'RVS', title: 'RVS' },
+                        { value: 'BULATS', title: 'BULATS' },
+                        { value: 'Direct', title: 'Direct' },
+                  ]
+                }
+        },
       },      
     },
     defaultStyle: false,

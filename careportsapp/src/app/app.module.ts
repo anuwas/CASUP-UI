@@ -11,6 +11,7 @@ import { SupportAllItemComponent } from './support-all-item/support-all-item.com
 import { NgxSpinnerModule } from "ngx-spinner";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { CalendarModule } from 'primeng/calendar';
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     Ng2SmartTableModule,
     NgxSpinnerModule,
     BrowserAnimationsModule,
+    CalendarModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

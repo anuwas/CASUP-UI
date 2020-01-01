@@ -22,7 +22,7 @@ this.config = {
       totalItems:3
     };
  }
-
+public date: any;
 config: any; 
 submitted = false;
 advanceSearchToggleBtnclickEventstats: boolean = false;
@@ -94,9 +94,8 @@ items: Observable<Supitem[]>;
     this.item.itemSubject=this.ItemSubject.value;
     this.item.itemDescription=this.ItemDescription.value;
     this.item.itemOwner=this.ItemOwner.value;
-    this.item.itemCreatedDate=parse(this.ItemCreatedDate.value, 'yyyy-MM-dd hh:mm:ss', new Date());
-    console.log(this.item.itemCreatedDate);
-    this.item.itemCloseDate=parse(this.ItemCloseDate.value, 'yyyy-MM-dd hh:mm:ss', new Date());
+    this.item.itemCreatedDate=this.ItemCreatedDate.value;
+    this.item.itemCloseDate=this.ItemCloseDate.value;
     this.item.associatedItem=this.ItemAssociatedItem.value;
     this.item.applicationName=this.ApplicationName.value;
     this.item.priority=this.PriorityItem.value;
@@ -157,8 +156,10 @@ items: Observable<Supitem[]>;
          item_owner:this.UpdatableItem(data,'itemOwner'),
          item_status:this.UpdatableItem(data,'itemStatus'),
          item_description:this.UpdatableItem(data,'itemDescription'),
-         item_created_date:datePipe.transform(this.UpdatableItem(data,'itemCreatedDate'),'yyyy-MM-dd hh:mm:ss'),
-         item_close_date:datePipe.transform(this.UpdatableItem(data,'itemCloseDate'),'yyyy-MM-dd hh:mm:ss'),
+         //item_created_date:datePipe.transform(this.UpdatableItem(data,'itemCreatedDate'),'yyyy-MM-dd hh:mm'),
+        item_created_date:new Date(this.UpdatableItem(data,'itemCreatedDate')),
+        // item_close_date:datePipe.transform(this.UpdatableItem(data,'itemCloseDate'),'yyyy-MM-dd hh:mm'),
+        item_close_date:new Date(this.UpdatableItem(data,'itemCloseDate')),
          associated_item:this.UpdatableItem(data,'associatedItem'),
          application_name:this.UpdatableItem(data,'applicationName'),
          aged_item:this.UpdatableItem(data,'aged'),
