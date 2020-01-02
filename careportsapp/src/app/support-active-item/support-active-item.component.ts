@@ -73,7 +73,7 @@ export class SupportActiveItemComponent implements OnInit {
                   selectText: 'Show All',
                   list: [
                         { value: 'Incident', title: 'Incident' },
-                        { value: 'Service Request', title: 'Service Record' },
+                        { value: 'Service Request', title: 'Service Request' },
                         { value: 'Problem Record', title: 'Problem Record' },
                         { value: 'Change Request', title: 'Change Request' },
                   ]
@@ -85,7 +85,7 @@ export class SupportActiveItemComponent implements OnInit {
                   selectText: 'Show All',
                   list: [
                          { value: 'Incident', title: 'Incident' },
-                        { value: 'Service Request', title: 'Service Record' },
+                        { value: 'Service Request', title: 'Service Request' },
                         { value: 'Problem Record', title: 'Problem Record' },
                         { value: 'Change Request', title: 'Change Request' },
                   ]
@@ -139,7 +139,7 @@ export class SupportActiveItemComponent implements OnInit {
                         { value: 'STS', title: 'STS' },
                         { value: 'RVS', title: 'RVS' },
                         { value: 'BULATS', title: 'BULATS' },
-                        { value: 'Direct', title: 'Direct' },
+                        { value: 'CIE Direct', title: 'CIE Direct' },
                   ]
                 }
         },
@@ -151,7 +151,7 @@ export class SupportActiveItemComponent implements OnInit {
                         { value: 'STS', title: 'STS' },
                         { value: 'RVS', title: 'RVS' },
                         { value: 'BULATS', title: 'BULATS' },
-                        { value: 'Direct', title: 'Direct' },
+                        { value: 'CIE Direct', title: 'CIE Direct' },
                   ]
                 }
         },

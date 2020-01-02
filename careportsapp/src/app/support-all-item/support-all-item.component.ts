@@ -58,31 +58,31 @@ items: Observable<Supitem[]>;
     item_id:new FormControl(),
     item_number:new FormControl(),
     item_subject:new FormControl(),
-    item_type:new FormControl(),
+    item_type:new FormControl('Incident'),
     item_owner:new FormControl(),
-    item_status:new FormControl(),
+    item_status:new FormControl(''),
     item_description:new FormControl(),
     item_created_date:new FormControl(),
     item_close_date:new FormControl(),
     associated_item:new FormControl(),
-    application_name:new FormControl(),
-    aged_item:new FormControl(),
-    priority_item:new FormControl(),
+    application_name:new FormControl(''),
+    aged_item:new FormControl('N'),
+    priority_item:new FormControl(5),
     bounce_item:new FormControl(),
-    primary_sla_breahed:new FormControl(),
-    secondary_sla_breahed:new FormControl(),
-    tertirary_sla_breahed:new FormControl(),
+    primary_sla_breahed:new FormControl('N'),
+    secondary_sla_breahed:new FormControl('N'),
+    tertirary_sla_breahed:new FormControl('N'),
     item_resolution:new FormControl(),
-    item_assigned:new FormControl(),
+    item_assigned:new FormControl(''),
   });
 
     searchItemSubmit(searchItem){
-  	console.log("aaa");
+    this.spinner.show();
       this.itemservice.getItemListByItemNumber(1,this.ItemNumberSearch.value)
             .subscribe(data => {
             this.items =data.content;
             this.config.totalItems = data.totalElements;
-            
+            this.spinner.hide();
         });
   }
 
@@ -122,14 +122,25 @@ items: Observable<Supitem[]>;
     this.itemservice.createItem(this.item)
       .subscribe(data => {
         this.getPage(this.config.currentPage);
+        this.modalCloseJquery();
       });
     this.item = new Supitem();
+  }
+
+  modalCloseJquery(){
+  setTimeout(function() { 
+          this.$('#modal').modal('hide'); 
+          this.$("#itemSubmitButton").prop('disabled', false);
+          this.$("#itemSubmitButton").prop('class', 'btn btn-info');
+          this.$("#itemSubmitButton").text("Save changes");
+        }, 1000);
   }
 
     updateItem(){
     this.itemservice.updateItem(this.item.id,this.item)
       .subscribe(data => {
         this.getPage(this.config.currentPage);
+        this.modalCloseJquery();
       });
     this.item = new Supitem();
   }
