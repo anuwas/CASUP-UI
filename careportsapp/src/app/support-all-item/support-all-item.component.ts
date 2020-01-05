@@ -1,7 +1,8 @@
 import { Component, OnInit,Pipe, PipeTransform } from '@angular/core';
-import {FormControl,FormGroup,Validators} from '@angular/forms';
+import { FormControl,FormGroup,Validators} from '@angular/forms';
 import { ItemService } from '../service/item.service';
 import { Supitem } from '../entity/supitem';
+import { SupitemAdvSearch } from '../entity/supitemadvsearch';
 import { Observable,Subject } from "rxjs";
 import { DatePipe } from '@angular/common';
 import { parse } from 'date-fns';
@@ -26,9 +27,11 @@ public date: any;
 config: any; 
 submitted = false;
 advanceSearchToggleBtnclickEventstats: boolean = false;
+stringifyadvsrcstr : any;
 
 item : Supitem=new Supitem();
 items: Observable<Supitem[]>;
+supitemadvsearchattribute : SupitemAdvSearch=new SupitemAdvSearch();
 
   ngOnInit() {
   	this.getPage(1);
@@ -43,19 +46,13 @@ items: Observable<Supitem[]>;
         this.items =data.content;
         this.config.totalItems = data.totalElements;
         this.spinner.hide();
-    })
+    });
     }
 
-    itemsearchform = new FormGroup({
-      search_item_number:new FormControl(),
-      search_from_item_type:new FormControl(),
-      search_from_item_status:new FormControl(),
-      search_from_date:new FormControl(),
-      search_to_date:new FormControl(),
-    });
+    
 
     itemsaveform=new FormGroup({
-    item_id:new FormControl(),
+    item_id:new FormControl('',[Validators.required]),
     item_number:new FormControl(),
     item_subject:new FormControl(),
     item_type:new FormControl('Incident'),
@@ -75,6 +72,31 @@ items: Observable<Supitem[]>;
     item_resolution:new FormControl(),
     item_assigned:new FormControl(''),
   });
+
+  itemsearchform = new FormGroup({
+      search_item_number:new FormControl(),
+      search_from_item_type:new FormControl(),
+      search_from_item_status:new FormControl(),
+      search_from_date:new FormControl(),
+      search_to_date:new FormControl(),
+    });
+
+    itemAdvanceSearchForm = new FormGroup({
+      adv_search_from_date:new FormControl(),
+      adv_search_to_date:new FormControl(),
+      adv_search_opne_date:new FormControl(true),
+      adv_search_close_date:new FormControl(false),
+      adv_search_application_name:new FormControl(null),
+      adv_search_bounce:new FormControl(null),
+      adv_search_item_status:new FormControl(null),
+      adv_search_item_type:new FormControl(null),
+      adv_search_assigned:new FormControl(null),
+      adv_search_sla:new FormControl(null),
+      adv_search_debt:new FormControl(null),
+      adv_search_priority:new FormControl('-1'),
+    });
+
+
 
     searchItemSubmit(searchItem){
     this.spinner.show();
@@ -108,14 +130,16 @@ items: Observable<Supitem[]>;
     this.item.itemAssigned=this.ItemAssigned.value;
     
     this.submitted = true;
-    if(this.ItemId.value==null){
+    if(this.ItemId.value==null || this.ItemId.value==''){
          this.saveItem();
+         this.itemsaveform.reset();
     }else{
         this.item.id=this.ItemId.value;
         this.updateItem();
+        this.itemsaveform.reset();
     }
     this.submitted=false;
-    this.itemsaveform.reset();
+    this.ItemSaveFormResetDropDownValues();
   }
 
     saveItem() {
@@ -184,6 +208,44 @@ items: Observable<Supitem[]>;
     });
   }
 
+  addItemModalOpen(){
+  this.ItemSaveFormResetDropDownValues();
+  }
+
+  ItemSaveFormResetDropDownValues(){
+    this.itemsaveform.patchValue({
+      item_type:'Incident',
+      item_status:'',
+      item_assigned:'',
+      application_name:'',
+      priority_item:'5',
+      });
+  }
+
+    advanceSearchItemSubmit(advancesearchitem){
+      this.spinner.show();
+      this.supitemadvsearchattribute = new SupitemAdvSearch();
+      this.supitemadvsearchattribute.itemCreatedDate = this.AdvSrcFromDate.value;
+      this.supitemadvsearchattribute.itemCloseDate = this.AdvSrcToDate.value;
+      this.supitemadvsearchattribute.opneDate = this.AdvSrcOpenDate.value;
+      this.supitemadvsearchattribute.closeDate = this.AdvSrcCloseDate.value;
+      this.supitemadvsearchattribute.applicationName= this.AdvSrcApplicationName.value;
+      this.supitemadvsearchattribute.bounce = this.AdvSrcBounce.value;
+      this.supitemadvsearchattribute.itemStatus = this.AdvSrcItemStatus.value;
+      this.supitemadvsearchattribute.itemType = this.AdvSrcItemType.value;
+      this.supitemadvsearchattribute.itemAssigned = this.AdvSrcItemAssigned.value;
+      this.supitemadvsearchattribute.sla = this.AdvSrcItemSla.value;
+      this.supitemadvsearchattribute.debt= this.AdvSrcItemDebt.value;
+      this.supitemadvsearchattribute.priority=this.AdvSrcItemPriority.value;
+      this.stringifyadvsrcstr=JSON.stringify(this.supitemadvsearchattribute);
+      this.itemservice.getAdvsearchItem(1,this.stringifyadvsrcstr)
+            .subscribe(data => {
+            console.log(data);
+            this.items =data.content;
+            this.config.totalItems = data.totalElements;
+            this.spinner.hide();
+        });
+    }
   
   advanceSearchToggleBtnclickEvent(){
     this.advanceSearchToggleBtnclickEventstats = !this.advanceSearchToggleBtnclickEventstats; 
@@ -276,6 +338,45 @@ items: Observable<Supitem[]>;
 
   get ItemAssigned(){
     return this.itemsaveform.get('item_assigned');
+  }
+
+  // advance search items
+
+  get AdvSrcFromDate(){
+    return this.itemAdvanceSearchForm.get('adv_search_from_date');
+  }
+  get AdvSrcToDate(){
+    return this.itemAdvanceSearchForm.get('adv_search_to_date');
+  }
+  get AdvSrcOpenDate(){
+    return this.itemAdvanceSearchForm.get('adv_search_opne_date');
+  }
+  get AdvSrcCloseDate(){
+    return this.itemAdvanceSearchForm.get('adv_search_close_date');
+  }
+  get AdvSrcApplicationName(){
+    return this.itemAdvanceSearchForm.get('adv_search_application_name');
+  }
+  get AdvSrcBounce(){
+    return this.itemAdvanceSearchForm.get('adv_search_bounce');
+  }
+  get AdvSrcItemStatus(){
+    return this.itemAdvanceSearchForm.get('adv_search_item_status');
+  }
+   get AdvSrcItemType(){
+    return this.itemAdvanceSearchForm.get('adv_search_item_type');
+  }
+  get AdvSrcItemAssigned(){
+    return this.itemAdvanceSearchForm.get('adv_search_assigned');
+  }
+  get AdvSrcItemSla(){
+    return this.itemAdvanceSearchForm.get('adv_search_sla');
+  }
+  get AdvSrcItemDebt(){
+    return this.itemAdvanceSearchForm.get('adv_search_debt');
+  }
+  get AdvSrcItemPriority(){
+    return this.itemAdvanceSearchForm.get('adv_search_priority');
   }
 
 }

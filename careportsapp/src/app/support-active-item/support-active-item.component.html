@@ -5,12 +5,29 @@
                 <header class="panel-heading">
                   All Active Items
                 </header>
-                
                 <div >
                   <ng2-smart-table class="table table-striped b-t text-sm" [settings]="settings" [source]="itemData" (deleteConfirm)="onDeleteConfirm($event)" (editConfirm)="onSaveConfirm($event)"
  (createConfirm)="onCreateConfirm($event)" (custom)="onCustomAction($event)"></ng2-smart-table>
-                  
                 </div>
+                <footer class="panel-footer">
+                  <div class="row">
+                  </div>
+                </footer>
+              </section>
+              <section class="panel">
+                <header class="panel-heading">
+                  All Active Reports
+                </header>
+                <div >
+                  <ng2-smart-table class="table table-striped b-t text-sm" [settings]="settings" [source]="itemReportData" (deleteConfirm)="onDeleteConfirm($event)" (editConfirm)="onSaveConfirm($event)"
+ (createConfirm)="onCreateConfirm($event)" (custom)="onCustomAction($event)"></ng2-smart-table>
+                </div>
+                <footer class="panel-footer">
+                  
+                </footer>
+              </section>
+          </div>
+          </div>    
                 <div>
                   <form [formGroup]="supitemactivityform" id="savesupitemactivity" (ngSubmit)="saveAndUpdateSupItemActivity(supItemActivity)">
                   <div class="modal fade" id="modal">
@@ -18,9 +35,9 @@
             <div class="modal-dialog">
               <div class="modal-content">
                 <div class="modal-header">
-                  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                  <h4 class="modal-title">Activity</h4>
-                  <div>Subject Here</div>
+                  <button type="button" class="close" data-dismiss="modal" aria-hidden="true" (click)="actvivityModalClose()">&times;</button>
+                  <h4 class="modal-title">{{supitem.itemType}} - #{{supitem.itemNumber}}</h4>
+                  <div>{{supitem.itemSubject}}</div>
                 </div>
                 <div class="modal-body">
                   <!-- <form  role="form"> -->
@@ -38,11 +55,21 @@
                     <section class="media-body">
                       
                         <div class="input-group">
-                          <input type="text" name="sup_item_activity" formControlName="sup_item_activity" class="form-control" placeholder="Input your comment here">
+                          <input type="text" name="sup_item_activity" formControlName="sup_item_activity" class="form-control" placeholder="Input your comment here" required>
+                          
                           <!-- <textarea name="sup_item_activity" formControlName="sup_item_activity" class="form-control" placeholder="Current Activity"></textarea> -->
                           <span class="input-group-btn">
                             <button class="btn btn-primary" type="submit">POST</button>
                           </span>
+                        </div>
+                        <div >
+                         
+                          <div class="alert alert-danger" *ngIf = "(SupItemActivity.touched) && (SupItemActivity.invalid)" 
+                style="margin-top: 5px;">
+                  <span *ngIf="SupItemActivity.errors.required">Please insert your activity </span>
+                                      
+                </div>
+                          
                         </div>
                     </section>
                   </article> 
@@ -54,11 +81,11 @@
                     <span class="arrow left"></span>
                     <section class="comment-body panel">
                       <header class="panel-heading">
-                        <a href="#">{{currentAPO}}</a>
+                        <a href="javascript:void(0)">{{currentAPO}}</a>
                         <label class="label bg-info m-l-xs">APO</label> 
                         <span class="text-muted m-l-sm pull-right">
                           <i class="fa fa-clock-o"></i>
-                          {{ itemActivityObj.itemActivityDate | date:'yyyy-MM-dd hh:mm:ss'}}
+                          {{ itemActivityObj.itemActivityDate | date:'EEEE, MMM d, y, h:mm:ss a'}}
                         </span>
                       </header>
                       <div class="panel-body">
@@ -78,31 +105,12 @@
                 </section>
                 </div>
                 <div class="modal-footer">
-                  <button type="button" class="btn btn-white" data-dismiss="modal"  >Close</button>
+                  <button type="button" class="btn btn-white" data-dismiss="modal"  (click)="actvivityModalClose()">Close</button>
                  </div>
               </div><!-- /.modal-content -->
             </div><!-- /.modal-dialog -->
           </div>
         </form>
                 </div>
-
-                <footer class="panel-footer">
-                  <div class="row">
-                    <div class="col-sm-4 hidden-xs">
-                      
-                             &nbsp;
-                    </div>
-                    <div class="col-sm-4 text-center">
-                      
-                    </div>
-                    
-                      
-                    
-                  </div>
-                </footer>
-              </section>
-          </div>
-          </div>    
-                
         </section>
         <ngx-spinner></ngx-spinner>

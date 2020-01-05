@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient,HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -40,11 +40,19 @@ private baseUrl = 'http://localhost:8091/api';
     return this.http.put(`${this.baseUrl}/item/${id}`, value);
   }
 
+  getAdvsearchItem(pagenumber:number,advsrcitem: any): Observable<Object> {
+    return this.http.get(`${this.baseUrl}/adv-search-supitem/${pagenumber}/${advsrcitem}`);
+  }
+
    deleteItem(id: number): Observable<any> {
     return this.http.delete(`${this.baseUrl}/item/${id}`, { responseType: 'text' });
   }
 
   getActiveItemList(): Observable<any> {
     return this.http.get(`${this.baseUrl}/active-item-list`);
+  }
+
+  getActiveReportItemList(): Observable<any> {
+    return this.http.get(`${this.baseUrl}/sup-item-active-report-list`);
   }
 }

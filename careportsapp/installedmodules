@@ -8,3 +8,4 @@
 #npm i angular-animations --save
 #npm install primeng --save
 #npm install primeicons --save
+#sudo npm i -g browserslist caniuse-lite -- update browser

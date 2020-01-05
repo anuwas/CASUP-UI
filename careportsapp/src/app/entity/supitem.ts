@@ -18,4 +18,5 @@ export class Supitem {
     secondarySlaBreached:String;
     tertirySlaBreached:String;
     resoluation:String;
+    cronicalReport:String;
 }

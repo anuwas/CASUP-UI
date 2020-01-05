@@ -17,6 +17,7 @@ export class SupportActiveItemComponent implements OnInit {
   constructor(private itemservice:ItemService,private spinner: NgxSpinnerService) { }
 
   itemData: Observable<any>;
+  itemReportData: Observable<any>;
   supitem : Supitem=new Supitem();
   supitemactivity : Supitemactivity=new Supitemactivity();
   supitemactivityList: Observable<Supitemactivity[]>;
@@ -24,11 +25,12 @@ export class SupportActiveItemComponent implements OnInit {
 
   ngOnInit() {
   	this.getPage();
+    this.getReportPage();
   }
 
   supitemactivityform=new FormGroup({
     sup_item_id:new FormControl(),
-    sup_item_activity:new FormControl(),
+    sup_item_activity:new FormControl('',[Validators.required ]),
   });
 
   settings = {
@@ -96,6 +98,35 @@ export class SupportActiveItemComponent implements OnInit {
       itemStatus: {
         title: 'Status',
         width: '15%',
+        editor: {
+        type: 'list',
+        config: {
+                  selectText: 'Show All',
+                  list: [
+                        { value: 'Active', title: 'Active' },
+                        { value: 'Waiting for Customer', title: 'Waiting for Customer' },
+                        { value: 'Premises On Hold', title: 'Premises On Hold' },
+                        { value: 'Waiting for RFC', title: 'Waiting for RFC' },
+                        { value: 'Re-Opened', title: 'Re-Opened' },
+                        { value: 'Closed', title: 'Closed' },
+                        { value: 'Resolved', title: 'Resolved' },
+                        { value: 'Fulfilled', title: 'Fulfilled' },
+                  ]
+                }
+        },
+        filter: {
+        type: 'list',
+        config: {
+                  selectText: 'Show All',
+                  list: [
+                        { value: 'Active', title: 'Active' },
+                        { value: 'Waiting for Customer', title: 'Waiting for Customer' },
+                        { value: 'Premises On Hold', title: 'Premises On Hold' },
+                        { value: 'Waiting for RFC', title: 'Waiting for RFC' },
+                        { value: 'Re-Opened', title: 'Re-Opened' },
+                  ]
+                }
+        }
       },
       itemSubject: {
         title: 'Subject',
@@ -165,11 +196,18 @@ export class SupportActiveItemComponent implements OnInit {
 
   };
 
+
   getPage(){
   this.spinner.show();
   this.itemservice.getActiveItemList().subscribe(data =>{
-        //console.log(data);
         this.itemData =data;
+        this.spinner.hide();
+    })
+  }
+  getReportPage(){
+  this.spinner.show();
+  this.itemservice.getActiveReportItemList().subscribe(data =>{
+        this.itemReportData =data;
         this.spinner.hide();
     })
   }
@@ -183,6 +221,7 @@ data = [ ];
     	this.itemservice.deleteItem(event.data.id)
             .subscribe(data => {
             this.getPage();
+            this.getReportPage();
         });
       event.confirm.resolve();
     } else {
@@ -202,6 +241,7 @@ data = [ ];
     this.itemservice.createItem(this.supitem)
       .subscribe(data => {
         this.getPage();
+        this.getReportPage();
       });
     this.supitem = new Supitem();
     event.confirm.reject();
@@ -214,6 +254,7 @@ data = [ ];
     this.itemservice.updateItem(this.supitem.id,this.supitem)
       .subscribe(data => {
         this.getPage();
+        this.getReportPage();
       });
     this.supitem = new Supitem();
   }
@@ -247,6 +288,8 @@ data = [ ];
     
 
   saveAndUpdateSupItemActivity(supItemActivity){
+  if (this.supitemactivityform.invalid) { return; }
+
   this.spinner.show();
   this.supitemactivity=new Supitemactivity();
   this.supitemactivity.itemId=this.SupItemId.value;
@@ -260,6 +303,8 @@ data = [ ];
     this.supitemactivity = new Supitemactivity();
   };
 
+
+
 UpdatableItemActivity(updateItemObject:Object,updateItemName:any){
     return updateItemObject[updateItemName];
   }
@@ -270,5 +315,9 @@ UpdatableItemActivity(updateItemObject:Object,updateItemName:any){
 
   get SupItemActivity(){
     return this.supitemactivityform.get('sup_item_activity');
+  }
+
+  actvivityModalClose(){
+    this.supitemactivityform.reset();
   }
 }
