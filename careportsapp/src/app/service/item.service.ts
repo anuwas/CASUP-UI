@@ -16,6 +16,11 @@ private baseUrl = 'http://localhost:8091/api';
     return this.http.get(`${this.baseUrl}/all-item-list/${page}`);
   }
 
+  getAllSupItemListSrc(srcsupitem:object,page: number): Observable<Object> {
+    let srcsupitemstr = JSON.stringify(srcsupitem);
+    return this.http.get(`${this.baseUrl}/all-src-item-list/${page}/${srcsupitemstr}`);
+  }
+
   getItemListByItemNumber(page: number,itemNumber: number): Observable<any> {
     return this.http.get(`${this.baseUrl}/all-item-list/${page}/${itemNumber}`);
   }
@@ -38,10 +43,6 @@ private baseUrl = 'http://localhost:8091/api';
 
    updateItem(id: number, value: any): Observable<Object> {
     return this.http.put(`${this.baseUrl}/item/${id}`, value);
-  }
-
-  getAdvsearchItem(pagenumber:number,advsrcitem: any): Observable<Object> {
-    return this.http.get(`${this.baseUrl}/adv-search-supitem/${pagenumber}/${advsrcitem}`);
   }
 
    deleteItem(id: number): Observable<any> {

@@ -41,15 +41,25 @@ supitemadvsearchattribute : SupitemAdvSearch=new SupitemAdvSearch();
     getPage(page: number) {
     this.spinner.show();
     this.config.currentPage=page;
-        this.itemservice.getItemList(page).subscribe(data =>{
-        //console.log(data);
-        this.items =data.content;
+    /*
+        this.itemservice.getItemList(this.supitemadvsearchattribute,page).subscribe(data =>{
+        this.items = data.content;
         this.config.totalItems = data.totalElements;
         this.spinner.hide();
     });
+    */
+
+    this.itemservice.getAllSupItemListSrc(this.supitemadvsearchattribute,page).subscribe(data =>{
+        this.items = this.getSupItemDataContent(data,'content');
+        this.config.totalItems = this.getSupItemDataContent(data,'totalElements');
+        this.spinner.hide();
+    });
+    
     }
 
-    
+    getSupItemDataContent(responseData:Object,contentName:any){
+    return responseData[contentName];
+  }
 
     itemsaveform=new FormGroup({
     item_id:new FormControl('',[Validators.required]),
@@ -74,14 +84,7 @@ supitemadvsearchattribute : SupitemAdvSearch=new SupitemAdvSearch();
   });
 
   itemsearchform = new FormGroup({
-      search_item_number:new FormControl(),
-      search_from_item_type:new FormControl(),
-      search_from_item_status:new FormControl(),
-      search_from_date:new FormControl(),
-      search_to_date:new FormControl(),
-    });
-
-    itemAdvanceSearchForm = new FormGroup({
+      search_item_number:new FormControl(null),
       adv_search_from_date:new FormControl(),
       adv_search_to_date:new FormControl(),
       adv_search_opne_date:new FormControl(true),
@@ -96,16 +99,33 @@ supitemadvsearchattribute : SupitemAdvSearch=new SupitemAdvSearch();
       adv_search_priority:new FormControl('-1'),
     });
 
+    
+
 
 
     searchItemSubmit(searchItem){
     this.spinner.show();
-      this.itemservice.getItemListByItemNumber(1,this.ItemNumberSearch.value)
-            .subscribe(data => {
-            this.items =data.content;
-            this.config.totalItems = data.totalElements;
-            this.spinner.hide();
-        });
+      this.supitemadvsearchattribute = new SupitemAdvSearch();
+      if(this.ItemNumberSearch.value==''){
+        this.supitemadvsearchattribute.itemNumber = 0;
+      }else{
+      this.supitemadvsearchattribute.itemNumber = this.ItemNumberSearch.value;
+      }
+      
+      this.supitemadvsearchattribute.itemCreatedDate = this.AdvSrcFromDate.value;
+      this.supitemadvsearchattribute.itemCloseDate = this.AdvSrcToDate.value;
+      this.supitemadvsearchattribute.opneDate = this.AdvSrcOpenDate.value;
+      this.supitemadvsearchattribute.closeDate = this.AdvSrcCloseDate.value;
+      this.supitemadvsearchattribute.applicationName= this.AdvSrcApplicationName.value;
+      this.supitemadvsearchattribute.bounce = this.AdvSrcBounce.value;
+      this.supitemadvsearchattribute.itemStatus = this.AdvSrcItemStatus.value;
+      this.supitemadvsearchattribute.itemType = this.AdvSrcItemType.value;
+      this.supitemadvsearchattribute.itemAssigned = this.AdvSrcItemAssigned.value;
+      this.supitemadvsearchattribute.sla = this.AdvSrcItemSla.value;
+      this.supitemadvsearchattribute.debt= this.AdvSrcItemDebt.value;
+      this.supitemadvsearchattribute.priority=this.AdvSrcItemPriority.value;
+      //this.stringifyadvsrcstr=JSON.stringify(this.supitemadvsearchattribute);
+      this.getPage(1);
   }
 
     saveAndUpdateItem(saveItem){
@@ -222,30 +242,7 @@ supitemadvsearchattribute : SupitemAdvSearch=new SupitemAdvSearch();
       });
   }
 
-    advanceSearchItemSubmit(advancesearchitem){
-      this.spinner.show();
-      this.supitemadvsearchattribute = new SupitemAdvSearch();
-      this.supitemadvsearchattribute.itemCreatedDate = this.AdvSrcFromDate.value;
-      this.supitemadvsearchattribute.itemCloseDate = this.AdvSrcToDate.value;
-      this.supitemadvsearchattribute.opneDate = this.AdvSrcOpenDate.value;
-      this.supitemadvsearchattribute.closeDate = this.AdvSrcCloseDate.value;
-      this.supitemadvsearchattribute.applicationName= this.AdvSrcApplicationName.value;
-      this.supitemadvsearchattribute.bounce = this.AdvSrcBounce.value;
-      this.supitemadvsearchattribute.itemStatus = this.AdvSrcItemStatus.value;
-      this.supitemadvsearchattribute.itemType = this.AdvSrcItemType.value;
-      this.supitemadvsearchattribute.itemAssigned = this.AdvSrcItemAssigned.value;
-      this.supitemadvsearchattribute.sla = this.AdvSrcItemSla.value;
-      this.supitemadvsearchattribute.debt= this.AdvSrcItemDebt.value;
-      this.supitemadvsearchattribute.priority=this.AdvSrcItemPriority.value;
-      this.stringifyadvsrcstr=JSON.stringify(this.supitemadvsearchattribute);
-      this.itemservice.getAdvsearchItem(1,this.stringifyadvsrcstr)
-            .subscribe(data => {
-            console.log(data);
-            this.items =data.content;
-            this.config.totalItems = data.totalElements;
-            this.spinner.hide();
-        });
-    }
+
   
   advanceSearchToggleBtnclickEvent(){
     this.advanceSearchToggleBtnclickEventstats = !this.advanceSearchToggleBtnclickEventstats; 
@@ -265,10 +262,6 @@ supitemadvsearchattribute : SupitemAdvSearch=new SupitemAdvSearch();
 
   get ItemNumber(){
     return this.itemsaveform.get('item_number');
-  }
-
-  get ItemNumberSearch(){
-    return this.itemsearchform.get('search_item_number');
   }
 
   get ItemType(){
@@ -342,41 +335,45 @@ supitemadvsearchattribute : SupitemAdvSearch=new SupitemAdvSearch();
 
   // advance search items
 
+  get ItemNumberSearch(){
+    return this.itemsearchform.get('search_item_number');
+  }
+
   get AdvSrcFromDate(){
-    return this.itemAdvanceSearchForm.get('adv_search_from_date');
+    return this.itemsearchform.get('adv_search_from_date');
   }
   get AdvSrcToDate(){
-    return this.itemAdvanceSearchForm.get('adv_search_to_date');
+    return this.itemsearchform.get('adv_search_to_date');
   }
   get AdvSrcOpenDate(){
-    return this.itemAdvanceSearchForm.get('adv_search_opne_date');
+    return this.itemsearchform.get('adv_search_opne_date');
   }
   get AdvSrcCloseDate(){
-    return this.itemAdvanceSearchForm.get('adv_search_close_date');
+    return this.itemsearchform.get('adv_search_close_date');
   }
   get AdvSrcApplicationName(){
-    return this.itemAdvanceSearchForm.get('adv_search_application_name');
+    return this.itemsearchform.get('adv_search_application_name');
   }
   get AdvSrcBounce(){
-    return this.itemAdvanceSearchForm.get('adv_search_bounce');
+    return this.itemsearchform.get('adv_search_bounce');
   }
   get AdvSrcItemStatus(){
-    return this.itemAdvanceSearchForm.get('adv_search_item_status');
+    return this.itemsearchform.get('adv_search_item_status');
   }
    get AdvSrcItemType(){
-    return this.itemAdvanceSearchForm.get('adv_search_item_type');
+    return this.itemsearchform.get('adv_search_item_type');
   }
   get AdvSrcItemAssigned(){
-    return this.itemAdvanceSearchForm.get('adv_search_assigned');
+    return this.itemsearchform.get('adv_search_assigned');
   }
   get AdvSrcItemSla(){
-    return this.itemAdvanceSearchForm.get('adv_search_sla');
+    return this.itemsearchform.get('adv_search_sla');
   }
   get AdvSrcItemDebt(){
-    return this.itemAdvanceSearchForm.get('adv_search_debt');
+    return this.itemsearchform.get('adv_search_debt');
   }
   get AdvSrcItemPriority(){
-    return this.itemAdvanceSearchForm.get('adv_search_priority');
+    return this.itemsearchform.get('adv_search_priority');
   }
 
 }

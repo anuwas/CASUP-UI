@@ -5,6 +5,7 @@
                 <header class="panel-heading">
                   All Items
                 </header>
+                <form [formGroup]="itemsearchform" id="searchItem" (ngSubmit)="searchItemSubmit(searchItem)">
                 <div class="row text-sm wrapper">
                   <div class="col-sm-7 m-b-xs">
                     <select class="input-sm form-control input-s-sm inline">
@@ -13,7 +14,7 @@
                     </select>
                     <button class="btn btn-sm btn-white" style="margin-left: 2px;">Apply</button>                
                   </div>
-                  <form [formGroup]="itemsearchform" id="searchItem" (ngSubmit)="searchItemSubmit(searchItem)">
+                  
                   <div class="col-sm-5">
                     <div class="input-group">
                       <input type="text" name="search_item_number" formControlName="search_item_number" class="input-sm form-control input-s-sm inline" placeholder="Item Number" placeholder="Item Number">
@@ -25,10 +26,10 @@
                       </span>
                     </div>
                   </div>
-                </form>
+                <!-- </form> -->
                 </div>
                 <div [ngClass]="advanceSearchToggleBtnclickEventstats ? 'row text-sm wrapper-advance-search ' : 'none'">
-                 <form [formGroup]="itemAdvanceSearchForm" id="advancesearchitem" (ngSubmit)="advanceSearchItemSubmit(advancesearchitem)">
+                 <!-- <form [formGroup]="itemAdvanceSearchForm" id="advancesearchitem" (ngSubmit)="advanceSearchItemSubmit(advancesearchitem)"> -->
                 <div class="row text-sm wrapper">
                   <div class="col-sm-3">
                     <div class="input-group">
@@ -128,13 +129,13 @@
                       <option value="1">1</option>
                     </select>
                       <span class="input-group-btn" style="padding-left: 2px;">
-                        <button class="btn btn-sm btn-white" type="submit">Search</button> 
+                        <!-- <button class="btn btn-sm btn-white" type="submit">Search</button>  -->
                       </span>
                     </div>
                   </div>
                 </div>
-              </form>
               </div>
+              </form>
                 <div class="table-responsive">
                   <table class="table table-striped b-t text-sm">
                     <thead>
