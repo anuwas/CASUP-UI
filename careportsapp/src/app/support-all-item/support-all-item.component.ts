@@ -112,8 +112,8 @@ supitemadvsearchattribute : SupitemAdvSearch=new SupitemAdvSearch();
       this.supitemadvsearchattribute.itemNumber = this.ItemNumberSearch.value;
       }
       
-      this.supitemadvsearchattribute.itemCreatedDate = this.AdvSrcFromDate.value;
-      this.supitemadvsearchattribute.itemCloseDate = this.AdvSrcToDate.value;
+      this.supitemadvsearchattribute.itemFromDate = this.AdvSrcFromDate.value;
+      this.supitemadvsearchattribute.itemToDate = this.AdvSrcToDate.value;
       this.supitemadvsearchattribute.opneDate = this.AdvSrcOpenDate.value;
       this.supitemadvsearchattribute.closeDate = this.AdvSrcCloseDate.value;
       this.supitemadvsearchattribute.applicationName= this.AdvSrcApplicationName.value;

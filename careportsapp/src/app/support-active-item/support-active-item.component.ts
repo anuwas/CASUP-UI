@@ -143,6 +143,8 @@ export class SupportActiveItemComponent implements OnInit {
                         { value: 'Tuhin Ghosh', title: 'Tuhin Ghosh' },
                         { value: 'Pralaysankar Saha', title: 'Pralaysankar Saha' },
                         { value: 'Vivek Sen', title: 'Vivek Sen' },
+                        { value: 'Rajarshi Mandal', title: 'Rajarshi Mandal' },
+                        { value: 'Abir Bhowmick', title: 'Abir Bhowmick' },
                   ]
                 }
         },
@@ -156,6 +158,8 @@ export class SupportActiveItemComponent implements OnInit {
                         { value: 'Tuhin', title: 'Tuhin Ghosh' },
                         { value: 'Pralaysankar', title: 'Pralaysankar Saha' },
                         { value: 'Vivek', title: 'Vivek Sen' },
+                        { value: 'Rajarshi Mandal', title: 'Rajarshi Mandal' },
+                        { value: 'Abir Bhowmick', title: 'Abir Bhowmick' },
                   ]
                 }
         }

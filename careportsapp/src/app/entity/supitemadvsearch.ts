@@ -1,7 +1,7 @@
 export class SupitemAdvSearch {
     itemNumber:number;
-    itemCreatedDate:Date;
-    itemCloseDate:Date;
+    itemFromDate:Date;
+    itemToDate:Date;
     opneDate:boolean;
     closeDate:boolean;
     applicationName:String;
