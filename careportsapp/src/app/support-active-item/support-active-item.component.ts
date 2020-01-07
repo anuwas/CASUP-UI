@@ -37,7 +37,7 @@ export class SupportActiveItemComponent implements OnInit {
  
   actions: {
       custom: [
-                { name: 'viewrecord', title: '<i class="fa fa-eye active_item_activity_btn" title="Add Activity"></i>'}
+                { name: 'viewrecord', title: '<i class="fa fa-comments-o fa-lg active_item_activity_btn" title="Add Activity"></i>'}
               ],
       position: 'right',
     },
@@ -48,7 +48,7 @@ export class SupportActiveItemComponent implements OnInit {
     delete: {
       confirmDelete: true,
 
-      deleteButtonContent: '<i class="fa fa-trash-o fa-lg" title="Delete Item"></i>',
+      deleteButtonContent: '<i class="fa fa-trash-o " title="Delete Item"></i>',
       saveButtonContent: 'save',
       cancelButtonContent: 'cancel'
     },
@@ -93,7 +93,7 @@ export class SupportActiveItemComponent implements OnInit {
                   ]
                 }
         },
-        width: '15%',
+        width: '12%',
       },
       itemStatus: {
         title: 'Status',

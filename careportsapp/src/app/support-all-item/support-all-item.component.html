@@ -34,13 +34,13 @@
                   <div class="col-sm-3">
                     <div class="input-group">
                        <!-- <input type="text" name="search_from_date"  class="input-sm form-control" placeholder="From Date" > -->
-                       <p-calendar  placeholder="From Date" [showIcon]="true"  dateFormat="yy-mm-dd" [style]="{'width':'80%'}" [inputStyle]="{'width':'80%'}" formControlName="adv_search_from_date"></p-calendar>
+                       <p-calendar  placeholder="From Date" [showIcon]="true"  dateFormat="yy-mm-dd" [style]="{'width':'75%'}" [inputStyle]="{'width':'75%'}" formControlName="adv_search_from_date" useUtc></p-calendar>
                     </div>
                   </div>
                   <div class="col-sm-3">
                     <div class="input-group">
                        <!-- <input type="text" name="search_to_date" class="input-sm form-control" placeholder="To Date" > -->
-                       <p-calendar  [showIcon]="true" placeholder="To Date" dateFormat="yy-mm-dd" [style]="{'width':'80%'}" [inputStyle]="{'width':'80%'}" formControlName="adv_search_to_date"></p-calendar>
+                       <p-calendar  [showIcon]="true" placeholder="To Date" dateFormat="yy-mm-dd" [style]="{'width':'75%'}" [inputStyle]="{'width':'75%'}" formControlName="adv_search_to_date" useUtc></p-calendar>
                     </div>
                   </div>
                   
@@ -142,14 +142,14 @@
                   <table class="table table-striped b-t text-sm">
                     <thead>
                       <tr>
-                        <th width="20" class="th-sortable" data-toggle="class">ID</th>
-                        <th>Item Number</th>                        
-                        <th>Item Type</th>
-                        <th>Status</th>
+                        <th width="5%" class="th-sortable" data-toggle="class">ID</th>
+                        <th width="7%">Number</th>                        
+                        <th width="12%">Item Type</th>
+                        <th width="13%">Status</th>
                         <th>Subject</th>
                         <th>Assigned</th>
                         <th>Open Date</th>
-                        <th width="80"><span class="label pull-right">
+                        <th width="7%"><span class="label pull-right">
                       <a href="#modal" data-toggle="modal" class="btn btn-xs btn-success add-item-button" data-backdrop="static" data-keyboard="false" (click)="addItemModalOpen()"><i class="fa fa-plus" aria-hidden="true"></i> Add</a>
                     </span></th>
                       </tr>
@@ -167,7 +167,7 @@
                         </td>                        
                         <td>{{ itemObj.itemAssigned }}</td> 
                         <td>{{ itemObj.itemCreatedDate | date:'yyyy-MM-dd HH:mm a'}}</td> 
-                        <td><a href="#modal" data-toggle="modal" data-backdrop="static" data-keyboard="false"><i class="fa fa-edit fa-lg edit-item-button" (click)="getUpdateItem(itemObj.id)"></i></a> &nbsp;<a href="javascript:void(0)"><i class="fa fa-trash-o fa-lg" (click)="getRemoveItem(itemObj.id)"></i></a></td>
+                        <td><a href="#modal" data-toggle="modal" data-backdrop="static" data-keyboard="false"><i class="fa fa-edit fa-lg edit-item-button" (click)="getUpdateItem(itemObj.id)"></i></a>&nbsp;<a href="javascript:void(0)"><i class="fa fa-cog fa-lg" ></i></a>&nbsp;<a href="javascript:void(0)"><i class="fa fa-trash-o fa-lg" (click)="getRemoveItem(itemObj.id)"></i></a></td>
                       </tr>
                     </tbody>
                   </table>
