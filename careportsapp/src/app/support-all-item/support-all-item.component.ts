@@ -87,7 +87,7 @@ supitemadvsearchattribute : SupitemAdvSearch=new SupitemAdvSearch();
       search_item_number:new FormControl(null),
       adv_search_from_date:new FormControl(),
       adv_search_to_date:new FormControl(),
-      adv_search_opne_date:new FormControl(true),
+      adv_search_opne_date:new FormControl(false),
       adv_search_close_date:new FormControl(false),
       adv_search_application_name:new FormControl(null),
       adv_search_bounce:new FormControl(null),
@@ -113,7 +113,8 @@ supitemadvsearchattribute : SupitemAdvSearch=new SupitemAdvSearch();
       }
       
       this.supitemadvsearchattribute.itemFromDate = this.AdvSrcFromDate.value;
-      this.supitemadvsearchattribute.itemToDate = this.AdvSrcToDate.value;
+      
+      this.supitemadvsearchattribute.itemToDate = this.setLastTimeOfDay(this.AdvSrcToDate.value);
       this.supitemadvsearchattribute.opneDate = this.AdvSrcOpenDate.value;
       this.supitemadvsearchattribute.closeDate = this.AdvSrcCloseDate.value;
       this.supitemadvsearchattribute.applicationName= this.AdvSrcApplicationName.value;
@@ -374,6 +375,14 @@ supitemadvsearchattribute : SupitemAdvSearch=new SupitemAdvSearch();
   }
   get AdvSrcItemPriority(){
     return this.itemsearchform.get('adv_search_priority');
+  }
+
+   setLastTimeOfDay(dateObj){
+    var dateObjTemp = new Date(dateObj);
+    dateObjTemp.setHours(dateObjTemp.getHours() + 23);
+    dateObjTemp.setMinutes(dateObjTemp.getMinutes() + 59);
+    dateObjTemp.setSeconds(dateObjTemp.getSeconds() + 59);
+    return dateObjTemp;
   }
 
 }
