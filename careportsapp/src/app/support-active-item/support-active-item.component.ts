@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {FormControl,FormGroup,Validators} from '@angular/forms';
-import { ItemService } from '../service/item.service';
+import { SupItemService } from '../service/supitem.service';
 import { Observable,Subject } from "rxjs";
 import { Supitem } from '../entity/supitem';
 import { Supitemactivity } from '../entity/supitemactivity';
@@ -14,7 +14,7 @@ declare var $: any;
 })
 export class SupportActiveItemComponent implements OnInit {
 
-  constructor(private itemservice:ItemService,private spinner: NgxSpinnerService) { }
+  constructor(private supitemservice: SupItemService,private spinner: NgxSpinnerService) { }
 
   itemData: Observable<any>;
   itemReportData: Observable<any>;
@@ -203,14 +203,14 @@ export class SupportActiveItemComponent implements OnInit {
 
   getPage(){
   this.spinner.show();
-  this.itemservice.getActiveItemList().subscribe(data =>{
+  this.supitemservice.getActiveItemList().subscribe(data =>{
         this.itemData =data;
         this.spinner.hide();
     })
   }
   getReportPage(){
   this.spinner.show();
-  this.itemservice.getActiveReportItemList().subscribe(data =>{
+  this.supitemservice.getActiveReportItemList().subscribe(data =>{
         this.itemReportData =data;
         this.spinner.hide();
     })
@@ -222,7 +222,7 @@ data = [ ];
     console.log("Delete Event In Console")
     console.log(event);
     if (window.confirm('Are you sure you want to delete?')) {
-    	this.itemservice.deleteItem(event.data.id)
+    	this.supitemservice.deleteItem(event.data.id)
             .subscribe(data => {
             this.getPage();
             this.getReportPage();
@@ -242,7 +242,7 @@ data = [ ];
     this.supitem.itemStatus=event.newData.itemStatus;
     this.supitem.itemAssigned=event.newData.itemAssigned;
     this.supitem.applicationName=event.newData.applicationName;
-    this.itemservice.createItem(this.supitem)
+    this.supitemservice.createItem(this.supitem)
       .subscribe(data => {
         this.getPage();
         this.getReportPage();
@@ -255,7 +255,7 @@ data = [ ];
     console.log("Edit Event In Console")
     console.log(event);
     this.supitem = event.newData;
-    this.itemservice.updateItem(this.supitem.id,this.supitem)
+    this.supitemservice.updateItem(this.supitem.id,this.supitem)
       .subscribe(data => {
         this.getPage();
         this.getReportPage();
@@ -281,7 +281,7 @@ data = [ ];
     }
 
     loadItemActivityItem(){    
-    this.itemservice.getItemActivityListByItemNumber(this.supitem.id)
+    this.supitemservice.getItemActivityListByItemNumber(this.supitem.id)
       .subscribe(data => {
         this.supitemactivityList = data;
         this.currentAPO=this.supitem.itemAssigned;
@@ -298,7 +298,7 @@ data = [ ];
   this.supitemactivity=new Supitemactivity();
   this.supitemactivity.itemId=this.SupItemId.value;
   this.supitemactivity.itemActivity=this.SupItemActivity.value;
-  this.itemservice.saveSupItemActivity(this.supitemactivity)
+  this.supitemservice.saveSupItemActivity(this.supitemactivity)
       .subscribe(data => {
         this.loadItemActivityItem();
         this.spinner.hide();

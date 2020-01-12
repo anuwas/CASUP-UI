@@ -1,6 +1,6 @@
 import { Component, OnInit,Pipe, PipeTransform } from '@angular/core';
 import { FormControl,FormGroup,Validators} from '@angular/forms';
-import { ItemService } from '../service/item.service';
+import { SupItemService } from '../service/supitem.service';
 import { Supitem } from '../entity/supitem';
 import { SupitemAdvSearch } from '../entity/supitemadvsearch';
 import { Observable,Subject } from "rxjs";
@@ -15,7 +15,7 @@ import { NgxSpinnerService } from "ngx-spinner";
 })
 export class SupportAllItemComponent implements OnInit {
 
-  constructor(private itemservice:ItemService,private spinner: NgxSpinnerService) {
+  constructor(private supitemservice: SupItemService,private spinner: NgxSpinnerService) {
 
 this.config = {
       currentPage: 1,
@@ -42,14 +42,14 @@ supitemadvsearchattribute : SupitemAdvSearch=new SupitemAdvSearch();
     this.spinner.show();
     this.config.currentPage=page;
     /*
-        this.itemservice.getItemList(this.supitemadvsearchattribute,page).subscribe(data =>{
+        this.supitemservice.getItemList(this.supitemadvsearchattribute,page).subscribe(data =>{
         this.items = data.content;
         this.config.totalItems = data.totalElements;
         this.spinner.hide();
     });
     */
 
-    this.itemservice.getAllSupItemListSrc(this.supitemadvsearchattribute,page).subscribe(data =>{
+    this.supitemservice.getAllSupItemListSrc(this.supitemadvsearchattribute,page).subscribe(data =>{
         this.items = this.getSupItemDataContent(data,'content');
         this.config.totalItems = this.getSupItemDataContent(data,'totalElements');
         this.spinner.hide();
@@ -164,7 +164,7 @@ supitemadvsearchattribute : SupitemAdvSearch=new SupitemAdvSearch();
   }
 
     saveItem() {
-    this.itemservice.createItem(this.item)
+    this.supitemservice.createItem(this.item)
       .subscribe(data => {
         this.getPage(this.config.currentPage);
         this.modalCloseJquery();
@@ -182,7 +182,7 @@ supitemadvsearchattribute : SupitemAdvSearch=new SupitemAdvSearch();
   }
 
     updateItem(){
-    this.itemservice.updateItem(this.item.id,this.item)
+    this.supitemservice.updateItem(this.item.id,this.item)
       .subscribe(data => {
         this.getPage(this.config.currentPage);
         this.modalCloseJquery();
@@ -193,7 +193,7 @@ supitemadvsearchattribute : SupitemAdvSearch=new SupitemAdvSearch();
      getRemoveItem(itemid){
     	if(confirm("Are you sure to delete this Item "+itemid)) {
         console.log("Implement delete functionality here");
-        this.itemservice.deleteItem(itemid)
+        this.supitemservice.deleteItem(itemid)
             .subscribe(data => {
             this.getPage(this.config.currentPage);
         });
@@ -202,7 +202,36 @@ supitemadvsearchattribute : SupitemAdvSearch=new SupitemAdvSearch();
 
     getUpdateItem(itemid){
     	this.item=new Supitem();
-    	this.itemservice.getItem(itemid).subscribe(data =>{
+    	this.supitemservice.getItem(itemid).subscribe(data =>{
+         var datePipe=new DatePipe("en-US");
+         this.itemsaveform.patchValue({
+         item_id:this.UpdatableItem(data,'id'),
+         item_number:this.UpdatableItem(data,'itemNumber'),
+         item_type:this.UpdatableItem(data,'itemType'),
+         item_subject:this.UpdatableItem(data,'itemSubject'),
+         item_owner:this.UpdatableItem(data,'itemOwner'),
+         item_status:this.UpdatableItem(data,'itemStatus'),
+         item_description:this.UpdatableItem(data,'itemDescription'),
+         //item_created_date:datePipe.transform(this.UpdatableItem(data,'itemCreatedDate'),'yyyy-MM-dd hh:mm'),
+        item_created_date:new Date(this.UpdatableItem(data,'itemCreatedDate')),
+        // item_close_date:datePipe.transform(this.UpdatableItem(data,'itemCloseDate'),'yyyy-MM-dd hh:mm'),
+        item_close_date:new Date(this.UpdatableItem(data,'itemCloseDate')),
+         associated_item:this.UpdatableItem(data,'associatedItem'),
+         application_name:this.UpdatableItem(data,'applicationName'),
+         aged_item:this.UpdatableItem(data,'aged'),
+         priority_item:this.UpdatableItem(data,'priority'),
+         bounce_item:this.UpdatableItem(data,'bounce'),
+         primary_sla_breahed:this.UpdatableItem(data,'primarySlaBreached'),
+         secondary_sla_breahed:this.UpdatableItem(data,'secondarySlaBreached'),
+         tertirary_sla_breahed:this.UpdatableItem(data,'tertirySlaBreached'),
+         item_resolution:this.UpdatableItem(data,'resoluation'),
+         item_assigned:this.UpdatableItem(data,'itemAssigned')});
+    });
+  }
+
+  getReportUpdateItem(itemid){
+    this.item=new Supitem();
+    this.supitemservice.getItem(itemid).subscribe(data =>{
          var datePipe=new DatePipe("en-US");
          this.itemsaveform.patchValue({
          item_id:this.UpdatableItem(data,'id'),

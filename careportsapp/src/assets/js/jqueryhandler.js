@@ -10,7 +10,7 @@ $( document ).ready(function() {
    	});*/
 
    	
-   	$(document).on('click','.edit-item-button', function(){
+   	$(document).on('click','.supitem-edit-item-button', function(){
     	$('.modal-title').text('Edit Item');
       $('#form_group_item_close_date').show();
       $('#form_group_primary_sla_breahed').show();
@@ -23,6 +23,20 @@ $( document ).ready(function() {
       $('#form-group_aged_justification').show();
       console.log($("#aged_item").val());
  	});
+
+      $(document).on('click','.supitem-report-edit-item-button', function(){
+      $('.modal-title').text('Edit Item Reporting Info');
+      $('#form_group_item_close_date').show();
+      $('#form_group_primary_sla_breahed').show();
+      $('#form_group_secondary_sla_breahed').show();
+      $('#form_group_tertirary_sla_breahed').show();
+      $('#form_group_item_resolution').show();
+      $('#form_group_aged_item').show();
+      $('#form_group_bounce_item').show();
+      $('#form-group_item_owner').show();
+      $('#form-group_aged_justification').show();
+      console.log($("#aged_item").val());
+   });
 
  	$(document).on('click','.add-item-button', function(){
     	$('.modal-title').text('Add New Item');

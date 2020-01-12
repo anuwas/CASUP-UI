@@ -1,13 +1,15 @@
 import { Injectable } from '@angular/core';
+
 import { HttpClient,HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
+
 
 @Injectable({
   providedIn: 'root'
 })
-export class ItemService {
+export class SupItemService {
 
-//private baseUrl = 'http://10.74.209.146:8091/api';
+  //private baseUrl = 'http://10.74.209.146:8091/api';
 private baseUrl = 'http://localhost:8091/api';
 
   constructor(private http:HttpClient) { }

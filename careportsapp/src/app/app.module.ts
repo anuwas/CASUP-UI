@@ -12,6 +12,9 @@ import { NgxSpinnerModule } from "ngx-spinner";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { CalendarModule } from 'primeng/calendar';
+import { DevAllItemComponent } from './dev-all-item/dev-all-item.component';
+import { DevSprintComponent } from './dev-sprint/dev-sprint.component';
+import { DevDailyScrumComponent } from './dev-daily-scrum/dev-daily-scrum.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +22,9 @@ import { CalendarModule } from 'primeng/calendar';
     SupportActiveItemComponent,
     SupportAllItemComponent,
     DashboardComponent,
+    DevAllItemComponent,
+    DevSprintComponent,
+    DevDailyScrumComponent,
   ],
   imports: [
     BrowserModule,

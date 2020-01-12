@@ -147,27 +147,31 @@
                         <th width="12%">Item Type</th>
                         <th width="13%">Status</th>
                         <th>Subject</th>
-                        <th>Assigned</th>
-                        <th>Open Date</th>
+                        <th>Developer</th>
+                        <th>Tester</th>
+                        <th>Application</th>
+                        <th>Sprint</th>
                         <th width="7%"><span class="label pull-right">
                       <a href="#modal" data-toggle="modal" class="btn btn-xs btn-success add-item-button" data-backdrop="static" data-keyboard="false" (click)="addItemModalOpen()"><i class="fa fa-plus" aria-hidden="true"></i> Add</a>
                     </span></th>
                       </tr>
                     </thead>
                     <tbody>
-                      <tr *ngFor="let itemObj of items | paginate: config">
-                        <td>{{ itemObj.id }}</td>
-                        <td>{{ itemObj.itemNumber }}</td>
-                        <td>{{ itemObj.itemType }}</td>
-                        <td>{{ itemObj.itemStatus }}</td>
-                        <td><span *ngIf="itemObj.itemSubject!=null && itemObj.itemSubject.length<=50;else subsubject">{{ itemObj.itemSubject }}</span>
+                      <tr *ngFor="let devitemOb of devitemObjList | paginate: config">
+                        <td>{{ devitemOb.devItemId }}</td>
+                        <td>{{ devitemOb.itemNumber }}</td>
+                        <td>{{ devitemOb.itemType }}</td>
+                        <td>{{ devitemOb.itemStatus }}</td>
+                        <td><span *ngIf="devitemOb.itemSubject!=null && devitemOb.itemSubject.length<=50;else subsubject">{{ devitemOb.itemSubject }}</span>
                           <ng-template #subsubject>
-                            {{ itemObj.itemSubject | slice:0:70 }} ....
+                            {{ devitemOb.itemSubject | slice:0:70 }} ....
                           </ng-template>
                         </td>                        
-                        <td>{{ itemObj.itemAssigned }}</td> 
-                        <td>{{ itemObj.itemCreatedDate | date:'yyyy-MM-dd HH:mm a'}}</td> 
-                        <td><a href="#modal" data-toggle="modal" data-backdrop="static" data-keyboard="false"><i class="fa fa-edit fa-lg supitem-edit-item-button" (click)="getUpdateItem(itemObj.id)"></i></a>&nbsp;<a href="javascript:void(0)" data-toggle="modal" data-backdrop="static" data-keyboard="false"><i class="fa fa-cog fa-lg supitem-report-edit-item-button" (click)="getReportUpdateItem(itemObj.id)"></i></a>&nbsp;<a href="javascript:void(0)"><i class="fa fa-trash-o fa-lg" (click)="getRemoveItem(itemObj.id)"></i></a></td>
+                        <td>{{ devitemOb.developerName }}</td> 
+                        <td>{{ devitemOb.testerName }}</td> 
+                        <td>{{ devitemOb.applicationName }}</td> 
+                        <td>{{ devitemOb.itemSprintName }}</td> 
+                        <td><a href="#modal" data-toggle="modal" data-backdrop="static" data-keyboard="false"><i class="fa fa-edit fa-lg supitem-edit-item-button" (click)="getUpdateItem(devitemOb.devItemId)"></i></a>&nbsp;<a href="javascript:void(0)" data-toggle="modal" data-backdrop="static" data-keyboard="false"><i class="fa fa-cog fa-lg supitem-report-edit-item-button" (click)="getReportUpdateItem(devitemOb.devItemId)"></i></a>&nbsp;<a href="javascript:void(0)"><i class="fa fa-trash-o fa-lg" (click)="getRemoveItem(devitemOb.devItemId)"></i></a></td>
                       </tr>
                     </tbody>
                   </table>
