@@ -62,7 +62,7 @@
                   </div>
                    <div class="col-sm-1">
                     <div class="input-group">
-                       <input type="checkbox" name="adv_search_bounce" value="1" formControlName="adv_search_bounce">Bounce
+                       
                     </div>
                   </div>             
                   
@@ -84,10 +84,9 @@
                   <div class="col-sm-2 m-b-xs">
                     <select class="input-sm form-control input-s-sm inline" formControlName="adv_search_item_type">
                       <option value="null"> --Item Type-- </option>
-                      <option value="Incident">Incident</option>
-                      <option value="Service Request">Service Request</option>
-                      <option value="Change Request">Change Request</option>
-                      <option value="Problem Record">Problem Record</option>
+                      <option value="Story">Story</option>
+                      <option value="Bug">Bug</option>
+                      <option value="Task">Task</option>
                     </select>                
                   </div>
                   <div class="col-sm-2 m-b-xs">
@@ -152,7 +151,7 @@
                         <th>Application</th>
                         <th>Sprint</th>
                         <th width="7%"><span class="label pull-right">
-                      <a href="#modal" data-toggle="modal" class="btn btn-xs btn-success add-item-button" data-backdrop="static" data-keyboard="false" (click)="addItemModalOpen()"><i class="fa fa-plus" aria-hidden="true"></i> Add</a>
+                      <a href="#devmodal" data-toggle="modal" class="btn btn-xs btn-success add-dev-item-button" data-backdrop="static" data-keyboard="false" (click)="addItemModalOpen()"><i class="fa fa-plus" aria-hidden="true"></i> Add</a>
                     </span></th>
                       </tr>
                     </thead>
@@ -171,13 +170,13 @@
                         <td>{{ devitemOb.testerName }}</td> 
                         <td>{{ devitemOb.applicationName }}</td> 
                         <td>{{ devitemOb.itemSprintName }}</td> 
-                        <td><a href="#modal" data-toggle="modal" data-backdrop="static" data-keyboard="false"><i class="fa fa-edit fa-lg supitem-edit-item-button" (click)="getUpdateItem(devitemOb.devItemId)"></i></a>&nbsp;<a href="javascript:void(0)" data-toggle="modal" data-backdrop="static" data-keyboard="false"><i class="fa fa-cog fa-lg supitem-report-edit-item-button" (click)="getReportUpdateItem(devitemOb.devItemId)"></i></a>&nbsp;<a href="javascript:void(0)"><i class="fa fa-trash-o fa-lg" (click)="getRemoveItem(devitemOb.devItemId)"></i></a></td>
+                        <td><a href="#devmodal" data-toggle="modal" data-backdrop="static" data-keyboard="false"><i class="fa fa-edit fa-lg devitem-edit-item-button" (click)="getUpdateItem(devitemOb.devItemId)"></i></a>&nbsp;<a href="javascript:void(0)" data-toggle="modal" data-backdrop="static" data-keyboard="false"><i class="fa fa-cog fa-lg devitem-report-edit-item-button" (click)="getReportUpdateItem(devitemOb.devItemId)"></i></a>&nbsp;<a href="javascript:void(0)"><i class="fa fa-trash-o fa-lg" (click)="getRemoveItem(devitemOb.devItemId)"></i></a></td>
                       </tr>
                     </tbody>
                   </table>
                 </div>
                 <form [formGroup]="itemsaveform" id="saveitem" (ngSubmit)="saveAndUpdateItem(saveItem)">
-                <div class="modal fade" id="modal">
+                <div class="modal fade" id="devmodal">
             <div class="modal-dialog">
               <div class="modal-content">
                 <div class="modal-header">
@@ -202,14 +201,10 @@
                           <!-- <input type="text" name="item_status" formControlName="item_status" class="form-control" placeholder="Status" > -->
                           <select name="item_status" formControlName="item_status" class="form-control">
                             <option value="">  -- Select -- </option>  
-                            <option value="Active">Active</option>
-                            <option value="Waiting for Customer">Waiting for Customer</option>
-                            <option value="Resolved">Resolved</option>
+                            <option value="Inprogress">Inprogress</option>
+                            <option value="Backlog">Backlog</option>
                             <option value="Closed">Closed</option>
-                            <option value="Premises On Hold">Premises On Hold</option>
-                            <option value="Waiting for RFC">Waiting for RFC</option>
-                            <option value="Fulfilled">Fulfilled</option>
-                            <option value="Re-Opened">Re-Opened</option>
+                            <option value="Done">Done</option>
                           </select>
                         </div>
                         <div class="form-group">
@@ -230,10 +225,9 @@
                           <label for="exampleSelect1">Item Type</label>
                           <!-- <input type="text" name="item_type" formControlName="item_type" class="form-control" placeholder="Item Type" > -->
                           <select class="form-control" name="item_type" formControlName="item_type">
-                          <option value="Incident">Incident</option>
-                          <option value="Service Request">Service Request</option>
-                          <option value="Change Request">Change Request</option>
-                          <option value="Problem Record">Problem Record</option>
+                          <option value="Story">Story</option>
+                          <option value="Bug">Bug</option>
+                          <option value="Change Request">Task</option>
                           </select> 
                         </div>
                         <div class="form-group">
@@ -241,11 +235,11 @@
                           <!-- <input type="text" name="item_assigned" formControlName="item_assigned" class="form-control" placeholder="Assigned to" > -->
                           <select name="item_assigned" formControlName="item_assigned" class="form-control">
                             <option value="">  -- Select -- </option>  
-                            <option value="Abhiroop Chakraborty">Abhiroop Chakraborty</option>
-                            <option value="Alamgir Ali SK">Alamgir Ali SK</option>
-                            <option value="Pralaysankar Saha">Pralaysankar Saha</option>
-                            <option value="Vivek Sen">Vivek Sen</option>
-                            <option value="Tuhin Ghosh">Tuhin Ghosh</option>
+                            <option value="Amit">Amit</option>
+                            <option value="Bappa">Bappa</option>
+                            <option value="Munshi">Munshi</option>
+                            <option value="Produyt">Produyt</option>
+                            <option value="Other">Other</option>
                           </select> 
                         </div>
                         <div class="col-sm-6" style="padding-left: 0px;">
@@ -253,11 +247,9 @@
                           <label for="exampleSelect1">Priority</label>
                           <!-- <input type="text" name="priority_item" formControlName="priority_item" class="form-control" placeholder="Priority" > -->
                           <select name="priority_item" formControlName="priority_item" class="form-control" >
-                            <option value="5">5</option>  
-                            <option value="4">4</option>
-                            <option value="3">3</option>
-                            <option value="2">2</option>
-                            <option value="1">1</option>
+                            <option value="High">High</option>  
+                            <option value="Medium">Medium</option>
+                            <option value="Low">Low</option>
                           </select>
                         </div>
                         

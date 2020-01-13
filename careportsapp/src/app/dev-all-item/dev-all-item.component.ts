@@ -4,6 +4,7 @@ import { FormControl,FormGroup,Validators} from '@angular/forms';
 import { NgxSpinnerService } from "ngx-spinner";
 import { Devitem } from '../entity/devitem';
 import { Devitemrequest } from '../entity/devitemrequest';
+import { Observable,Subject } from "rxjs";
 
 
 @Component({
@@ -25,6 +26,7 @@ devitemRequestAttributes : Devitemrequest=new Devitemrequest();
 devitemObj : Devitem =new Devitem();
 devitemObjList: Observable<Devitem[]>;
 config: any; 
+advanceSearchToggleBtnclickEventstats: boolean = false;
 
   ngOnInit() {
   	this.getPage(1);
@@ -50,7 +52,6 @@ config: any;
       adv_search_opne_date:new FormControl(false),
       adv_search_close_date:new FormControl(false),
       adv_search_application_name:new FormControl(null),
-      adv_search_bounce:new FormControl(null),
       adv_search_item_status:new FormControl(null),
       adv_search_item_type:new FormControl(null),
       adv_search_assigned:new FormControl(null),
@@ -63,7 +64,7 @@ config: any;
     item_id:new FormControl('',[Validators.required]),
     item_number:new FormControl(),
     item_subject:new FormControl(),
-    item_type:new FormControl('Incident'),
+    item_type:new FormControl('Story'),
     item_owner:new FormControl(),
     item_status:new FormControl(''),
     item_description:new FormControl(),
@@ -83,6 +84,28 @@ config: any;
 
     getDevItemDataContent(responseData:Object,contentName:any){
     return responseData[contentName];
+  }
+
+   advanceSearchToggleBtnclickEvent(){
+    this.advanceSearchToggleBtnclickEventstats = !this.advanceSearchToggleBtnclickEventstats; 
+  }
+
+  addItemModalOpen(){
+  this.ItemSaveFormResetDropDownValues();
+  }
+
+    addItemModalClose(){
+    this.itemsaveform.reset();
+  }
+
+  ItemSaveFormResetDropDownValues(){
+    this.itemsaveform.patchValue({
+      item_type:'Incident',
+      item_status:'',
+      item_assigned:'',
+      application_name:'',
+      priority_item:'5',
+      });
   }
 
     get ItemNumber(){
