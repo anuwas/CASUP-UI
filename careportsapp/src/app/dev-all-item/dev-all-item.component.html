@@ -5,7 +5,7 @@
                 <header class="panel-heading">
                   All Items
                 </header>
-                <form [formGroup]="itemsearchform" id="searchItem" (ngSubmit)="searchItemSubmit(searchItem)">
+                <form [formGroup]="devitemsearchform" id="devsearchItem" (ngSubmit)="searchItemSubmit(searchItem)">
                 <div class="row text-sm wrapper">
                   <div class="col-sm-7 m-b-xs">
                     <select class="input-sm form-control input-s-sm inline">
@@ -122,12 +122,13 @@
                   <div class="col-sm-2">
                     <div class="input-group">
                       <select class="input-sm form-control input-s-sm inline" formControlName="adv_search_priority">
-                      <option value="-1"> --Priority-- </option>  
-                      <option value="5">5</option>  
-                      <option value="4">4</option>
-                      <option value="3">3</option>
-                      <option value="2">2</option>
-                      <option value="1">1</option>
+                      <option value=" "> --Sprint-- </option>  
+                      <option value="Sprint 10">Sprint 10</option>
+                      <option value="Sprint 9">Sprint 9</option>
+                      <option value="Sprint 8">Sprint 8</option>  
+                      <option value="print 7">Sprint 7</option>
+                      <option value="Sprint 6">Sprint 6</option>
+                     
                     </select>
                       <span class="input-group-btn" style="padding-left: 2px;">
                         <!-- <button class="btn btn-sm btn-white" type="submit">Search</button>  -->
@@ -188,17 +189,42 @@
                   <div class="row">
                     <div class="col-sm-12">
                       <input type="hidden" class="form-control"  formControlName="item_id">
-                      <div class="col-sm-6" style="padding-left: 0px">
-                        <div class="form-group">
+                      <div class="col-sm-4" style="padding-left: 0px">
+                      	<div class="form-group">
                           <label for="exampleSelect1">Item Number</label>   
                           <input type="text" name="item_number" formControlName="item_number" class="form-control" placeholder="Item Number" required>
                           <div class="alert alert-danger" *ngIf = "(ItemNumber.touched) && (ItemNumber.invalid)"  style="margin-top: 5px;">
                           <span *ngIf="ItemNumber.errors.required">Provide Item Number</span>   
                         </div>
                         </div>
+                      </div>
+                      <div class="col-sm-4" >
+                      	<div class="form-group">
+                          <label for="exampleSelect1">Item Type</label>
+                          <select class="form-control" name="item_type" formControlName="item_type">
+                          <option value="Story">Story</option>
+                          <option value="Bug">Bug</option>
+                          <option value="Change Request">Task</option>
+                          </select> 
+                        </div>
+                      </div>
+                      <div class="col-sm-4" style="padding-right: 0px">
+                      	<div class="form-group" id="form_group_bounce_item">
+                          <label for="exampleSelect1">Sprint</label> 
+                          
+                           <select name="sprint_name" formControlName="sprint_name" class="form-control">
+                          	<option value="Sprint 10">Sprint 10</option>
+                      		<option value="Sprint 9">Sprint 9</option>
+                      		<option value="Sprint 8">Sprint 8</option>  
+                      		<option value="print 7">Sprint 7</option>
+                      		<option value="Sprint 6">Sprint 6</option>
+                  		</select>
+                        </div>
+                      </div>
+                      <div class="col-sm-6" style="padding-left: 0px">
+                        
                         <div class="form-group">
                           <label for="exampleSelect1">Item Status</label>
-                          <!-- <input type="text" name="item_status" formControlName="item_status" class="form-control" placeholder="Status" > -->
                           <select name="item_status" formControlName="item_status" class="form-control">
                             <option value="">  -- Select -- </option>  
                             <option value="Inprogress">Inprogress</option>
@@ -207,9 +233,12 @@
                             <option value="Done">Done</option>
                           </select>
                         </div>
+                        
+                      </div>
+                      <div class="col-sm-6" style="padding-right: 0px;">
+                        
                         <div class="form-group">
                           <label for="exampleSelect1">Application Name</label> 
-                          <!-- <input type="text" name="application_name" formControlName="application_name" class="form-control" placeholder="Application Name" > -->
                           <select name="application_name" formControlName="application_name" class="form-control" >
                           <option value="">  -- Select -- </option>  
                           <option value="STS">STS</option>
@@ -219,21 +248,13 @@
                           <option value="Entries Externate">Entries Externate</option>
                           </select>
                         </div>
+                        
+                         
                       </div>
-                      <div class="col-sm-6" style="padding-right: 0px;">
-                        <div class="form-group">
-                          <label for="exampleSelect1">Item Type</label>
-                          <!-- <input type="text" name="item_type" formControlName="item_type" class="form-control" placeholder="Item Type" > -->
-                          <select class="form-control" name="item_type" formControlName="item_type">
-                          <option value="Story">Story</option>
-                          <option value="Bug">Bug</option>
-                          <option value="Change Request">Task</option>
-                          </select> 
-                        </div>
-                        <div class="form-group">
-                          <label for="exampleSelect1">Assigned To</label>
-                          <!-- <input type="text" name="item_assigned" formControlName="item_assigned" class="form-control" placeholder="Assigned to" > -->
-                          <select name="item_assigned" formControlName="item_assigned" class="form-control">
+                      <div class="col-sm-4" style="padding-left: 0px;">
+                      	<div class="form-group">
+                          <label for="exampleSelect1">Developer</label>
+                          <select name="developer_name" formControlName="developer_name" class="form-control">
                             <option value="">  -- Select -- </option>  
                             <option value="Amit">Amit</option>
                             <option value="Bappa">Bappa</option>
@@ -242,26 +263,29 @@
                             <option value="Other">Other</option>
                           </select> 
                         </div>
-                        <div class="col-sm-6" style="padding-left: 0px;">
-                          <div class="form-group" >
+                      </div>
+                      <div class="col-sm-4" >
+                      	<div class="form-group">
+                          <label for="exampleSelect1">Tester</label>
+                          <select name="tester_name" formControlName="tester_name" class="form-control">
+                            <option value="">  -- Select -- </option>  
+                            <option value="Amit">Amit</option>
+                            <option value="Bappa">Bappa</option>
+                            <option value="Munshi">Munshi</option>
+                            <option value="Produyt">Produyt</option>
+                            <option value="Other">Other</option>
+                          </select> 
+                        </div>
+                      </div>
+                      <div class="col-sm-4" style="padding-right: 0px;">
+                      	<div class="form-group" >
                           <label for="exampleSelect1">Priority</label>
-                          <!-- <input type="text" name="priority_item" formControlName="priority_item" class="form-control" placeholder="Priority" > -->
                           <select name="priority_item" formControlName="priority_item" class="form-control" >
                             <option value="High">High</option>  
                             <option value="Medium">Medium</option>
                             <option value="Low">Low</option>
                           </select>
                         </div>
-                        
-                        </div>
-                        <div class="col-sm-6" style="padding-right: 0px;">
-                          
-                        <div class="form-group" id="form_group_bounce_item">
-                          <label for="exampleSelect1">Bounce</label> 
-                          <input type="text" name="bounce_item" formControlName="bounce_item" class="form-control" placeholder="Bounce" >
-                        </div>
-                        </div>
-                         
                       </div>
                       <div class="form-group">
                         <label for="exampleSelect1">Subject</label>
@@ -271,79 +295,12 @@
                         <label for="exampleSelect1">Description</label>
                         <textarea name="item_description" formControlName="item_description" class="form-control" placeholder="Item Description"></textarea>
                       </div>
-                    <div class="col-sm-6" style="padding-left: 0px">
-                        <div class="form-group">
-                          <label for="exampleSelect1">Created On</label>
-                          <!-- <input type="text" name="item_created_date" formControlName="item_created_date" class="form-control" placeholder="created On" > -->
-                          <p-calendar placeholder="created On" [showIcon]="true" [showTime]="true" dateFormat="yy-mm-dd" formControlName="item_created_date" useUtc hourFormat="24"  [monthNavigator]="true" [yearNavigator]="true" yearRange="2019:2030"></p-calendar>
-                        </div>
-                       <div class="form-group" id="form_group_item_close_date">
-                        <label for="exampleSelect1">Closed On</label>
-                          <!-- <input type="text" name="item_close_date" formControlName="item_close_date" class="form-control" placeholder="Close On" > -->
-                          <p-calendar placeholder="Close On" [showIcon]="true" [showTime]="true" dateFormat="yy-mm-dd" formControlName="item_close_date" useUtc hourFormat="24" [monthNavigator]="true" [yearNavigator]="true" yearRange="2019:2030"></p-calendar>
-                        </div>
-                        <div class="form-group" id="form_group_aged_item">
-                          <label for="exampleSelect1">Aged</label>
-                          <!-- <input type="text" name="aged_item" formControlName="aged_item" class="form-control" placeholder="Aged Item" > -->
-                           <select name="aged_item" id="aged_item" formControlName="aged_item" class="form-control" >
-                          <option value="N">No</option>  
-                          <option value="Y">Yes</option>
-                          </select>
-                        </div>
-                        
-                         
+                      <div class="form-group">
+                        <label for="exampleSelect1">Acceptance Criteria</label>
+                        <textarea name="acceptance_criteria" formControlName="acceptance_criteria" class="form-control" placeholder="Item Description"></textarea>
                       </div>
-                      <div class="col-sm-6" style="padding-right: 0px;">
-                        <div class="form-group">
-                          <label for="exampleSelect1">Associated Item</label> 
-                          <input type="text" name="associated_item" formControlName="associated_item" class="form-control" placeholder="Associated" >
-                        </div>
-                        <div class="form-group" id="form-group_item_owner">
-                          <label for="exampleSelect1">Item Owner</label> 
-                          <input type="text" name="item_owner" formControlName="item_owner" class="form-control" placeholder="Item Owner" >
-                        </div>
-                        <div class="form-group" id="form-group_aged_justification">
-                          <label for="exampleSelect1">Aged Justification</label> 
-                          <textarea name="item_description"  class="form-control" placeholder="Justification" readonly="true"></textarea>
-                        </div>  
-                        
-                        
-                      </div>
-                      <div class="col-sm-4" style="padding-left: 0px;">
-                        <div class="form-group" id="form_group_primary_sla_breahed">
-                          <label for="exampleSelect1">Primary SLA Breach</label>
-                          <!-- <input type="text" name="primary_sla_breahed" formControlName="primary_sla_breahed" class="form-control" placeholder="Primary SLA" > -->
-                          <select name="primary_sla_breahed" formControlName="primary_sla_breahed" class="form-control"  >
-                          <option value="N">No</option>  
-                          <option value="Y">Yes</option>
-                          </select>
-                        </div>
-                      </div>
-                      <div class="col-sm-4" >
-                        <div class="form-group" id="form_group_secondary_sla_breahed">
-                          <label for="exampleSelect1">Secondary SLA Breach</label> 
-                          <!-- <input type="text" name="secondary_sla_breahed" formControlName="secondary_sla_breahed" class="form-control" placeholder="Secondary SLA" > -->
-                          <select name="secondary_sla_breahed" formControlName="secondary_sla_breahed" class="form-control"  >
-                          <option value="N">No</option>  
-                          <option value="Y">Yes</option>
-                          </select>
-                        </div>
-                      </div>
-                      <div class="col-sm-4" style="padding-right: 0px;">
-                        <div class="form-group" id="form_group_tertirary_sla_breahed">
-                          <label for="exampleSelect1">Tertiary SLA Breach</label>
-                          <!-- <input type="text" name="tertirary_sla_breahed" formControlName="tertirary_sla_breahed" class="form-control" placeholder="Tertiry SLA" > -->
-                          <select name="tertirary_sla_breahed" formControlName="tertirary_sla_breahed" class="form-control"  >
-                          <option value="N">No</option>  
-                          <option value="Y">Yes</option>
-                          </select>
-                        </div>
-                      </div> 
-                      
                     
-                    <div class="form-group" id="form_group_item_resolution">
-                      <input type="text" name="item_resolution" formControlName="item_resolution" class="form-control" placeholder="Resoluation" >
-                    </div>                 
+                                     
                   </div>
                 </div>
               </div>

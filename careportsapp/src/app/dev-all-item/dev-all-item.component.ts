@@ -45,7 +45,7 @@ advanceSearchToggleBtnclickEventstats: boolean = false;
     	});  
     }
 
-      itemsearchform = new FormGroup({
+      devitemsearchform = new FormGroup({
       search_item_number:new FormControl(null),
       adv_search_from_date:new FormControl(),
       adv_search_to_date:new FormControl(),
@@ -65,20 +65,15 @@ advanceSearchToggleBtnclickEventstats: boolean = false;
     item_number:new FormControl(),
     item_subject:new FormControl(),
     item_type:new FormControl('Story'),
-    item_owner:new FormControl(),
     item_status:new FormControl(''),
     item_description:new FormControl(),
-    item_created_date:new FormControl(),
-    item_close_date:new FormControl(),
-    associated_item:new FormControl(),
     application_name:new FormControl(''),
-    aged_item:new FormControl('N'),
-    priority_item:new FormControl(5),
-    bounce_item:new FormControl(),
-    primary_sla_breahed:new FormControl('N'),
-    secondary_sla_breahed:new FormControl('N'),
-    tertirary_sla_breahed:new FormControl('N'),
-    item_resolution:new FormControl(),
+    priority_item:new FormControl(),
+    sprint_name:new FormControl(),
+    developer_name:new FormControl(),
+    tester_name:new FormControl(),
+    acceptance_criteria:new FormControl(),
+  
     item_assigned:new FormControl(''),
   });
 
