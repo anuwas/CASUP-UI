@@ -1,6 +1,7 @@
 export class Devitem {
 	devItemId:number;
 	itemParentId:number;
+    itemNumber:String;
     itemType:String;
     itemSubType:String;
     itemStatus:String;
@@ -14,6 +15,7 @@ export class Devitem {
     itemEpicName:String;
     itemCurrentBoard:String;
     applicationName:String;
+    itemPriority:String;
     isRefined:String;
     refineDate:Date
     refineComment:String;

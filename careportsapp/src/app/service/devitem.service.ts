@@ -20,4 +20,8 @@ private baseUrl = 'http://localhost:8091/api/dev';
     let srcsupitemstr = JSON.stringify(requestObj);
     return this.http.get(`${this.baseUrl}/all-dev-item/${page}/${srcsupitemstr}`);
   }
+
+    createDevItem(item: object): Observable<object> {
+    return this.http.post(`${this.baseUrl}`+'/save-dev-item', item);
+  }
 }

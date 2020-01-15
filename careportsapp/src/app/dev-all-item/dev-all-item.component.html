@@ -176,7 +176,7 @@
                     </tbody>
                   </table>
                 </div>
-                <form [formGroup]="itemsaveform" id="saveitem" (ngSubmit)="saveAndUpdateItem(saveItem)">
+                <form [formGroup]="itemsaveform" id="saveitem" (ngSubmit)="saveAndUpdateDevItem(saveItem)">
                 <div class="modal fade" id="devmodal">
             <div class="modal-dialog">
               <div class="modal-content">
@@ -188,7 +188,7 @@
                 <div class="modal-body">
                   <div class="row">
                     <div class="col-sm-12">
-                      <input type="hidden" class="form-control"  formControlName="item_id">
+                      <input type="hidden" class="form-control"  formControlName="dev_item_id">
                       <div class="col-sm-4" style="padding-left: 0px">
                       	<div class="form-group">
                           <label for="exampleSelect1">Item Number</label>   

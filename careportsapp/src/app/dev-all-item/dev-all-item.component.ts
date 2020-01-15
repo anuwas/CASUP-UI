@@ -27,6 +27,8 @@ devitemObj : Devitem =new Devitem();
 devitemObjList: Observable<Devitem[]>;
 config: any; 
 advanceSearchToggleBtnclickEventstats: boolean = false;
+submitted = false;
+public date: any;
 
   ngOnInit() {
   	this.getPage(1);
@@ -61,7 +63,7 @@ advanceSearchToggleBtnclickEventstats: boolean = false;
     });
 
     itemsaveform=new FormGroup({
-    item_id:new FormControl('',[Validators.required]),
+    dev_item_id:new FormControl('',[Validators.required]),
     item_number:new FormControl(),
     item_subject:new FormControl(),
     item_type:new FormControl('Story'),
@@ -76,6 +78,60 @@ advanceSearchToggleBtnclickEventstats: boolean = false;
   
     item_assigned:new FormControl(''),
   });
+
+  saveAndUpdateDevItem(saveItem){
+  	this.devitemObj = new Devitem();
+  	this.devitemObj.itemNumber=this.ItemNumber.value;
+    this.devitemObj.itemType=this.ItemType.value;
+    this.devitemObj.itemStatus=this.ItemStatus.value;
+    this.devitemObj.itemSubject=this.ItemSubject.value;
+    this.devitemObj.itemDescription=this.ItemDescription.value;
+    this.devitemObj.applicationName=this.ApplicationName.value;
+    this.devitemObj.itemPriority=this.PriorityItem.value;
+    this.devitemObj.itemSprintName=this.ItemSprintName.value;
+    this.devitemObj.developerName=this.DeveloperName.value;
+    this.devitemObj.testerName=this.TesterName.value;
+    this.devitemObj.itemAcceptanceCtriteria=this.ItemAcceptanceCtriteria.value;
+    this.submitted = true;
+    if(this.DevItemId.value==null || this.DevItemId.value==''){
+         this.saveDevItem();
+         this.itemsaveform.reset();
+    }else{
+        this.devitemObj.devItemId=this.DevItemId.value;
+        this.updateDevItem();
+        this.itemsaveform.reset();
+    }
+    this.submitted=false;
+  }
+
+   saveDevItem() {
+    this.devitemService.createDevItem(this.devitemObj)
+      .subscribe(data => {
+        this.getPage(this.config.currentPage);
+        this.modalCloseJquery();
+      });
+    this.devitemObj = new Devitem();
+  }
+
+   updateDevItem(){
+   /*
+    this.supitemservice.updateItem(this.item.id,this.item)
+      .subscribe(data => {
+        this.getPage(this.config.currentPage);
+        this.modalCloseJquery();
+      });
+    this.item = new Supitem();
+    */
+  }
+
+    modalCloseJquery(){
+  	setTimeout(function() { 
+          this.$('#modal').modal('hide'); 
+          this.$("#itemSubmitButton").prop('disabled', false);
+          this.$("#itemSubmitButton").prop('class', 'btn btn-info');
+          this.$("#itemSubmitButton").text("Save changes");
+        }, 1000);
+  }
 
     getDevItemDataContent(responseData:Object,contentName:any){
     return responseData[contentName];
@@ -103,8 +159,43 @@ advanceSearchToggleBtnclickEventstats: boolean = false;
       });
   }
 
-    get ItemNumber(){
+ get DevItemId(){
+    return this.itemsaveform.get('dev_item_id');
+  }
+  get ItemNumber(){
     return this.itemsaveform.get('item_number');
+  }
+  get ItemType(){
+    return this.itemsaveform.get('item_type');
+  }
+
+  get ItemStatus(){
+    return this.itemsaveform.get('item_status');
+  }
+  get ItemDescription(){
+    return this.itemsaveform.get('item_description');
+  }
+
+  get ItemSubject(){
+    return this.itemsaveform.get('item_subject');
+  }
+   get ApplicationName(){
+    return this.itemsaveform.get('application_name');
+  }
+  get PriorityItem(){
+    return this.itemsaveform.get('priority_item');
+  }
+  get ItemSprintName(){
+    return this.itemsaveform.get('sprint_name');
+  }
+   get DeveloperName(){
+    return this.itemsaveform.get('developer_name');
+  }
+  get TesterName(){
+    return this.itemsaveform.get('tester_name');
+  }
+  get ItemAcceptanceCtriteria(){
+    return this.itemsaveform.get('acceptance_criteria');
   }
 
 }
