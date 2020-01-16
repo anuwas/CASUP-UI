@@ -2,6 +2,8 @@ export class Devitem {
 	devItemId:number;
 	itemParentId:number;
     itemNumber:String;
+    parentItem:String;
+    itemStoryPoint:number;
     itemType:String;
     itemSubType:String;
     itemStatus:String;

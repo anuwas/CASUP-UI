@@ -65,6 +65,8 @@ public date: any;
     itemsaveform=new FormGroup({
     dev_item_id:new FormControl('',[Validators.required]),
     item_number:new FormControl(),
+    item_story_point:new FormControl(),
+    parent_item_number:new FormControl(),
     item_subject:new FormControl(),
     item_type:new FormControl('Story'),
     item_status:new FormControl(''),
@@ -82,7 +84,9 @@ public date: any;
   saveAndUpdateDevItem(saveItem){
   	this.devitemObj = new Devitem();
   	this.devitemObj.itemNumber=this.ItemNumber.value;
+  	this.devitemObj.parentItem=this.ParentItemNumber.value;
     this.devitemObj.itemType=this.ItemType.value;
+    this.devitemObj.itemStoryPoint=this.ItemStoryPoint.value;
     this.devitemObj.itemStatus=this.ItemStatus.value;
     this.devitemObj.itemSubject=this.ItemSubject.value;
     this.devitemObj.itemDescription=this.ItemDescription.value;
@@ -165,6 +169,13 @@ public date: any;
   get ItemNumber(){
     return this.itemsaveform.get('item_number');
   }
+   get ParentItemNumber(){
+    return this.itemsaveform.get('parent_item_number');
+  }
+  get ItemStoryPoint(){
+    return this.itemsaveform.get('item_story_point');
+  }
+  
   get ItemType(){
     return this.itemsaveform.get('item_type');
   }

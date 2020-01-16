@@ -143,12 +143,13 @@
                     <thead>
                       <tr>
                         <th width="5%" class="th-sortable" data-toggle="class">ID</th>
-                        <th width="7%">Number</th>                        
+                        <th width="7%">Number</th>
+                        <th width="3%">SP</th>                        
                         <th width="12%">Item Type</th>
                         <th width="13%">Status</th>
                         <th>Subject</th>
-                        <th>Developer</th>
-                        <th>Tester</th>
+                        <th>Parent</th>
+                        <th>Assigned</th>
                         <th>Application</th>
                         <th>Sprint</th>
                         <th width="7%"><span class="label pull-right">
@@ -160,6 +161,7 @@
                       <tr *ngFor="let devitemOb of devitemObjList | paginate: config">
                         <td>{{ devitemOb.devItemId }}</td>
                         <td>{{ devitemOb.itemNumber }}</td>
+                        <td>{{ devitemOb.itemStoryPoint }}</td>
                         <td>{{ devitemOb.itemType }}</td>
                         <td>{{ devitemOb.itemStatus }}</td>
                         <td><span *ngIf="devitemOb.itemSubject!=null && devitemOb.itemSubject.length<=50;else subsubject">{{ devitemOb.itemSubject }}</span>
@@ -167,8 +169,8 @@
                             {{ devitemOb.itemSubject | slice:0:70 }} ....
                           </ng-template>
                         </td>                        
-                        <td>{{ devitemOb.developerName }}</td> 
-                        <td>{{ devitemOb.testerName }}</td> 
+                        <td>{{ devitemOb.parentItem }}</td> 
+                        <td>{{ devitemOb.developerName }} - {{ devitemOb.testerName }}</td> 
                         <td>{{ devitemOb.applicationName }}</td> 
                         <td>{{ devitemOb.itemSprintName }}</td> 
                         <td><a href="#devmodal" data-toggle="modal" data-backdrop="static" data-keyboard="false"><i class="fa fa-edit fa-lg devitem-edit-item-button" (click)="getUpdateItem(devitemOb.devItemId)"></i></a>&nbsp;<a href="javascript:void(0)" data-toggle="modal" data-backdrop="static" data-keyboard="false"><i class="fa fa-cog fa-lg devitem-report-edit-item-button" (click)="getReportUpdateItem(devitemOb.devItemId)"></i></a>&nbsp;<a href="javascript:void(0)"><i class="fa fa-trash-o fa-lg" (click)="getRemoveItem(devitemOb.devItemId)"></i></a></td>
@@ -189,7 +191,7 @@
                   <div class="row">
                     <div class="col-sm-12">
                       <input type="hidden" class="form-control"  formControlName="dev_item_id">
-                      <div class="col-sm-4" style="padding-left: 0px">
+                      <div class="col-sm-3" style="padding-left: 0px">
                       	<div class="form-group">
                           <label for="exampleSelect1">Item Number</label>   
                           <input type="text" name="item_number" formControlName="item_number" class="form-control" placeholder="Item Number" required>
@@ -198,7 +200,15 @@
                         </div>
                         </div>
                       </div>
-                      <div class="col-sm-4" >
+                      <div class="col-sm-3" >
+                      	<div class="form-group">
+                          <label for="exampleSelect1">Parent Item</label>
+                          <input type="text" name="parent_item_number" formControlName="parent_item_number" class="form-control" placeholder="Parent Item">
+                        </div>
+                      	
+                      </div>
+                      <div class="col-sm-3" style="padding-right: 0px">
+                      	
                       	<div class="form-group">
                           <label for="exampleSelect1">Item Type</label>
                           <select class="form-control" name="item_type" formControlName="item_type">
@@ -208,20 +218,23 @@
                           </select> 
                         </div>
                       </div>
-                      <div class="col-sm-4" style="padding-right: 0px">
-                      	<div class="form-group" id="form_group_bounce_item">
-                          <label for="exampleSelect1">Sprint</label> 
-                          
-                           <select name="sprint_name" formControlName="sprint_name" class="form-control">
-                          	<option value="Sprint 10">Sprint 10</option>
-                      		<option value="Sprint 9">Sprint 9</option>
-                      		<option value="Sprint 8">Sprint 8</option>  
-                      		<option value="print 7">Sprint 7</option>
-                      		<option value="Sprint 6">Sprint 6</option>
-                  		</select>
+                      <div class="col-sm-3" style="padding-right: 0px">
+                      	
+                      	<div class="form-group">
+                          <label for="exampleSelect1">Story Point</label>
+                          <select class="form-control" name="item_story_point" formControlName="item_story_point">
+                          <option value="0">0</option>
+                          <option value="1">1</option>
+                          <option value="2">2</option>
+                          <option value="3">3</option>
+                          <option value="5">5</option>
+                          <option value="8">8</option>
+                          <option value="13">13</option>
+                          </select> 
                         </div>
                       </div>
-                      <div class="col-sm-6" style="padding-left: 0px">
+                      
+                      <div class="col-sm-4" style="padding-left: 0px">
                         
                         <div class="form-group">
                           <label for="exampleSelect1">Item Status</label>
@@ -235,7 +248,7 @@
                         </div>
                         
                       </div>
-                      <div class="col-sm-6" style="padding-right: 0px;">
+                      <div class="col-sm-4" >
                         
                         <div class="form-group">
                           <label for="exampleSelect1">Application Name</label> 
@@ -250,6 +263,19 @@
                         </div>
                         
                          
+                      </div>
+                      <div class="col-sm-4" style="padding-right: 0px">
+                      	<div class="form-group" id="form_group_bounce_item">
+                          <label for="exampleSelect1">Sprint</label> 
+                          
+                           <select name="sprint_name" formControlName="sprint_name" class="form-control">
+                          	<option value="Sprint 10">Sprint 10</option>
+                      		<option value="Sprint 9">Sprint 9</option>
+                      		<option value="Sprint 8">Sprint 8</option>  
+                      		<option value="print 7">Sprint 7</option>
+                      		<option value="Sprint 6">Sprint 6</option>
+                  		</select>
+                        </div>
                       </div>
                       <div class="col-sm-4" style="padding-left: 0px;">
                       	<div class="form-group">
