@@ -1,6 +1,7 @@
 import { Component, OnInit,Pipe, PipeTransform } from '@angular/core';
 import { FormControl,FormGroup,Validators} from '@angular/forms';
 import { SupItemService } from '../service/supitem.service';
+import { ExcelService } from '../service/excel.service';
 import { Supitem } from '../entity/supitem';
 import { SupitemAdvSearch } from '../entity/supitemadvsearch';
 import { Observable,Subject } from "rxjs";
@@ -15,7 +16,7 @@ import { NgxSpinnerService } from "ngx-spinner";
 })
 export class SupportAllItemComponent implements OnInit {
 
-  constructor(private supitemservice: SupItemService,private spinner: NgxSpinnerService) {
+  constructor(private supitemservice: SupItemService,private spinner: NgxSpinnerService,private excelService:ExcelService) {
 
 this.config = {
       currentPage: 1,
@@ -24,6 +25,7 @@ this.config = {
     };
  }
 public date: any;
+
 config: any; 
 submitted = false;
 advanceSearchToggleBtnclickEventstats: boolean = false;
@@ -32,6 +34,7 @@ stringifyadvsrcstr : any;
 item : Supitem=new Supitem();
 items: Observable<Supitem[]>;
 supitemadvsearchattribute : SupitemAdvSearch=new SupitemAdvSearch();
+excelData : any=[] ;
 
   ngOnInit() {
   	this.getPage(1);
@@ -81,6 +84,12 @@ supitemadvsearchattribute : SupitemAdvSearch=new SupitemAdvSearch();
     tertirary_sla_breahed:new FormControl('N'),
     item_resolution:new FormControl(),
     item_assigned:new FormControl(''),
+    aged_justification:new FormControl(''),
+    breach_justification:new FormControl(''),
+    debt_class:new FormControl(' '),
+    debt_type:new FormControl(' '),
+    remedial_mechanism:new FormControl(' '),
+    revised_tower:new FormControl(' '),
   });
 
   itemsearchform = new FormGroup({
@@ -149,6 +158,13 @@ supitemadvsearchattribute : SupitemAdvSearch=new SupitemAdvSearch();
     this.item.tertirySlaBreached=this.TertirarySlaBreahed.value;
     this.item.resoluation=this.ItemResolution.value;
     this.item.itemAssigned=this.ItemAssigned.value;
+    this.item.agedJustification=this.AgedJustification.value;
+    this.item.breachJustification=this.BreachJustification.value;
+    this.item.debtClass=this.DebtClass.value;
+    this.item.debtType=this.DebtType.value;
+    this.item.debtRemedialMechanism=this.DebtRemedialMechanism.value;
+    this.item.revisedTower=this.DevisedTower.value;
+    
     
     this.submitted = true;
     if(this.ItemId.value==null || this.ItemId.value==''){
@@ -174,10 +190,17 @@ supitemadvsearchattribute : SupitemAdvSearch=new SupitemAdvSearch();
 
   modalCloseJquery(){
   setTimeout(function() { 
-          this.$('#modal').modal('hide'); 
-          this.$("#itemSubmitButton").prop('disabled', false);
-          this.$("#itemSubmitButton").prop('class', 'btn btn-info');
-          this.$("#itemSubmitButton").text("Save changes");
+          this.$('#modal').modal('hide');           
+          this.$("#itemSubmitButtonAddEdit").prop('disabled', false);
+          this.$("#itemSubmitButtonAddEdit").prop('class', 'btn btn-info');
+          this.$("#itemSubmitButtonAddEdit").text("Save changes");
+
+          this.$('#operationmodal').modal('hide'); 
+          this.$("#itemSubmitButtonReport").prop('disabled', false);
+          this.$("#itemSubmitButtonReport").prop('class', 'btn btn-info');
+          this.$("#itemSubmitButtonReport").text("Save changes");
+
+          
         }, 1000);
   }
 
@@ -225,35 +248,12 @@ supitemadvsearchattribute : SupitemAdvSearch=new SupitemAdvSearch();
          secondary_sla_breahed:this.UpdatableItem(data,'secondarySlaBreached'),
          tertirary_sla_breahed:this.UpdatableItem(data,'tertirySlaBreached'),
          item_resolution:this.UpdatableItem(data,'resoluation'),
-         item_assigned:this.UpdatableItem(data,'itemAssigned')});
-    });
-  }
-
-  getReportUpdateItem(itemid){
-    this.item=new Supitem();
-    this.supitemservice.getItem(itemid).subscribe(data =>{
-         var datePipe=new DatePipe("en-US");
-         this.itemsaveform.patchValue({
-         item_id:this.UpdatableItem(data,'id'),
-         item_number:this.UpdatableItem(data,'itemNumber'),
-         item_type:this.UpdatableItem(data,'itemType'),
-         item_subject:this.UpdatableItem(data,'itemSubject'),
-         item_owner:this.UpdatableItem(data,'itemOwner'),
-         item_status:this.UpdatableItem(data,'itemStatus'),
-         item_description:this.UpdatableItem(data,'itemDescription'),
-         //item_created_date:datePipe.transform(this.UpdatableItem(data,'itemCreatedDate'),'yyyy-MM-dd hh:mm'),
-        item_created_date:new Date(this.UpdatableItem(data,'itemCreatedDate')),
-        // item_close_date:datePipe.transform(this.UpdatableItem(data,'itemCloseDate'),'yyyy-MM-dd hh:mm'),
-        item_close_date:new Date(this.UpdatableItem(data,'itemCloseDate')),
-         associated_item:this.UpdatableItem(data,'associatedItem'),
-         application_name:this.UpdatableItem(data,'applicationName'),
-         aged_item:this.UpdatableItem(data,'aged'),
-         priority_item:this.UpdatableItem(data,'priority'),
-         bounce_item:this.UpdatableItem(data,'bounce'),
-         primary_sla_breahed:this.UpdatableItem(data,'primarySlaBreached'),
-         secondary_sla_breahed:this.UpdatableItem(data,'secondarySlaBreached'),
-         tertirary_sla_breahed:this.UpdatableItem(data,'tertirySlaBreached'),
-         item_resolution:this.UpdatableItem(data,'resoluation'),
+         aged_justification:this.UpdatableItem(data,'agedJustification'),
+         breach_justification:this.UpdatableItem(data,'breachJustification'),
+         debt_class:this.UpdatableItem(data,'debtClass'),
+         debt_type:this.UpdatableItem(data,'debtType'),
+         remedial_mechanism:this.UpdatableItem(data,'debtRemedialMechanism'),
+         revised_tower:this.UpdatableItem(data,'revisedTower'),
          item_assigned:this.UpdatableItem(data,'itemAssigned')});
     });
   }
@@ -273,6 +273,32 @@ supitemadvsearchattribute : SupitemAdvSearch=new SupitemAdvSearch();
   }
 
 
+exportExcelOnClickBtn():void {
+this.supitemservice.getAllSupItemListSrcForExcelExport(this.supitemadvsearchattribute,'MSR')
+      .subscribe(data => {
+        this.excelData = this.excelService.excelFormatDatatoExport(data,'MSR');
+        //console.log(this.excelData);
+        this.excelService.exportAsExcelFile(this.excelData, 'sample');
+      });
+      
+     /*
+this.excelData = [{
+eid: 'e101',
+ename: 'ravi',
+esal: 1000
+},{
+eid: 'e102',
+ename: 'ram',
+esal: 2000
+},{
+eid: 'e103',
+ename: 'rajesh',
+esal: 3000
+}];
+*/
+//
+   
+}
   
   advanceSearchToggleBtnclickEvent(){
     this.advanceSearchToggleBtnclickEventstats = !this.advanceSearchToggleBtnclickEventstats; 
@@ -362,6 +388,31 @@ supitemadvsearchattribute : SupitemAdvSearch=new SupitemAdvSearch();
   get ItemAssigned(){
     return this.itemsaveform.get('item_assigned');
   }
+
+  get AgedJustification(){
+    return this.itemsaveform.get('aged_justification');
+  }
+
+  get BreachJustification(){
+    return this.itemsaveform.get('breach_justification');
+  }
+
+  get DebtClass(){
+    return this.itemsaveform.get('debt_class');
+  }
+
+  get DebtType(){
+    return this.itemsaveform.get('debt_type');
+  }
+
+  get DebtRemedialMechanism(){
+    return this.itemsaveform.get('remedial_mechanism');
+  }
+
+  get DevisedTower(){
+    return this.itemsaveform.get('revised_tower');
+  }
+
 
   // advance search items
 

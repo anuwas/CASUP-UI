@@ -11,7 +11,7 @@ $( document ).ready(function() {
 
    	
    	$(document).on('click','.supitem-edit-item-button', function(){
-    	$('.modal-title').text('Edit Item');
+    	$('#add_edit_modal_title').text('Edit Item');
       $('#form_group_item_close_date').show();
       $('#form_group_primary_sla_breahed').show();
       $('#form_group_secondary_sla_breahed').show();
@@ -25,7 +25,7 @@ $( document ).ready(function() {
  	});
 
       $(document).on('click','.supitem-report-edit-item-button', function(){
-      $('.modal-title').text('Edit Item Reporting Info');
+      //$('.modal-title').text('Edit Item Reporting Info');
       $('#form_group_item_close_date').show();
       $('#form_group_primary_sla_breahed').show();
       $('#form_group_secondary_sla_breahed').show();
@@ -39,7 +39,7 @@ $( document ).ready(function() {
    });
 
  	$(document).on('click','.add-item-button', function(){
-    	$('.modal-title').text('Add New Item');
+    	$('#add_edit_modal_title').text('Add New Item');
       $('#form_group_item_close_date').hide();
       $('#form_group_primary_sla_breahed').hide();
       $('#form_group_secondary_sla_breahed').hide();

@@ -24,4 +24,12 @@ private baseUrl = 'http://localhost:8091/api/dev';
     createDevItem(item: object): Observable<object> {
     return this.http.post(`${this.baseUrl}`+'/save-dev-item', item);
   }
+
+  updateItem(devItemId: number, value: any): Observable<Object> {
+    return this.http.put(`${this.baseUrl}/devitem/${devItemId}`, value);
+  }
+
+    getDevItem(devItemId: number): Observable<Object> {
+    return this.http.get(`${this.baseUrl}/devitem/${devItemId}`);
+  }
 }

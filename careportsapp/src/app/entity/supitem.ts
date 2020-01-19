@@ -19,4 +19,10 @@ export class Supitem {
     tertirySlaBreached:String;
     resoluation:String;
     cronicalReport:String;
+    revisedTower:String;
+    breachJustification:String;
+    agedJustification:String;
+    debtClass:String;
+    debtType:String;
+    debtRemedialMechanism:String;
 }

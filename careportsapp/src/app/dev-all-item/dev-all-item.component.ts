@@ -57,8 +57,8 @@ public date: any;
       adv_search_item_status:new FormControl(null),
       adv_search_item_type:new FormControl(null),
       adv_search_assigned:new FormControl(null),
-      adv_search_sla:new FormControl(null),
-      adv_search_debt:new FormControl(null),
+      adv_search_sprint_name:new FormControl(null),
+      adv_search_project:new FormControl(null),
       adv_search_priority:new FormControl('-1'),
     });
 
@@ -77,8 +77,8 @@ public date: any;
     developer_name:new FormControl(),
     tester_name:new FormControl(),
     acceptance_criteria:new FormControl(),
-  
     item_assigned:new FormControl(''),
+    project_name:new FormControl(''),
   });
 
   saveAndUpdateDevItem(saveItem){
@@ -96,6 +96,7 @@ public date: any;
     this.devitemObj.developerName=this.DeveloperName.value;
     this.devitemObj.testerName=this.TesterName.value;
     this.devitemObj.itemAcceptanceCtriteria=this.ItemAcceptanceCtriteria.value;
+    this.devitemObj.projectName=this.ProjectName.value;
     this.submitted = true;
     if(this.DevItemId.value==null || this.DevItemId.value==''){
          this.saveDevItem();
@@ -118,19 +119,43 @@ public date: any;
   }
 
    updateDevItem(){
-   /*
-    this.supitemservice.updateItem(this.item.id,this.item)
+    this.devitemService.updateItem(this.devitemObj.devItemId,this.devitemObj)
       .subscribe(data => {
         this.getPage(this.config.currentPage);
         this.modalCloseJquery();
       });
-    this.item = new Supitem();
-    */
+    this.devitemObj = new Devitem();
+  }
+
+      getUpdateItem(itemid){
+      this.devitemObj=new Devitem();
+      this.devitemService.getDevItem(itemid).subscribe(data =>{
+         this.itemsaveform.patchValue({
+         dev_item_id:this.UpdatableItem(data,'devItemId'),
+         item_number:this.UpdatableItem(data,'itemNumber'),
+         parent_item_number:this.UpdatableItem(data,'parentItem'),
+         item_type:this.UpdatableItem(data,'itemType'),
+         item_story_point:this.UpdatableItem(data,'itemStoryPoint'),
+         item_status:this.UpdatableItem(data,'itemStatus'),
+         application_name:this.UpdatableItem(data,'applicationName'),
+         sprint_name:this.UpdatableItem(data,'itemSprintName'),
+         developer_name:this.UpdatableItem(data,'developerName'),
+         tester_name:this.UpdatableItem(data,'testerName'),
+         priority_item:this.UpdatableItem(data,'priority'),
+         item_subject:this.UpdatableItem(data,'itemSubject'),
+         item_description:this.UpdatableItem(data,'itemDescription'),
+         acceptance_criteria:this.UpdatableItem(data,'itemAcceptanceCtriteria'),
+         project_name:this.UpdatableItem(data,'projectName')});
+    });
+  }
+
+  UpdatableItem(updateItemObject:Object,updateItemName:any){
+    return updateItemObject[updateItemName];
   }
 
     modalCloseJquery(){
   	setTimeout(function() { 
-          this.$('#modal').modal('hide'); 
+          this.$('#devmodal').modal('hide'); 
           this.$("#itemSubmitButton").prop('disabled', false);
           this.$("#itemSubmitButton").prop('class', 'btn btn-info');
           this.$("#itemSubmitButton").text("Save changes");
@@ -207,6 +232,9 @@ public date: any;
   }
   get ItemAcceptanceCtriteria(){
     return this.itemsaveform.get('acceptance_criteria');
+  }
+  get ProjectName(){
+    return this.itemsaveform.get('project_name');
   }
 
 }
