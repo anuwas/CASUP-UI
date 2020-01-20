@@ -48,18 +48,19 @@ public date: any;
     }
 
       devitemsearchform = new FormGroup({
-      search_item_number:new FormControl(null),
+      search_item_number:new FormControl(),
       adv_search_from_date:new FormControl(),
       adv_search_to_date:new FormControl(),
       adv_search_opne_date:new FormControl(false),
       adv_search_close_date:new FormControl(false),
-      adv_search_application_name:new FormControl(null),
-      adv_search_item_status:new FormControl(null),
-      adv_search_item_type:new FormControl(null),
-      adv_search_assigned:new FormControl(null),
-      adv_search_sprint_name:new FormControl(null),
-      adv_search_project:new FormControl(null),
-      adv_search_priority:new FormControl('-1'),
+      adv_search_application_name:new FormControl('All'),
+      adv_search_item_status:new FormControl('All'),
+      adv_search_item_type:new FormControl('All'),
+      adv_search_assigned:new FormControl('All'),
+      adv_search_sprint_name:new FormControl('All'),
+      adv_search_project:new FormControl('All'),
+      adv_search_priority:new FormControl('All'),
+      adv_search_is_refined:new FormControl(),
     });
 
     itemsaveform=new FormGroup({
@@ -141,7 +142,7 @@ public date: any;
          sprint_name:this.UpdatableItem(data,'itemSprintName'),
          developer_name:this.UpdatableItem(data,'developerName'),
          tester_name:this.UpdatableItem(data,'testerName'),
-         priority_item:this.UpdatableItem(data,'priority'),
+         priority_item:this.UpdatableItem(data,'itemPriority'),
          item_subject:this.UpdatableItem(data,'itemSubject'),
          item_description:this.UpdatableItem(data,'itemDescription'),
          acceptance_criteria:this.UpdatableItem(data,'itemAcceptanceCtriteria'),
@@ -184,8 +185,24 @@ public date: any;
       item_status:'',
       item_assigned:'',
       application_name:'',
-      priority_item:'5',
+      priority_item:'',
       });
+  }
+
+    searchItemSubmit(searchItem){
+    this.spinner.show();
+      this.devitemRequestAttributes = new Devitemrequest();
+     
+      this.devitemRequestAttributes.itemNumber = this.ItemNumberSRC.value;
+      this.devitemRequestAttributes.itemSprintName = this.ItemSprintNameSRC.value;
+      this.devitemRequestAttributes.itemStatus = this.ItemStatusSRC.value;
+      this.devitemRequestAttributes.itemType = this.ItemTypeSRC.value;
+      this.devitemRequestAttributes.applicationName = this.ApplicationNameSRC.value;
+      this.devitemRequestAttributes.developerName = this.DeveloperNameSRC.value;
+      this.devitemRequestAttributes.projectName = this.ProjectNameSRC.value;
+      this.devitemRequestAttributes.itemPriority = this.ItemPrioritySRC.value;
+      this.devitemRequestAttributes.isRefined = this.IsRefinedSRC.value;
+      this.getPage(1);
   }
 
  get DevItemId(){
@@ -236,5 +253,34 @@ public date: any;
   get ProjectName(){
     return this.itemsaveform.get('project_name');
   }
+  // src item
+  get ItemNumberSRC(){
+    return this.devitemsearchform.get('search_item_number');
+  }
+  get ItemSprintNameSRC(){
+    return this.devitemsearchform.get('adv_search_sprint_name');
+  }
+  get ItemStatusSRC(){
+    return this.devitemsearchform.get('adv_search_item_status');
+  }
+  get ApplicationNameSRC(){
+    return this.devitemsearchform.get('adv_search_application_name');
+  }
+  get DeveloperNameSRC(){
+    return this.devitemsearchform.get('adv_search_assigned');
+  }
+  get ProjectNameSRC(){
+    return this.devitemsearchform.get('adv_search_project');
+  }
+  get ItemPrioritySRC(){
+    return this.devitemsearchform.get('adv_search_priority');
+  }
+   get IsRefinedSRC(){
+    return this.devitemsearchform.get('adv_search_is_refined');
+  }
+  get ItemTypeSRC(){
+    return this.devitemsearchform.get('adv_search_item_type');
+  }
+  
 
 }

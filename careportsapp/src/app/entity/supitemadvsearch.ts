@@ -1,15 +1,15 @@
 export class SupitemAdvSearch {
-    itemNumber:number;
+    itemNumber:number = 0 ;
     itemFromDate:Date;
     itemToDate:Date;
     opneDate:boolean;
     closeDate:boolean;
-    applicationName:String;
+    applicationName:String = 'All';
     bounce:boolean;
-    itemStatus:String;
-    itemType:String;
-    itemAssigned:String;
-    sla:String;
-    debt:String;
+    itemStatus:String = 'All';
+    itemType:String = 'All';
+    itemAssigned:String = 'All';
+    sla:String = 'All';
+    debt:String = 'All';
     priority:number;
 }

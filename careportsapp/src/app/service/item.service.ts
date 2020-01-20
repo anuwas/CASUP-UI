@@ -1,13 +1,11 @@
 import { Injectable } from '@angular/core';
-
 import { HttpClient,HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
-
 
 @Injectable({
   providedIn: 'root'
 })
-export class SupItemService {
+export class ItemService {
 
 //private baseUrl = 'http://10.74.209.146:8091/api';
 private baseUrl = 'http://localhost:8091/api';
@@ -21,11 +19,6 @@ private baseUrl = 'http://localhost:8091/api';
   getAllSupItemListSrc(srcsupitem:object,page: number): Observable<Object> {
     let srcsupitemstr = JSON.stringify(srcsupitem);
     return this.http.get(`${this.baseUrl}/all-src-item-list/${page}/${srcsupitemstr}`);
-  }
-
-  getAllSupItemListSrcForExcelExport(srcsupitem:object,type: any): Observable<Object> {
-    let srcsupitemstr = JSON.stringify(srcsupitem);
-    return this.http.get(`${this.baseUrl}/all-src-item-list-excel-export/${srcsupitemstr}/${type}`);
   }
 
   getItemListByItemNumber(page: number,itemNumber: number): Observable<any> {

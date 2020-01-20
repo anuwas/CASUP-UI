@@ -51,7 +51,7 @@
                   </div>
                     <div class="col-sm-2 m-b-xs" >
                     <select class="input-sm form-control input-s-sm inline" formControlName="adv_search_application_name">
-                      <option value="null"> --Application-- </option>
+                      <option value="All"> --Application-- </option>
                       <option value="STS">STS</option>
                       <option value="BULATS">BULATS</option>
                       <option value="RVS">RVS</option>
@@ -69,7 +69,7 @@
                 <div class="row text-sm wrapper">
                   <div class="col-sm-2 m-b-xs">
                     <select class="input-sm form-control input-s-sm inline" formControlName="adv_search_item_status">
-                      <option value="null"> --Item Status-- </option>
+                      <option value="All"> --Item Status-- </option>
                       <option value="Active">Active</option>
                       <option value="Waiting for Customer">Waiting for Customer</option>
                       <option value="Resolved">Resolved</option>
@@ -82,7 +82,7 @@
                   </div>
                   <div class="col-sm-2 m-b-xs">
                     <select class="input-sm form-control input-s-sm inline" formControlName="adv_search_item_type">
-                      <option value="null"> --Item Type-- </option>
+                      <option value="All"> --Item Type-- </option>
                       <option value="Incident">Incident</option>
                       <option value="Service Request">Service Request</option>
                       <option value="Change Request">Change Request</option>
@@ -91,7 +91,7 @@
                   </div>
                   <div class="col-sm-2 m-b-xs">
                     <select class="input-sm form-control input-s-sm inline" formControlName="adv_search_assigned">
-                      <option value="null"> --Assigned-- </option>
+                      <option value="All"> --Assigned-- </option>
                       <option value="Abhiroop Chakraborty">Abhiroop Chakraborty</option>
                       <option value="Alamgir Ali SK">Alamgir Ali SK</option>
                       <option value="Pralaysankar Saha">Pralaysankar Saha</option>
@@ -103,7 +103,7 @@
                   </div>
                   <div class="col-sm-2 m-b-xs">
                     <select class="input-sm form-control input-s-sm inline" formControlName="adv_search_sla">
-                      <option value="null"> --SLA-- </option>
+                      <option value="All"> --SLA-- </option>
                       <option value="NonAged">Non Aged</option>
                       <option value="Aged">Aged</option>
                       <option value="Primary">Primary</option>
@@ -113,7 +113,7 @@
                   </div>
                   <div class="col-sm-2 m-b-xs">
                     <select class="input-sm form-control input-s-sm inline" formControlName="adv_search_debt">
-                      <option value="null"> --Debt-- </option>
+                      <option value="All"> --Debt-- </option>
                       <option value="Functional">Functional</option>
                       <option value="Technical">Technical</option>
                       <option value="Knowledge">Knowledge</option>
@@ -293,7 +293,8 @@
                       
                     
                     <div class="form-group" id="form_group_item_resolution">
-                      <input type="text" name="item_resolution" formControlName="item_resolution" class="form-control" placeholder="Resoluation" >
+                     <!--  <input type="text" name="item_resolution" formControlName="item_resolution" class="form-control" placeholder="Resoluation" > -->
+                      <textarea name="item_resolution" formControlName="item_resolution" class="form-control" placeholder="Resoluation"></textarea>
                     </div>                 
                   </div>
                 </div>
@@ -317,7 +318,7 @@
                 <div class="modal-body">
                   <div class="row">
                     <div class="col-sm-12">
-                      <input type="text" class="form-control"  formControlName="item_id">
+                      <input type="hidden" class="form-control"  formControlName="item_id">
                      
                       <div class="form-group">
                         <label for="exampleSelect1">Subject</label>
@@ -328,7 +329,8 @@
                         <textarea name="item_description" formControlName="item_description" class="form-control" placeholder="Item Description"></textarea>
                       </div>
                       <div class="form-group" id="form_group_item_resolution">
-                      <input type="text" name="item_resolution" formControlName="item_resolution" class="form-control" placeholder="Resoluation" >
+                      <!-- <input type="text" name="item_resolution" formControlName="item_resolution" class="form-control" placeholder="Resoluation" > -->
+                      <textarea name="item_resolution" formControlName="item_resolution" class="form-control" placeholder="Resoluation"></textarea>
                     </div>
                     <div class="col-sm-3" style="padding-left: 0px;">
                       <div class="form-group" id="form_group_aged_item">
@@ -429,9 +431,7 @@
                           <option value=".Net">.Net</option>
                         </select>
                         </div>                                                
-                      </div>                   
-                    
-                                     
+                      </div>        
                   </div>
                 </div>
               </div>

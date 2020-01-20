@@ -1,10 +1,11 @@
 export class Devitemrequest {
-	itemNumber_Req:String;
-	itemSprintName_Req:String;
-	itemStatus_Req:String;
-	applicationName_Req:String;
-	developerName_Req:String;
-    testerName_Req:String;
-    projectName_Req:String;
-    prority_Req:String;
+	itemNumber:String;
+	itemSprintName:String = 'All';
+	itemStatus:String = 'All';
+	applicationName:String = 'All';
+	developerName:String = 'All';
+    projectName:String = 'All';
+    itemPriority:String = 'All';
+    isRefined:String;
+    itemType:String = 'All';
 }

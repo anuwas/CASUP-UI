@@ -58,7 +58,7 @@
                   </div>
                     <div class="col-sm-2 m-b-xs" >
                     <select class="input-sm form-control input-s-sm inline" formControlName="adv_search_application_name">
-                      <option value="null"> --Application-- </option>
+                      <option value="All"> --Application-- </option>
                       <option value="STS">STS</option>
                       <option value="BULATS">BULATS</option>
                       <option value="RVS">RVS</option>
@@ -68,7 +68,7 @@
                   </div>
                    <div class="col-sm-1">
                     <div class="input-group">
-                       
+                       <input type="checkbox" name="src_is_refined" formControlName="adv_search_is_refined" value="Y"> Refined
                     </div>
                   </div>             
                   
@@ -76,7 +76,7 @@
                 <div class="row text-sm wrapper">
                   <div class="col-sm-2 m-b-xs">
                     <select class="input-sm form-control input-s-sm inline" formControlName="adv_search_item_status">
-                      <option value="null"> --Item Status-- </option>
+                      <option value="All"> --Item Status-- </option>
                       <option value="Active">Active</option>
                       <option value="Waiting for Customer">Waiting for Customer</option>
                       <option value="Resolved">Resolved</option>
@@ -89,7 +89,7 @@
                   </div>
                   <div class="col-sm-2 m-b-xs">
                     <select class="input-sm form-control input-s-sm inline" formControlName="adv_search_item_type">
-                      <option value="null"> --Item Type-- </option>
+                      <option value="All"> --Item Type-- </option>
                       <option value="Story">Story</option>
                       <option value="Bug">Bug</option>
                       <option value="Task">Task</option>
@@ -97,7 +97,7 @@
                   </div>
                   <div class="col-sm-2 m-b-xs">
                     <select class="input-sm form-control input-s-sm inline" formControlName="adv_search_assigned">
-                      <option value="null"> --Assigned-- </option>
+                      <option value="All"> --Assigned-- </option>
                       <option value="Abhiroop Chakraborty">Abhiroop Chakraborty</option>
                       <option value="Alamgir Ali SK">Alamgir Ali SK</option>
                       <option value="Pralaysankar Saha">Pralaysankar Saha</option>
@@ -109,8 +109,7 @@
                   </div>
                   <div class="col-sm-2 m-b-xs">
                     <select class="input-sm form-control input-s-sm inline" formControlName="adv_search_sprint_name">
-                      <option value="null"> --Sprint-- </option>
-                      <option value="All">All</option>
+                      <option value="All"> --Sprint-- </option>
                       <option value="Sprint-9">Sprint-9</option>
                       <option value="Sprint-8">Sprint-8</option>
                       <option value="Sprint-7">Sprint-7</option>
@@ -118,8 +117,8 @@
                   </div>
                   <div class="col-sm-2 m-b-xs">
                     <select class="input-sm form-control input-s-sm inline" formControlName="adv_search_project">
-                      <option value="null"> --Project-- </option>
-                      <option value="Functional">STS Singlapore</option>
+                      <option value="All"> --Project-- </option>
+                      <option value="STS Singapore">STS Singlapore</option>
                       <option value="Technical">Technical</option>
                       <option value="Knowledge">Knowledge</option>
                     </select>                
@@ -127,7 +126,7 @@
                   <div class="col-sm-2">
                     <div class="input-group">
                       <select class="input-sm form-control input-s-sm inline" formControlName="adv_search_priority">
-                      <option value=" "> --Priority-- </option>  
+                      <option value="All"> --Priority-- </option>  
                       <option value="High">High</option>
                       <option value="Medium">Medium</option>
                       <option value="Medium Low">Medium Low</option> 
@@ -247,6 +246,9 @@
                             <option value="Backlog">Backlog</option>
                             <option value="Closed">Closed</option>
                             <option value="Done">Done</option>
+                            <option value="Selected">Selected</option>
+                            <option value="Ready">Ready</option>
+                            <option value="Analysis">Analysis</option>
                           </select>
                         </div>
                         
@@ -273,7 +275,7 @@
                           <label for="exampleSelect1">Project Name</label> 
                           <select name="project_name" formControlName="project_name" class="form-control" >
                           <option value="">  -- Select -- </option>  
-                          <option value="STS">STS Singapore</option>
+                          <option value="STS Singapore">STS Singapore</option>
                           <option value="BULATS">BULATS</option>
                           <option value="RVS">RVS</option>
                           <option value="CIE Direct">CIE Direct</option>
