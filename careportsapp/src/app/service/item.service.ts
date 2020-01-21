@@ -7,8 +7,8 @@ import { Observable } from 'rxjs';
 })
 export class ItemService {
 
-//private baseUrl = 'http://10.74.209.146:8091/api';
-private baseUrl = 'http://localhost:8091/api';
+private baseUrl = 'http://10.74.209.146:8091/api';
+//private baseUrl = 'http://localhost:8091/api';
 
   constructor(private http:HttpClient) { }
 

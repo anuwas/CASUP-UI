@@ -61,6 +61,8 @@ public date: any;
       adv_search_project:new FormControl('All'),
       adv_search_priority:new FormControl('All'),
       adv_search_is_refined:new FormControl(),
+      adv_search_chk_task:new FormControl(),
+      adv_search_chk_sub_task:new FormControl(),
     });
 
     itemsaveform=new FormGroup({
@@ -192,8 +194,12 @@ public date: any;
     searchItemSubmit(searchItem){
     this.spinner.show();
       this.devitemRequestAttributes = new Devitemrequest();
-     
+     if(this.ItemNumberSRC.value==''){
+      this.devitemRequestAttributes.itemNumber = null;
+     }else{
       this.devitemRequestAttributes.itemNumber = this.ItemNumberSRC.value;
+     }
+      
       this.devitemRequestAttributes.itemSprintName = this.ItemSprintNameSRC.value;
       this.devitemRequestAttributes.itemStatus = this.ItemStatusSRC.value;
       this.devitemRequestAttributes.itemType = this.ItemTypeSRC.value;
@@ -202,6 +208,18 @@ public date: any;
       this.devitemRequestAttributes.projectName = this.ProjectNameSRC.value;
       this.devitemRequestAttributes.itemPriority = this.ItemPrioritySRC.value;
       this.devitemRequestAttributes.isRefined = this.IsRefinedSRC.value;
+
+      if(this.ItemTaskSRC.value==null){
+        this.devitemRequestAttributes.task = false;
+      }else{
+        this.devitemRequestAttributes.task = this.ItemTaskSRC.value;
+      }
+      if(this.ItemSubTaskSRC.value==null){
+        this.devitemRequestAttributes.subTask = false;
+      }else{
+      this.devitemRequestAttributes.subTask = this.ItemSubTaskSRC.value;
+      }
+      
       this.getPage(1);
   }
 
@@ -280,6 +298,12 @@ public date: any;
   }
   get ItemTypeSRC(){
     return this.devitemsearchform.get('adv_search_item_type');
+  }
+  get ItemTaskSRC(){
+    return this.devitemsearchform.get('adv_search_chk_task');
+  }
+  get ItemSubTaskSRC(){
+    return this.devitemsearchform.get('adv_search_chk_sub_task');
   }
   
 

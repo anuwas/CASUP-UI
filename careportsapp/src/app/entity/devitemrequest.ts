@@ -8,4 +8,6 @@ export class Devitemrequest {
     itemPriority:String = 'All';
     isRefined:String;
     itemType:String = 'All';
+    task:boolean = false;
+    subTask:boolean = false;
 }

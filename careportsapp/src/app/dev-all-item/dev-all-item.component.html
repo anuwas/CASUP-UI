@@ -19,10 +19,10 @@
                     <div class="input-group">
                       <input type="text" name="search_item_number" formControlName="search_item_number" class="input-sm form-control input-s-sm inline" placeholder="Item Number" placeholder="Item Number">
                       <span class="input-group-btn" style="padding-left: 2px;">
-                        <input type="checkbox" name="src_chk_item" value="Item" checked=""> Item
+                        <input type="checkbox" name="adv_search_chk_task" formControlName="adv_search_chk_task" value="1" checked="false"> Task
                       </span>
                       <span class="input-group-btn" style="padding-left: 2px;">
-                        <input type="checkbox" name="src_chk_sub_item" value="SubItem"> Sub Item
+                        <input type="checkbox" name="adv_search_chk_sub_task" formControlName="adv_search_chk_sub_task" value="2" checked="false"> Sub Task
                       </span>
                       <span class="input-group-btn" style="padding-left: 2px;">
                         <button class="btn btn-sm btn-white" type="submit">Go!</button>
@@ -110,9 +110,11 @@
                   <div class="col-sm-2 m-b-xs">
                     <select class="input-sm form-control input-s-sm inline" formControlName="adv_search_sprint_name">
                       <option value="All"> --Sprint-- </option>
-                      <option value="Sprint-9">Sprint-9</option>
-                      <option value="Sprint-8">Sprint-8</option>
-                      <option value="Sprint-7">Sprint-7</option>
+                      <option value="Sprint-10">Sprint 10</option>
+                      <option value="Sprint-9">Sprint 9</option>
+                      <option value="Sprint-8">Sprint 8</option>  
+                      <option value="Sprint-7">Sprint 7</option>
+                      <option value="Sprint-6">Sprint 6</option>
                     </select>                
                   </div>
                   <div class="col-sm-2 m-b-xs">
@@ -216,7 +218,8 @@
                           <select class="form-control" name="item_type" formControlName="item_type">
                           <option value="Story">Story</option>
                           <option value="Bug">Bug</option>
-                          <option value="Change Request">Task</option>
+                          <option value="Task">Task</option>
+                          <option value="Sub Task">Sub Task</option>
                           </select> 
                         </div>
                       </div>
@@ -289,12 +292,12 @@
                       	<div class="form-group" id="form_group_bounce_item">
                           <label for="exampleSelect1">Sprint</label> 
                           
-                           <select name="sprint_name" formControlName="sprint_name" class="form-control">
-                          	<option value="Sprint 10">Sprint 10</option>
-                      		<option value="Sprint 9">Sprint 9</option>
-                      		<option value="Sprint 8">Sprint 8</option>  
-                      		<option value="print 7">Sprint 7</option>
-                      		<option value="Sprint 6">Sprint 6</option>
+                          <select name="sprint_name" formControlName="sprint_name" class="form-control">
+                          <option value="Sprint-10">Sprint 10</option>
+                      		<option value="Sprint-9">Sprint 9</option>
+                      		<option value="Sprint-8">Sprint 8</option>  
+                      		<option value="Sprint-7">Sprint 7</option>
+                      		<option value="Sprint-6">Sprint 6</option>
                   		</select>
                         </div>
                       </div>
