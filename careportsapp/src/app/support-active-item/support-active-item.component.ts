@@ -111,6 +111,7 @@ export class SupportActiveItemComponent implements OnInit {
                         { value: 'Closed', title: 'Closed' },
                         { value: 'Resolved', title: 'Resolved' },
                         { value: 'Fulfilled', title: 'Fulfilled' },
+                        { value: 'Cancel', title: 'Cancel' },
                   ]
                 }
         },

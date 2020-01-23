@@ -1,4 +1,4 @@
-        <section class="scrollable wrapper">
+<section class="scrollable wrapper">
           <div class="row">
           <div class="col-md-12">
             <section class="panel">
@@ -77,14 +77,14 @@
                   <div class="col-sm-2 m-b-xs">
                     <select class="input-sm form-control input-s-sm inline" formControlName="adv_search_item_status">
                       <option value="All"> --Item Status-- </option>
-                      <option value="Active">Active</option>
-                      <option value="Waiting for Customer">Waiting for Customer</option>
-                      <option value="Resolved">Resolved</option>
+                      <option value="Inprogress">Inprogress</option>
+                      <option value="Backlog">Backlog</option>
                       <option value="Closed">Closed</option>
-                      <option value="Premises On Hold">Premises On Hold</option>
-                      <option value="Waiting for RFC">Waiting for RFC</option>
-                      <option value="Fulfilled">Fulfilled</option>
-                      <option value="Re-Opened">Re-Opened</option>
+                      <option value="Done">Done</option>
+                      <option value="Selected">Selected</option>
+                      <option value="Ready">Ready</option>
+                      <option value="Analysis">Analysis</option>
+                      <option value="Blocked">Blocked</option>
                     </select>                
                   </div>
                   <div class="col-sm-2 m-b-xs">
@@ -93,18 +93,18 @@
                       <option value="Story">Story</option>
                       <option value="Bug">Bug</option>
                       <option value="Task">Task</option>
+                      <option value="Sub Task">Sub Task</option>
+                      <option value="Spike">Spike</option>
                     </select>                
                   </div>
                   <div class="col-sm-2 m-b-xs">
                     <select class="input-sm form-control input-s-sm inline" formControlName="adv_search_assigned">
                       <option value="All"> --Assigned-- </option>
-                      <option value="Abhiroop Chakraborty">Abhiroop Chakraborty</option>
-                      <option value="Alamgir Ali SK">Alamgir Ali SK</option>
-                      <option value="Pralaysankar Saha">Pralaysankar Saha</option>
-                      <option value="Vivek Sen">Vivek Sen</option>
-                      <option value="Tuhin Ghosh">Tuhin Ghosh</option>
-                      <option value="Rajarshi Mandal">Rajarshi Mandal</option>
-                      <option value="Abir Bhowmick">Abir Bhowmick</option>
+                      <option value="Amit">Amit</option>
+                      <option value="Bappa">Bappa</option>
+                      <option value="Munshi">Munshi</option>
+                      <option value="Prodyut">Prodyut</option>
+                      <option value="Other">Other</option>
                     </select>                
                   </div>
                   <div class="col-sm-2 m-b-xs">
@@ -131,7 +131,7 @@
                       <option value="All"> --Priority-- </option>  
                       <option value="High">High</option>
                       <option value="Medium">Medium</option>
-                      <option value="Medium Low">Medium Low</option> 
+                      <option value="Low">Low</option> 
                      
                     </select>
                       <span class="input-group-btn" style="padding-left: 2px;">
@@ -147,22 +147,23 @@
                     <thead>
                       <tr>
                         <th width="5%" class="th-sortable" data-toggle="class">ID</th>
-                        <th width="7%">Number</th>
+                        <th width="8%">Number</th>
                         <th width="3%">SP</th>                        
-                        <th width="12%">Item Type</th>
-                        <th width="13%">Status</th>
+                        <th width="10%">Item Type</th>
+                        <th width="10%">Status</th>
                         <th>Subject</th>
-                        <th>Parent</th>
+                        <th width="8%">Parent</th>
                         <th>Assigned</th>
                         <th>Application</th>
-                        <th>Sprint</th>
+                        <th width="8%">Sprint</th>
                         <th width="7%"><span class="label pull-right">
                       <a href="#devmodal" data-toggle="modal" class="btn btn-xs btn-success add-dev-item-button" data-backdrop="static" data-keyboard="false" (click)="addItemModalOpen()"><i class="fa fa-plus" aria-hidden="true"></i> Add</a>
                     </span></th>
                       </tr>
                     </thead>
                     <tbody>
-                      <tr *ngFor="let devitemOb of devitemObjList | paginate: config">
+                      <tr *ngFor="let devitemOb of devitemObjList  | paginate: config " [ngClass]="getColorClass(devitemOb.itemStatus)">
+                       
                         <td>{{ devitemOb.devItemId }}</td>
                         <td>{{ devitemOb.itemNumber }}</td>
                         <td>{{ devitemOb.itemStoryPoint }}</td>
@@ -170,7 +171,7 @@
                         <td>{{ devitemOb.itemStatus }}</td>
                         <td><span *ngIf="devitemOb.itemSubject!=null && devitemOb.itemSubject.length<=50;else subsubject">{{ devitemOb.itemSubject }}</span>
                           <ng-template #subsubject>
-                            {{ devitemOb.itemSubject | slice:0:70 }} ....
+                            {{ devitemOb.itemSubject | slice:0:50 }} ....
                           </ng-template>
                         </td>                        
                         <td>{{ devitemOb.parentItem }}</td> 
@@ -196,7 +197,7 @@
                     <div class="col-sm-12">
                       <input type="hidden" class="form-control"  formControlName="dev_item_id">
                       <div class="col-sm-3" style="padding-left: 0px">
-                      	<div class="form-group">
+                        <div class="form-group">
                           <label for="exampleSelect1">Item Number</label>   
                           <input type="text" name="item_number" formControlName="item_number" class="form-control" placeholder="Item Number" required>
                           <div class="alert alert-danger" *ngIf = "(ItemNumber.touched) && (ItemNumber.invalid)"  style="margin-top: 5px;">
@@ -205,27 +206,28 @@
                         </div>
                       </div>
                       <div class="col-sm-3" >
-                      	<div class="form-group">
+                        <div class="form-group">
                           <label for="exampleSelect1">Parent Item</label>
                           <input type="text" name="parent_item_number" formControlName="parent_item_number" class="form-control" placeholder="Parent Item">
                         </div>
-                      	
+                        
                       </div>
                       <div class="col-sm-3" >
-                      	
-                      	<div class="form-group">
+                        
+                        <div class="form-group">
                           <label for="exampleSelect1">Item Type</label>
                           <select class="form-control" name="item_type" formControlName="item_type">
                           <option value="Story">Story</option>
                           <option value="Bug">Bug</option>
                           <option value="Task">Task</option>
                           <option value="Sub Task">Sub Task</option>
+                          <option value="Spike">Spike</option>
                           </select> 
                         </div>
                       </div>
                       <div class="col-sm-3" style="padding-right: 0px">
-                      	
-                      	<div class="form-group">
+                        
+                        <div class="form-group">
                           <label for="exampleSelect1">Story Point</label>
                           <select class="form-control" name="item_story_point" formControlName="item_story_point">
                           <option value="0">0</option>
@@ -252,6 +254,7 @@
                             <option value="Selected">Selected</option>
                             <option value="Ready">Ready</option>
                             <option value="Analysis">Analysis</option>
+                            <option value="Blocked">Blocked</option>
                           </select>
                         </div>
                         
@@ -289,33 +292,33 @@
                          
                       </div>
                       <div class="col-sm-3" style="padding-right: 0px">
-                      	<div class="form-group" id="form_group_bounce_item">
+                        <div class="form-group" id="form_group_bounce_item">
                           <label for="exampleSelect1">Sprint</label> 
                           
                           <select name="sprint_name" formControlName="sprint_name" class="form-control">
                           <option value="Sprint-10">Sprint 10</option>
-                      		<option value="Sprint-9">Sprint 9</option>
-                      		<option value="Sprint-8">Sprint 8</option>  
-                      		<option value="Sprint-7">Sprint 7</option>
-                      		<option value="Sprint-6">Sprint 6</option>
-                  		</select>
+                          <option value="Sprint-9">Sprint 9</option>
+                          <option value="Sprint-8">Sprint 8</option>  
+                          <option value="Sprint-7">Sprint 7</option>
+                          <option value="Sprint-6">Sprint 6</option>
+                      </select>
                         </div>
                       </div>
                       <div class="col-sm-4" style="padding-left: 0px;">
-                      	<div class="form-group">
+                        <div class="form-group">
                           <label for="exampleSelect1">Developer</label>
                           <select name="developer_name" formControlName="developer_name" class="form-control">
                             <option value="">  -- Select -- </option>  
                             <option value="Amit">Amit</option>
                             <option value="Bappa">Bappa</option>
                             <option value="Munshi">Munshi</option>
-                            <option value="Produyt">Produyt</option>
+                            <option value="Prodyut">Prodyut</option>
                             <option value="Other">Other</option>
                           </select> 
                         </div>
                       </div>
                       <div class="col-sm-4" >
-                      	<div class="form-group">
+                        <div class="form-group">
                           <label for="exampleSelect1">Tester</label>
                           <select name="tester_name" formControlName="tester_name" class="form-control">
                             <option value="">  -- Select -- </option>  
@@ -328,7 +331,7 @@
                         </div>
                       </div>
                       <div class="col-sm-4" style="padding-right: 0px;">
-                      	<div class="form-group" >
+                        <div class="form-group" >
                           <label for="exampleSelect1">Priority</label>
                           <select name="priority_item" formControlName="priority_item" class="form-control" >
                             <option value="High">High</option>  
@@ -347,7 +350,7 @@
                       </div>
                       <div class="form-group">
                         <label for="exampleSelect1">Acceptance Criteria</label>
-                        <textarea name="acceptance_criteria" formControlName="acceptance_criteria" class="form-control" placeholder="Item Description"></textarea>
+                        <textarea name="acceptance_criteria" formControlName="acceptance_criteria" class="form-control" placeholder="Acceptance Criteria"></textarea>
                       </div>
                     
                                      

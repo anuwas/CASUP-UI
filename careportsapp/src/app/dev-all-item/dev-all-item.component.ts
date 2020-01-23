@@ -31,20 +31,20 @@ submitted = false;
 public date: any;
 
   ngOnInit() {
-  	this.getPage(1);
+    this.getPage(1);
   }
 
 
 
     getPage(page: number) {
-    	this.spinner.show();
-    	this.config.currentPage=page;
-    	console.log(this.devitemRequestAttributes);
-    	this.devitemService.getAllDevItemByRequest(this.devitemRequestAttributes,page).subscribe(data =>{
+      this.spinner.show();
+      this.config.currentPage=page;
+      console.log(this.devitemRequestAttributes);
+      this.devitemService.getAllDevItemByRequest(this.devitemRequestAttributes,page).subscribe(data =>{
         this.devitemObjList = this.getDevItemDataContent(data,'content');
         this.config.totalItems = this.getDevItemDataContent(data,'totalElements');
         this.spinner.hide();
-    	});  
+      });  
     }
 
       devitemsearchform = new FormGroup({
@@ -85,9 +85,9 @@ public date: any;
   });
 
   saveAndUpdateDevItem(saveItem){
-  	this.devitemObj = new Devitem();
-  	this.devitemObj.itemNumber=this.ItemNumber.value;
-  	this.devitemObj.parentItem=this.ParentItemNumber.value;
+    this.devitemObj = new Devitem();
+    this.devitemObj.itemNumber=this.ItemNumber.value;
+    this.devitemObj.parentItem=this.ParentItemNumber.value;
     this.devitemObj.itemType=this.ItemType.value;
     this.devitemObj.itemStoryPoint=this.ItemStoryPoint.value;
     this.devitemObj.itemStatus=this.ItemStatus.value;
@@ -157,7 +157,7 @@ public date: any;
   }
 
     modalCloseJquery(){
-  	setTimeout(function() { 
+    setTimeout(function() { 
           this.$('#devmodal').modal('hide'); 
           this.$("#itemSubmitButton").prop('disabled', false);
           this.$("#itemSubmitButton").prop('class', 'btn btn-info');
@@ -222,6 +222,24 @@ public date: any;
       
       this.getPage(1);
   }
+
+getColorClass(role: string) {
+  let returnValue;
+  switch (role) {
+  case 'Done':
+    returnValue = 'done';
+    break;
+  case 'Blocked':
+    returnValue = 'blocked';
+    break;
+  case 'Inprogress':
+    returnValue = 'inprogress';
+    break;
+  default:
+    returnValue = 'white';
+}
+return returnValue;
+}
 
  get DevItemId(){
     return this.itemsaveform.get('dev_item_id');
