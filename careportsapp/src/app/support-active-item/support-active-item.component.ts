@@ -34,6 +34,11 @@ export class SupportActiveItemComponent implements OnInit {
   });
 
   settings = {
+  rowClassFunction: (row) => {
+          if (row.cells[2].newValue === 'Active') {
+              return 'active_item';
+          }
+        },
  
   actions: {
       custom: [

@@ -141,7 +141,7 @@
                   <table class="table table-striped b-t text-sm">
                     <thead>
                       <tr>
-                        <th width="5%" class="th-sortable" data-toggle="class">ID</th>
+                        <!-- <th width="5%" class="th-sortable" data-toggle="class">ID</th> -->
                         <th width="7%">Number</th>                        
                         <th width="12%">Item Type</th>
                         <th width="13%">Status</th>
@@ -155,7 +155,7 @@
                     </thead>
                     <tbody>
                       <tr *ngFor="let itemObj of items | paginate: config">
-                        <td><a href="javascript:void(0)">{{ itemObj.id }}</a></td>
+                        <!-- <td><a href="javascript:void(0)">{{ itemObj.id }}</a></td> -->
                         <td>{{ itemObj.itemNumber }}</td>
                         <td>{{ itemObj.itemType }}</td>
                         <td>{{ itemObj.itemStatus }}</td>
@@ -165,8 +165,8 @@
                           </ng-template>
                         </td>                        
                         <td>{{ itemObj.itemAssigned }}</td> 
-                        <td>{{ itemObj.itemCreatedDate | date:'yyyy-MM-dd HH:mm a'}}</td> 
-                        <td><a href="#modal" data-toggle="modal" data-backdrop="static" data-keyboard="false"><i class="fa fa-edit fa-lg supitem-edit-item-button" (click)="getUpdateItem(itemObj.id)"></i></a>&nbsp;<a href="#operationmodal" data-toggle="modal" data-backdrop="static" data-keyboard="false"><i class="fa fa-cog fa-lg supitem-report-edit-item-button" (click)="getUpdateItem(itemObj.id)"></i></a>&nbsp;<a href="javascript:void(0)"><i class="fa fa-trash-o fa-lg" (click)="getRemoveItem(itemObj.id)"></i></a></td>
+                        <td>{{ itemObj.itemCreatedDate | date:'yyyy-MM-dd HH:mm'}}</td> 
+                        <td><a href="#modal" data-toggle="modal" data-backdrop="static" data-keyboard="false"><i class="fa fa-edit fa-lg supitem-edit-item-button" (click)="getUpdateItem(itemObj.id)"></i></a>&nbsp;<a href="#operationmodal" data-toggle="modal" data-backdrop="static" data-keyboard="false" ><i class="fa fa-cog fa-lg supitem-report-edit-item-button" (click)="getUpdateItem(itemObj.id)" [ngClass]="getOperationColorClass(this.itemObj)"></i></a>&nbsp;<a href="javascript:void(0)"><i class="fa fa-trash-o fa-lg" (click)="getRemoveItem(itemObj.id)" style="color:#DDDDDD;"></i></a></td>
                       </tr>
                     </tbody>
                   </table>
@@ -330,6 +330,7 @@
                       </div>
                       <div class="form-group" id="form_group_item_resolution">
                       <!-- <input type="text" name="item_resolution" formControlName="item_resolution" class="form-control" placeholder="Resoluation" > -->
+                      <label for="exampleSelect1">Resoluation</label>
                       <textarea name="item_resolution" formControlName="item_resolution" class="form-control" placeholder="Resoluation"></textarea>
                     </div>
                     <div class="col-sm-3" style="padding-left: 0px;">
@@ -381,7 +382,7 @@
                         <div class="form-group" >
                           <label for="exampleSelect1">Debt Class</label>
                           <select name="debt_class" formControlName="debt_class"  class="form-control"  >
-                          <option value=" "> - Select -</option>    
+                          <option value="null"> - Select -</option>    
                           <option value="Technical">Technical</option>  
                           <option value="Functional">Functional</option>
                           <option value="Operational">Operational</option>
@@ -392,7 +393,7 @@
                         <div class="form-group" >
                           <label for="exampleSelect1">Debt Type</label>
                           <select name="debt_type" formControlName="debt_type" class="form-control"  >
-                          <option value=" "> - Select -</option>    
+                          <option value="null"> - Select -</option>    
                           <option value="Avoidable">Avoidable</option>  
                           <option value="Unavoidable">Unavoidable</option>
                           </select>
@@ -402,7 +403,7 @@
                         <div class="form-group" >
                           <label for="exampleSelect1">Remedial Mechanism</label>
                           <select name="remedial_mechanism" class="form-control"  formControlName="remedial_mechanism">
-                          <option value=" "> - Select -</option>    
+                          <option value="null"> - Select -</option>    
                           <option value="Eleminate">Eleminate</option>  
                           <option value="Indristrilise">Indristrilise</option>
                           </select>
@@ -426,7 +427,7 @@
                         <div class="form-group" id="form-group_item_owner">
                           <label for="exampleSelect1">Revised Tower</label> 
                           <select name="revised_tower" class="form-control"  formControlName="revised_tower">
-                         <option value=" "> - Select -</option>    
+                         <option value="null"> - Select -</option>    
                           <option value="Oracle">Oracle</option>  
                           <option value=".Net">.Net</option>
                         </select>

@@ -23,5 +23,11 @@
 :host /deep/ ng2-st-tbody-edit-delete {margin: 3px;}
 :host /deep/ .ng2-smart-action-custom-custom{margin: 3px;}
 
+:host /deep/ .active_item {
+     background-color: #f36868 !important;
+     color: black;
+     font-weight: 500;
+}
+
 
 

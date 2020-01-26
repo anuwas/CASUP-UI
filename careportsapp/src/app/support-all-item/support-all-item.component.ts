@@ -86,10 +86,10 @@ excelData : any=[] ;
     item_assigned:new FormControl(''),
     aged_justification:new FormControl(''),
     breach_justification:new FormControl(''),
-    debt_class:new FormControl(' '),
-    debt_type:new FormControl(' '),
-    remedial_mechanism:new FormControl(' '),
-    revised_tower:new FormControl(' '),
+    debt_class:new FormControl(),
+    debt_type:new FormControl(),
+    remedial_mechanism:new FormControl(),
+    revised_tower:new FormControl(),
   });
 
   itemsearchform = new FormGroup({
@@ -278,7 +278,7 @@ this.supitemservice.getAllSupItemListSrcForExcelExport(this.supitemadvsearchattr
       .subscribe(data => {
         this.excelData = this.excelService.excelFormatDatatoExport(data,'MSR');
         //console.log(this.excelData);
-        this.excelService.exportAsExcelFile(this.excelData, 'sample');
+        this.excelService.exportAsExcelFile(this.excelData, 'SupportExtract');
       });
       
      /*
@@ -298,6 +298,27 @@ esal: 3000
 */
 //
    
+}
+
+getOperationColorClass(itemObject : Object){
+  let operationClass = '';
+  if(itemObject['itemType']=='Incident'){
+    if(itemObject['itemStatus']=='Closed' || itemObject['itemStatus']=='Resolved'){
+      if(itemObject['debtClass']==null || itemObject['debtType']==null || itemObject['debtRemedialMechanism']==null){
+        operationClass = 'debtEmpty';
+      }
+
+      if(itemObject['resoluation']=='' || itemObject['resoluation'] == null){
+        operationClass = 'resolutionEmpty';
+      }
+
+      if(itemObject['itemSubject']==null || itemObject['itemSubject']=='' || itemObject['itemDescription'] == null || itemObject['itemDescription'] == ''){
+        operationClass = 'subjectDescriptionEmpty';
+      }
+
+    }
+  }
+  return operationClass;
 }
   
   advanceSearchToggleBtnclickEvent(){

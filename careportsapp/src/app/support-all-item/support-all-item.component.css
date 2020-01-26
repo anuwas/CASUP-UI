@@ -62,3 +62,14 @@
 	background: white;
 }
 
+.resolutionEmpty{
+     color: #f74242 !important;
+}
+
+.debtEmpty{
+     color: #f9caca !important;
+}
+
+.subjectDescriptionEmpty{
+     color: #bf0c0c !important;
+}
