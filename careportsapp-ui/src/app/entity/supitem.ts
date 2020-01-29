@@ -1,0 +1,28 @@
+export class Supitem {
+	id:number;
+	itemNumber:number;
+    itemType:String;
+    itemSubject:String;
+    itemOwner:String;
+    itemStatus:String;
+    itemDescription:String;
+    itemAssigned:String;
+    associatedItem:String;
+    itemCreatedDate:Date;
+    itemCloseDate:Date;
+    applicationName:String;
+    priority:number;
+    aged:String;
+    bounce:number;
+    primarySlaBreached:String;
+    secondarySlaBreached:String;
+    tertirySlaBreached:String;
+    resoluation:String;
+    cronicalReport:String;
+    revisedTower:String;
+    breachJustification:String;
+    agedJustification:String;
+    debtClass:String;
+    debtType:String;
+    debtRemedialMechanism:String;
+}

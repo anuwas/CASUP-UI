@@ -1,0 +1,34 @@
+:host /deep/ ng2-smart-table-title a:focus { color: #009ECE; }
+
+:host /deep/ ng2-smart-table thead > table> td> tr > th > div { color: #717171; font-size: 14px;}
+
+
+:host /deep/ ng2-smart-table thead > tr > th > div {cursor: pointer;color: #009ECE; }
+:host /deep/ th.ng2-smart-actions a {cursor: pointer;color: #009ECE; }
+
+ /*:host /deep/ ng2-st-tbody-edit-delete {display: flex !important;
+  height: 0 !important;
+}
+
+:host /deep/ ng2-st-tbody-custom a.ng2-smart-action.ng2-smart-action-custom-custom {
+  display: inline-block;
+  width: 50px;
+  text-align: center;
+  font-size: 1.1em;
+}
+
+:host /deep/ ng2-st-tbody-custom a.ng2-smart-action.ng2-smart-action-custom-custom:hover {
+  color: #5dcfe3;
+}*/
+:host /deep/ ng2-st-tbody-edit-delete {margin: 3px;}
+:host /deep/ .ng2-smart-action-custom-custom{margin: 3px;}
+
+
+:host /deep/ .table .table-striped > tbody > tr.active_item > td{
+     background-color: #f36868 !important;
+     color: black;
+     font-weight: 500;
+}
+
+
+

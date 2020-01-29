@@ -1,0 +1,24 @@
+.modal-dialog {
+    width: 919px;
+    padding-top: 30px;
+    padding-bottom: 30px;
+  }
+
+
+
+.panel .table-striped > tbody > tr.done > td{
+     background-color: #b2e697 !important;
+     color: black;
+     font-weight: 500;
+}
+
+.panel .table-striped > tbody > tr.blocked > td{
+     background-color: #ff00007a !important;
+     color: black;
+     font-weight: 500;
+}
+
+.panel .table-striped > tbody > tr.inprogress > td{
+     background-color: #d9f5d2 !important;
+}
+
