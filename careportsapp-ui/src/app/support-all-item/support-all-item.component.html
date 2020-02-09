@@ -205,6 +205,11 @@
                             <option value="Waiting for RFC">Waiting for RFC</option>
                             <option value="Fulfilled">Fulfilled</option>
                             <option value="Re-Opened">Re-Opened</option>
+                            <option value="Investivation">Investivation</option>
+                            <option value="Planned into Release">Planned into Release</option>
+                            <option value="Identified">Identified</option>
+                            <option value="Awaiting Review">Awaiting Review</option>
+                            
                           </select>
                         </div>
                         <div class="form-group">
@@ -278,7 +283,7 @@
                         <div class="form-group">
                           <label for="exampleSelect1">Created On</label>
                           <!-- <input type="text" name="item_created_date" formControlName="item_created_date" class="form-control" placeholder="created On" > -->
-                          <p-calendar placeholder="created On" [showIcon]="true" [showTime]="true" dateFormat="yy-mm-dd" formControlName="item_created_date" useUtc hourFormat="24"  [monthNavigator]="true" [yearNavigator]="true" yearRange="2019:2030"></p-calendar>
+                          <p-calendar placeholder="created On" [showIcon]="true" [showTime]="true" dateFormat="yy-mm-dd" formControlName="item_created_date" useUtc hourFormat="24"  [monthNavigator]="true" [yearNavigator]="true" yearRange="2016:2030"></p-calendar>
                         </div>
                        
                          
@@ -287,7 +292,7 @@
                         <div class="form-group" id="form_group_item_close_date">
                         <label for="exampleSelect1">Closed On</label>
                           <!-- <input type="text" name="item_close_date" formControlName="item_close_date" class="form-control" placeholder="Close On" > -->
-                          <p-calendar placeholder="Close On" [showIcon]="true" [showTime]="true" dateFormat="yy-mm-dd" formControlName="item_close_date" useUtc hourFormat="24" [monthNavigator]="true" [yearNavigator]="true" yearRange="2019:2030"></p-calendar>
+                          <p-calendar placeholder="Close On" [showIcon]="true" [showTime]="true" dateFormat="yy-mm-dd" formControlName="item_close_date" useUtc hourFormat="24" [monthNavigator]="true" [yearNavigator]="true" yearRange="2016:2030"></p-calendar>
                         </div>                      
                       </div>                     
                       
@@ -386,6 +391,7 @@
                           <option value="Technical">Technical</option>  
                           <option value="Functional">Functional</option>
                           <option value="Operational">Operational</option>
+                          <option value="Knowledge">Knowledge</option>
                           </select>
                         </div>
                       </div>
@@ -405,8 +411,15 @@
                           <select name="remedial_mechanism" class="form-control"  formControlName="remedial_mechanism">
                           <option value="null"> - Select -</option>    
                           <option value="Eleminate">Eleminate</option>  
-                          <option value="Indristrilise">Indristrilise</option>
+                          <option value="Industrialise">Industrialise</option>
+                          <option value="Automate">Automate</option>
                           </select>
+                        </div>
+                      </div>
+                      <div class="col-sm-12" style="padding: 0px;">
+                        <div class="form-group">
+                          <label for="exampleSelect1">Debt Comment</label> 
+                          <input type="text" name="debt_comment" formControlName="debt_comment" class="form-control" placeholder="Comment" >
                         </div>
                       </div>
                       <div class="col-sm-4" style="padding-left: 0px;">
@@ -428,7 +441,8 @@
                           <label for="exampleSelect1">Revised Tower</label> 
                           <select name="revised_tower" class="form-control"  formControlName="revised_tower">
                          <option value="null"> - Select -</option>    
-                          <option value="Oracle">Oracle</option>  
+                          <option value="EPS">EPS</option>  
+                          <option value="SAP">SAP</option>
                           <option value=".Net">.Net</option>
                         </select>
                         </div>                                                

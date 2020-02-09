@@ -18,6 +18,7 @@ export class SupportActiveItemComponent implements OnInit {
 
   itemData: Observable<any>;
   itemReportData: Observable<any>;
+  itemProblemRecordData: Observable<any>;
   supitem : Supitem=new Supitem();
   supitemactivity : Supitemactivity=new Supitemactivity();
   supitemactivityList: Observable<Supitemactivity[]>;
@@ -26,6 +27,7 @@ export class SupportActiveItemComponent implements OnInit {
   ngOnInit() {
   	this.getPage();
     this.getReportPage();
+    this.getActiveProblemRecordPage();
   }
 
   supitemactivityform=new FormGroup({
@@ -221,6 +223,13 @@ export class SupportActiveItemComponent implements OnInit {
         this.spinner.hide();
     })
   }
+  getActiveProblemRecordPage(){
+  this.spinner.show();
+  this.supitemservice.getActiveProblemRecordItemList().subscribe(data =>{
+        this.itemProblemRecordData =data;
+        this.spinner.hide();
+    })
+  }
   
 data = [ ];
 
@@ -330,4 +339,167 @@ UpdatableItemActivity(updateItemObject:Object,updateItemName:any){
   actvivityModalClose(){
     this.supitemactivityform.reset();
   }
+
+problemRecordSettings = {
+  rowClassFunction: (row) => {
+          if (row.cells[2].newValue === 'Active') {
+              return 'active_item';
+          }
+        },
+ 
+  actions: {
+      custom: [
+                { name: 'viewrecord', title: '<i class="fa fa-comments-o fa-lg active_item_activity_btn" title="Add Activity"></i>'}
+              ],
+      position: 'right',
+    },
+    pager:{
+      perPage:20
+    },
+
+    delete: {
+      confirmDelete: true,
+
+      deleteButtonContent: '<i class="fa fa-trash-o " title="Delete Item"></i>',
+      saveButtonContent: 'save',
+      cancelButtonContent: 'cancel'
+    },
+
+    add: {
+      confirmCreate: true,
+      createButtonContent:'Save'
+    },
+    edit: {
+      confirmSave: true,
+      editButtonContent:'<i class="fa fa-edit fa-lg edit-item-button" title="Edit Item"></i>'
+    },
+    columns: {
+      
+      itemNumber: {
+        title: 'Item Number',
+        width: '12%',
+      },
+      itemType: {
+        title: 'Type',
+        editor: {
+        type: 'list',
+        config: {
+                  selectText: 'Show All',
+                  list: [
+                        { value: 'Problem Record', title: 'Problem Record' },
+                  ]
+                }
+        },
+        filter: {
+        type: 'list',
+        config: {
+                  selectText: 'Show All',
+                  list: [
+                        { value: 'Problem Record', title: 'Problem Record' },
+                  ]
+                }
+        },
+        width: '12%',
+      },
+      itemStatus: {
+        title: 'Status',
+        width: '15%',
+        editor: {
+        type: 'list',
+        config: {
+                  selectText: 'Show All',
+                  list: [
+                        { value: 'Awaiting Review', title: 'Awaiting Review' },
+                        { value: 'Investivation', title: 'Investivation' },
+                        { value: 'Planned into Release', title: 'Planned into Release' },
+                        { value: 'Identified', title: 'Identified' },
+                  ]
+                }
+        },
+        filter: {
+        type: 'list',
+        config: {
+                  selectText: 'Show All',
+                  list: [
+                        { value: 'Awaiting Review', title: 'Awaiting Review' },
+                        { value: 'Investivation', title: 'Investivation' },
+                        { value: 'Planned into Release', title: 'Planned into Release' },
+                        { value: 'Identified', title: 'Identified' },
+                  ]
+                }
+        }
+      },
+      itemSubject: {
+        title: 'Subject',
+      },
+      itemAssigned: {
+        title: 'Assigned',
+        editor: {
+        type: 'list',
+        config: {
+                  selectText: 'Show All',
+                  list: [
+                        { value: 'Abhiroop Chakraborty', title: 'Abhiroop Chakraborty' },
+                        { value: 'Alamgir Ali SK', title: 'Alamgir Ali SK' },
+                        { value: 'Tuhin Ghosh', title: 'Tuhin Ghosh' },
+                        { value: 'Pralaysankar Saha', title: 'Pralaysankar Saha' },
+                        { value: 'Vivek Sen', title: 'Vivek Sen' },
+                        { value: 'Rajarshi Mandal', title: 'Rajarshi Mandal' },
+                        { value: 'Abir Bhowmick', title: 'Abir Bhowmick' },
+                  ]
+                }
+        },
+        filter: {
+        type: 'list',
+        config: {
+                  selectText: 'Show All',
+                  list: [
+                        { value: 'Abhiroop', title: 'Abhiroop Chakraborty' },
+                        { value: 'Alamgir', title: 'Alamgir Ali SK' },
+                        { value: 'Tuhin', title: 'Tuhin Ghosh' },
+                        { value: 'Pralaysankar', title: 'Pralaysankar Saha' },
+                        { value: 'Vivek', title: 'Vivek Sen' },
+                        { value: 'Rajarshi Mandal', title: 'Rajarshi Mandal' },
+                        { value: 'Abir Bhowmick', title: 'Abir Bhowmick' },
+                  ]
+                }
+        }
+      },
+      applicationName: {
+        title: 'Application',
+        editor: {
+        type: 'list',
+        config: {
+                  selectText: 'Show All',
+                  list: [
+                        { value: 'STS', title: 'STS' },
+                        { value: 'RVS', title: 'RVS' },
+                        { value: 'BULATS', title: 'BULATS' },
+                        { value: 'CIE Direct', title: 'CIE Direct' },
+                  ]
+                }
+        },
+        filter: {
+        type: 'list',
+        config: {
+                  selectText: 'Show All',
+                  list: [
+                        { value: 'STS', title: 'STS' },
+                        { value: 'RVS', title: 'RVS' },
+                        { value: 'BULATS', title: 'BULATS' },
+                        { value: 'CIE Direct', title: 'CIE Direct' },
+                  ]
+                }
+        },
+      },      
+    },
+    defaultStyle: false,
+    attr: {
+        class: 'table table-striped b-t text-sm2'
+      }
+       
+
+  };
 }
+
+  

@@ -26,6 +26,18 @@
                   
                 </footer>
               </section>
+              <section class="panel">
+                <header class="panel-heading">
+                  All Active Problem Record
+                </header>
+                <div >
+                  <ng2-smart-table class="table table-striped b-t text-sm" [settings]="problemRecordSettings" [source]="itemProblemRecordData" (deleteConfirm)="onDeleteConfirm($event)" (editConfirm)="onSaveConfirm($event)"
+ (createConfirm)="onCreateConfirm($event)" (custom)="onCustomAction($event)"></ng2-smart-table>
+                </div>
+                <footer class="panel-footer">
+                  
+                </footer>
+              </section>
           </div>
           </div>    
                 <div>

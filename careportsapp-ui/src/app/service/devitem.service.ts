@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 })
 export class DevItemService {
 
-//private baseUrl = 'http://10.74.209.146:8091/api/dev';
+//private baseUrl = 'http://10.114.44.205:8091/api/dev';
 private baseUrl = 'http://localhost:8091/api/dev';
 
   constructor(private http:HttpClient) { }

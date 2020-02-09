@@ -90,6 +90,7 @@ excelData : any=[] ;
     debt_type:new FormControl(),
     remedial_mechanism:new FormControl(),
     revised_tower:new FormControl(),
+    debt_comment:new FormControl(),
   });
 
   itemsearchform = new FormGroup({
@@ -164,6 +165,7 @@ excelData : any=[] ;
     this.item.debtType=this.DebtType.value;
     this.item.debtRemedialMechanism=this.DebtRemedialMechanism.value;
     this.item.revisedTower=this.DevisedTower.value;
+    this.item.debtComment=this.DebtComment.value;
     
     
     this.submitted = true;
@@ -254,6 +256,7 @@ excelData : any=[] ;
          debt_type:this.UpdatableItem(data,'debtType'),
          remedial_mechanism:this.UpdatableItem(data,'debtRemedialMechanism'),
          revised_tower:this.UpdatableItem(data,'revisedTower'),
+         debt_comment:this.UpdatableItem(data,'debtComment'),
          item_assigned:this.UpdatableItem(data,'itemAssigned')});
     });
   }
@@ -433,6 +436,12 @@ getOperationColorClass(itemObject : Object){
   get DevisedTower(){
     return this.itemsaveform.get('revised_tower');
   }
+
+  get DebtComment(){
+    return this.itemsaveform.get('debt_comment');
+  }
+
+  
 
 
   // advance search items

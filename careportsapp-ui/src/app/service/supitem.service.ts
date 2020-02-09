@@ -9,7 +9,7 @@ import { Observable } from 'rxjs';
 })
 export class SupItemService {
 
-//private baseUrl = 'http://10.74.209.146:8091/api';
+//private baseUrl = 'http://10.114.44.205:8091/api';
 private baseUrl = 'http://localhost:8091/api';
 
   constructor(private http:HttpClient) { }
@@ -62,5 +62,9 @@ private baseUrl = 'http://localhost:8091/api';
 
   getActiveReportItemList(): Observable<any> {
     return this.http.get(`${this.baseUrl}/sup-item-active-report-list`);
+  }
+
+  getActiveProblemRecordItemList(): Observable<any> {
+    return this.http.get(`${this.baseUrl}/sup-item-active-problem-record-list`);
   }
 }
