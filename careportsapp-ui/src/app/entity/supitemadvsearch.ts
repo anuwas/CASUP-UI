@@ -12,4 +12,5 @@ export class SupitemAdvSearch {
     sla:String = 'All';
     debt:String = 'All';
     priority:number;
+    searchText:String;
 }

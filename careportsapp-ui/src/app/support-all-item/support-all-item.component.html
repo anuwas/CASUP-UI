@@ -7,15 +7,22 @@
                 </header>
                 <form [formGroup]="itemsearchform" id="searchItem" (ngSubmit)="searchItemSubmit(searchItem)">
                 <div class="row text-sm wrapper">
-                  <div class="col-sm-7 m-b-xs">
+                  <div class="col-sm-3 m-b-xs">
                     <select class="input-sm form-control input-s-sm inline">
                       <option value="1">Excel Export</option>
                     </select>
                     <button class="btn btn-sm btn-white" style="margin-left: 2px;" (click)="exportExcelOnClickBtn()" type="button">Apply</button>                
                   </div>
-                  
                   <div class="col-sm-5">
+                    <div class="input-group" style="float: right;">
+                      <input type="text" name="search_text" formControlName="search_text" class="input-sm form-control input-s-sm inline" placeholder="Search" >
+                      
+                    </div>
+                  </div>
+                  
+                  <div class="col-sm-4">
                     <div class="input-group">
+                      
                       <input type="text" name="search_item_number" formControlName="search_item_number" class="input-sm form-control input-s-sm inline" placeholder="Item Number" placeholder="Item Number">
                       <span class="input-group-btn" style="padding-left: 2px;">
                         <button class="btn btn-sm btn-white" type="submit">Go!</button>

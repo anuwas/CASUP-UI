@@ -107,6 +107,7 @@ excelData : any=[] ;
       adv_search_sla:new FormControl('All'),
       adv_search_debt:new FormControl('All'),
       adv_search_priority:new FormControl('-1'),
+      search_text:new FormControl(),
     });
 
     
@@ -135,6 +136,7 @@ excelData : any=[] ;
       this.supitemadvsearchattribute.sla = this.AdvSrcItemSla.value;
       this.supitemadvsearchattribute.debt= this.AdvSrcItemDebt.value;
       this.supitemadvsearchattribute.priority=this.AdvSrcItemPriority.value;
+      this.supitemadvsearchattribute.searchText=this.AdvSrcSearchText.value;
       //this.stringifyadvsrcstr=JSON.stringify(this.supitemadvsearchattribute);
       this.getPage(1);
   }
@@ -485,6 +487,9 @@ getOperationColorClass(itemObject : Object){
   }
   get AdvSrcItemPriority(){
     return this.itemsearchform.get('adv_search_priority');
+  }
+  get AdvSrcSearchText(){
+    return this.itemsearchform.get('search_text');
   }
 
    setLastTimeOfDay(dateObj){
