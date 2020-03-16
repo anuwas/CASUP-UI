@@ -15,6 +15,7 @@ import { CalendarModule } from 'primeng/calendar';
 import { DevAllItemComponent } from './dev-all-item/dev-all-item.component';
 import { DevSprintComponent } from './dev-sprint/dev-sprint.component';
 import { DevDailyScrumComponent } from './dev-daily-scrum/dev-daily-scrum.component';
+import { ReleaseItemComponent } from './release-item/release-item.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import { DevDailyScrumComponent } from './dev-daily-scrum/dev-daily-scrum.compon
     DevAllItemComponent,
     DevSprintComponent,
     DevDailyScrumComponent,
+    ReleaseItemComponent,
   ],
   imports: [
     BrowserModule,

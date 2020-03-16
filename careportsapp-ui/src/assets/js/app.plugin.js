@@ -219,6 +219,7 @@
 	  })
 	};
 
+/*
 	$('.portlet').each(function(){
 		$(".portlet").sortable({
 	        connectWith: '.portlet',
@@ -233,7 +234,7 @@
             tolerance: 'pointer'
 	    });
     });
-
+*/
 
   });
 }(window.jQuery);

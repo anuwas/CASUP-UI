@@ -388,25 +388,25 @@
                        </div>
                        <div class="form-group" >
                           <label for="exampleSelect1">Breach Justification</label> 
-                          <textarea name="item_description" formControlName="breach_justification"   class="form-control" placeholder="Justification" ></textarea>
+                          <textarea name="breach_justification" formControlName="breach_justification"   class="form-control" placeholder="Justification" ></textarea>
                        </div>  
                        <div class="col-sm-4" style="padding-left: 0px;">
                         <div class="form-group" >
                           <label for="exampleSelect1">Debt Class</label>
-                          <select name="debt_class" formControlName="debt_class"  class="form-control"  >
-                          <option value="null"> - Select -</option>    
+                          <select name="debt_class" class="form-control"  formControlName="debt_class">
+                         <option value="null"> - Select -</option>    
                           <option value="Technical">Technical</option>  
                           <option value="Functional">Functional</option>
                           <option value="Operational">Operational</option>
                           <option value="Knowledge">Knowledge</option>
-                          </select>
+                        </select>
                         </div>
                       </div>
                       <div class="col-sm-4" >
                         <div class="form-group" >
                           <label for="exampleSelect1">Debt Type</label>
                           <select name="debt_type" formControlName="debt_type" class="form-control"  >
-                          <option value="null"> - Select -</option>    
+                          <option value="null"> - Select - </option>    
                           <option value="Avoidable">Avoidable</option>  
                           <option value="Unavoidable">Unavoidable</option>
                           </select>
@@ -422,13 +422,11 @@
                           <option value="Automate">Automate</option>
                           </select>
                         </div>
-                      </div>
-                      <div class="col-sm-12" style="padding: 0px;">
+                      </div> 
                         <div class="form-group">
                           <label for="exampleSelect1">Debt Comment</label> 
                           <input type="text" name="debt_comment" formControlName="debt_comment" class="form-control" placeholder="Comment" >
                         </div>
-                      </div>
                       <div class="col-sm-4" style="padding-left: 0px;">
                         <div class="form-group">
                           <label for="exampleSelect1">Associated Item</label> 
@@ -451,6 +449,7 @@
                           <option value="EPS">EPS</option>  
                           <option value="SAP">SAP</option>
                           <option value=".Net">.Net</option>
+                          <option value="Other">Other</option>
                         </select>
                         </div>                                                
                       </div>        
