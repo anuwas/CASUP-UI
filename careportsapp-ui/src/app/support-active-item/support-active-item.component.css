@@ -30,5 +30,26 @@
      font-weight: 500;
 }
 
+:host /deep/ .table .table-striped > tbody > tr.shared_rca > td{
+     background-color: #1e4c15 !important;
+     color: black;
+     font-weight: 500;
+}
+:host /deep/ .table .table-striped > tbody > tr.review_rca > td{
+     background-color: #32921f !important;
+     color: black;
+     font-weight: 500;
+}
+:host /deep/ .table .table-striped > tbody > tr.completed_rca > td{
+     background-color: #5ed447 !important;
+     color: black;
+     font-weight: 500;
+}
+:host /deep/ .table .table-striped > tbody > tr.inprogress_rca > td{
+     background-color: #99d68d !important;
+     color: black;
+     font-weight: 500;
+}
+
 
 

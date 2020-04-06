@@ -233,7 +233,7 @@ public date: any;
         }
     }
 
-getColorClass(role: string) {
+getColorClass(role: string, tasktype : string) {
   let returnValue;
   switch (role) {
   case 'Done':
@@ -248,8 +248,19 @@ getColorClass(role: string) {
   default:
     returnValue = 'white';
 }
-return returnValue;
+
+let returnValueSubtask;
+if(tasktype==null || tasktype==''){
+  returnValueSubtask = 'task';
+  
+  }else{
+  returnValueSubtask = 'subtask';
+  }
+
+
+return returnValue+' '+returnValueSubtask ;
 }
+
 
  get DevItemId(){
     return this.itemsaveform.get('dev_item_id');

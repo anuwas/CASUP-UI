@@ -342,8 +342,17 @@ UpdatableItemActivity(updateItemObject:Object,updateItemName:any){
 
 problemRecordSettings = {
   rowClassFunction: (row) => {
-          if (row.cells[2].newValue === 'Active') {
+
+          if (row.cells[2].newValue === 'Pending') {
               return 'active_item';
+          }else if (row.cells[2].newValue === 'Shared') {
+              return 'shared_rca';
+          }else if (row.cells[2].newValue === 'Review') {
+              return 'review_rca';
+          }else if (row.cells[2].newValue === 'Completed') {
+              return 'completed_rca';
+          }else if (row.cells[2].newValue === 'Inprogress') {
+              return 'inprogress_rca';
           }
         },
  
@@ -379,28 +388,6 @@ problemRecordSettings = {
         title: 'Item Number',
         width: '12%',
       },
-      itemType: {
-        title: 'Type',
-        editor: {
-        type: 'list',
-        config: {
-                  selectText: 'Show All',
-                  list: [
-                        { value: 'Problem Record', title: 'Problem Record' },
-                  ]
-                }
-        },
-        filter: {
-        type: 'list',
-        config: {
-                  selectText: 'Show All',
-                  list: [
-                        { value: 'Problem Record', title: 'Problem Record' },
-                  ]
-                }
-        },
-        width: '12%',
-      },
       itemStatus: {
         title: 'Status',
         width: '15%',
@@ -425,6 +412,36 @@ problemRecordSettings = {
                         { value: 'Investivation', title: 'Investivation' },
                         { value: 'Planned into Release', title: 'Planned into Release' },
                         { value: 'Identified', title: 'Identified' },
+                  ]
+                }
+        }
+      },
+      rcaDocument: {
+        title: 'RCA',
+        width: '15%',
+        editor: {
+        type: 'list',
+        config: {
+                  selectText: 'Show All',
+                  list: [
+                        { value: 'Pending', title: 'Pending' },
+                        { value: 'Inprogress', title: 'Inprogress' },
+                        { value: 'Review', title: 'Review' },
+                        { value: 'Completed', title: 'Completed' },
+                        { value: 'Shared', title: 'Shared' },
+                  ]
+                }
+        },
+        filter: {
+        type: 'list',
+        config: {
+                  selectText: 'Show All',
+                  list: [
+                        { value: 'Pending', title: 'Pending' },
+                        { value: 'Inprogress', title: 'Inprogress' },
+                        { value: 'Review', title: 'Review' },
+                        { value: 'Completed', title: 'Completed' },
+                        { value: 'Shared', title: 'Shared' },
                   ]
                 }
         }

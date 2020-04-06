@@ -63,7 +63,9 @@
                       <option value="BULATS">BULATS</option>
                       <option value="RVS">RVS</option>
                       <option value="CIE Direct">CIE Direct</option>
+                      <option value="CIE Direct">CIE Checkpoint</option>
                       <option value="Entries Externate">Entries Externate</option>
+                      <option value="STS Singapore">STS Singlapore</option>
                     </select>                
                   </div>
                    <div class="col-sm-1">
@@ -95,6 +97,8 @@
                       <option value="Task">Task</option>
                       <option value="Sub Task">Sub Task</option>
                       <option value="Spike">Spike</option>
+                      <option value="Automation">Automation</option>
+                      <option value="Testing">Testing</option>
                     </select>                
                   </div>
                   <div class="col-sm-2 m-b-xs">
@@ -102,14 +106,20 @@
                       <option value="All"> --Assigned-- </option>
                       <option value="Amit">Amit</option>
                       <option value="Bappa">Bappa</option>
-                      <option value="Munshi">Munshi</option>
                       <option value="Prodyut">Prodyut</option>
+                      <option value="Prolayjit">Prolayjit</option>
+                      <option value="Ayan">Ayan</option>
                       <option value="Other">Other</option>
                     </select>                
                   </div>
                   <div class="col-sm-2 m-b-xs">
                     <select class="input-sm form-control input-s-sm inline" formControlName="adv_search_sprint_name">
                       <option value="All"> --Sprint-- </option>
+                      <option value="Sprint-15">Sprint 15</option>
+                      <option value="Sprint-14">Sprint 14</option>
+                      <option value="Sprint-13">Sprint 13</option>
+                      <option value="Sprint-12">Sprint 12</option>
+                      <option value="Sprint-11">Sprint 11</option>
                       <option value="Sprint-10">Sprint 10</option>
                       <option value="Sprint-9">Sprint 9</option>
                       <option value="Sprint-8">Sprint 8</option>  
@@ -121,8 +131,12 @@
                     <select class="input-sm form-control input-s-sm inline" formControlName="adv_search_project">
                       <option value="All"> --Project-- </option>
                       <option value="STS Singapore">STS Singlapore</option>
-                      <option value="Technical">Technical</option>
-                      <option value="Knowledge">Knowledge</option>
+                      <option value="STS">STS</option>
+                      <option value="BULATS">BULATS</option>
+                      <option value="RVS">RVS</option>
+                      <option value="CIE Direct">CIE Direct</option>
+                      <option value="CIE Direct">CIE Checkpoint</option>
+                      <option value="Entries Externate">Entries Externate</option>
                     </select>                
                   </div>
                   <div class="col-sm-2">
@@ -162,7 +176,7 @@
                       </tr>
                     </thead>
                     <tbody>
-                      <tr *ngFor="let devitemOb of devitemObjList  | paginate: config " [ngClass]="getColorClass(devitemOb.itemStatus)">
+                      <tr *ngFor="let devitemOb of devitemObjList  | paginate: config " [ngClass]="getColorClass(devitemOb.itemStatus,devitemOb.parentItem)">
                        
                         <td>{{ devitemOb.devItemId }}</td>
                         <td>{{ devitemOb.itemNumber }}</td>
@@ -269,7 +283,9 @@
                           <option value="BULATS">BULATS</option>
                           <option value="RVS">RVS</option>
                           <option value="CIE Direct">CIE Direct</option>
+                          <option value="CIE Direct">CIE Checkpoint</option>
                           <option value="Entries Externate">Entries Externate</option>
+                          <option value="STS Singapore">STS Singlapore</option>
                           </select>
                         </div>
                         
@@ -281,11 +297,13 @@
                           <label for="exampleSelect1">Project Name</label> 
                           <select name="project_name" formControlName="project_name" class="form-control" >
                           <option value="">  -- Select -- </option>  
-                          <option value="STS Singapore">STS Singapore</option>
+                          <option value="STS">STS</option>
                           <option value="BULATS">BULATS</option>
                           <option value="RVS">RVS</option>
                           <option value="CIE Direct">CIE Direct</option>
+                          <option value="CIE Direct">CIE Checkpoint</option>
                           <option value="Entries Externate">Entries Externate</option>
+                          <option value="STS Singapore">STS Singlapore</option>
                           </select>
                         </div>
                         
@@ -296,6 +314,11 @@
                           <label for="exampleSelect1">Sprint</label> 
                           
                           <select name="sprint_name" formControlName="sprint_name" class="form-control">
+                          <option value="Sprint-15">Sprint 15</option>
+                          <option value="Sprint-14">Sprint 14</option>
+                          <option value="Sprint-13">Sprint 13</option>
+                          <option value="Sprint-12">Sprint 12</option>
+                          <option value="Sprint-11">Sprint 11</option>
                           <option value="Sprint-10">Sprint 10</option>
                           <option value="Sprint-9">Sprint 9</option>
                           <option value="Sprint-8">Sprint 8</option>  
@@ -309,10 +332,10 @@
                           <label for="exampleSelect1">Developer</label>
                           <select name="developer_name" formControlName="developer_name" class="form-control">
                             <option value="">  -- Select -- </option>  
-                            <option value="Amit">Amit</option>
                             <option value="Bappa">Bappa</option>
-                            <option value="Munshi">Munshi</option>
                             <option value="Prodyut">Prodyut</option>
+                            <option value="Prolayjit">Prolayjit</option>
+                            <option value="Ayan">Ayan</option>
                             <option value="Other">Other</option>
                           </select> 
                         </div>
@@ -323,9 +346,6 @@
                           <select name="tester_name" formControlName="tester_name" class="form-control">
                             <option value="">  -- Select -- </option>  
                             <option value="Amit">Amit</option>
-                            <option value="Bappa">Bappa</option>
-                            <option value="Munshi">Munshi</option>
-                            <option value="Produyt">Produyt</option>
                             <option value="Other">Other</option>
                           </select> 
                         </div>

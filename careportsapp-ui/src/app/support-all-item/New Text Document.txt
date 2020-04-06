@@ -1,4 +1,0 @@
-debt_comment
-
-	  @Column(name = "debt_comment")
-	  private String debtComment;

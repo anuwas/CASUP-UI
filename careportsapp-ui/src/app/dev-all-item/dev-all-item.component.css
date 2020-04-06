@@ -7,7 +7,7 @@
 
 
 .panel .table-striped > tbody > tr.done > td{
-     background-color: #b2e697 !important;
+     background-color: #408e39 !important;
      color: black;
      font-weight: 500;
 }
@@ -20,5 +20,14 @@
 
 .panel .table-striped > tbody > tr.inprogress > td{
      background-color: #d9f5d2 !important;
+}
+
+.panel .table-striped > tbody > tr.task > td{
+     font-weight: 600;
+}
+
+.panel .table-striped > tbody > tr.subtask > td{
+     font-weight: 300;
+     font-style: italic;
 }
 
