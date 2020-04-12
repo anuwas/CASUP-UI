@@ -1,0 +1,199 @@
+
+<section class="scrollable wrapper">
+          <div class="row">
+          <div class="col-md-12">
+            <section class="panel">
+                <header class="panel-heading">
+                  All Items
+                </header>
+                <form [formGroup]="taskSearchForm" id="devsearchItem" (ngSubmit)="searchItemSubmit(searchItem)">
+                <div class="row text-sm wrapper">
+                  <div class="col-sm-12 m-b-xs">
+                    <select class="input-sm form-control input-s-sm inline" formControlName="task_status_src">
+                      <option value="All">All Status</option>
+                      <option value="Pending">Pending</option>
+                      <option value="Inprogress">Inprogress</option>
+                      <option value="Pending">Done</option>
+                    </select>                    
+
+                    <select class="input-sm form-control input-s-sm inline" style="margin-left: 5px;" formControlName="task_priority_src">
+                      <option value="All">All Priority</option>
+                      <option value="High">High</option>
+                      <option value="Medium">Medium</option>
+                      <option value="Low">Low</option>
+                    </select>                   
+
+                    
+                    <p-calendar  placeholder="From Date" [showIcon]="true"  dateFormat="yy-mm-dd" style="margin-left: 5px;" [style]="{'width':'85%'}" [inputStyle]="{'width':'75%'}"  useUtc class="iform-control  inline" formControlName="task_from_date_src"></p-calendar>
+
+                    <p-calendar  placeholder="To Date" [showIcon]="true"  dateFormat="yy-mm-dd" [style]="{'width':'85%'}" [inputStyle]="{'width':'75%'}"  useUtc class="iform-control  inline" formControlName="task_to_date_src"></p-calendar>
+
+                    <input type="text" name="follow_up_to_src" class="input-sm form-control input-s-sm inline" placeholder="Follow Up" style="margin-left: 5px;" formControlName="follow_up_to_src">
+
+                    <button class="btn btn-sm btn-white" style="margin-left: 2px;" type="submit">Apply</button>                
+                  </div>
+                  
+                 
+                </div>
+
+              </form>
+                <div class="table-responsive">
+                  <table class="table table-striped b-t text-sm">
+                    <thead>
+                      <tr>
+                        <th width="5%" class="th-sortable" data-toggle="class">ID</th>
+                        <th width="10%">Task</th>
+                        <th width="30%">Description</th>
+                        <th width="8%">Priority</th>                        
+                        <th width="8%">Follow Up</th>
+                        <th width="8%">Status</th>
+                        <th width="8%">Scheduled</th>
+                        <th width="5%"><span class="label pull-right">
+                      <a href="#releasemodal" data-toggle="modal" class="btn btn-xs btn-success add-dev-item-button" data-backdrop="static" data-keyboard="false" (click)="addItemModalOpen()"><i class="fa fa-plus" aria-hidden="true"></i> Add</a>
+                    </span></th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let taskSchedulerObj of taskSchedulerObjList | paginate: config" [ngClass]="getColorClass(taskSchedulerObj.taskStatus)">
+                        <td>{{ taskSchedulerObj.taskSchedulerId }}</td>
+                        <td>{{ taskSchedulerObj.taskName }}</td>
+                        <td><span *ngIf="taskSchedulerObj.taskDescription!=null && taskSchedulerObj.taskDescription.length<=50;else subsubject">{{ taskSchedulerObj.taskDescription }}</span>
+                          <ng-template #subsubject>
+                            {{ taskSchedulerObj.taskDescription | slice:0:50 }} ....taskSchedulerObj
+                          </ng-template>
+                        </td>
+                        <td>{{ taskSchedulerObj.priority }}</td>
+                        <td>{{ taskSchedulerObj.followUpTo }}</td>
+                        <td>{{ taskSchedulerObj.taskStatus }}</td>
+                        <td>{{ taskSchedulerObj.taskScheduledDate | date:'yyyy-MM-dd'}}</td> 
+                        <td><a href="#releasemodal" data-toggle="modal" data-backdrop="static" data-keyboard="false"><i class="fa fa-edit fa-lg devitem-edit-item-button" (click)="getUpdateTasks(taskSchedulerObj.taskSchedulerId)"></i></a>&nbsp;<a href="#devmodalview" data-toggle="modal" data-backdrop="static" data-keyboard="false"><i class="fa fa-cog fa-lg devitem-report-edit-item-button" (click)="getReportUpdateItem(taskSchedulerObj.taskSchedulerId)"></i></a>&nbsp;<a href="javascript:void(0)"><i class="fa fa-trash-o fa-lg" (click)="getRemoveTask(taskSchedulerObj.taskSchedulerId)"></i></a></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                
+                <form [formGroup]="taskSchedulerSaveForm" id="taskSchedulerSaveForm" (ngSubmit)="saveAndUpdateScheduledTask(saveItem)">
+                <div class="modal fade" id="releasemodal">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal" aria-hidden="true" (click)="addItemModalClose()">&times;</button>
+                  <h4 class="modal-title">Add New Task</h4>
+                </div>
+
+                <div class="modal-body">
+                  <div class="row">
+                    <div class="col-sm-12">
+                      <input type="hidden" class="form-control"  formControlName="task_scheduler_id">
+                        
+                        <div class="col-sm-6" >
+                        <div class="form-group">
+                          <label for="exampleSelect1">Task</label>
+                          <input type="text" name="task_name" formControlName="task_name" class="form-control" placeholder="Task">
+                        </div>
+                      </div>
+                        <div class="col-sm-3" >
+                        <div class="form-group">
+                          <label for="exampleSelect1">Priority</label>
+                           <select name="task_priority" formControlName="task_priority" class="form-control" >
+                          <option value="High">High</option>
+                          <option value="Medium">Medium</option>
+                          <option value="Low">Low</option>
+                          </select>
+                        </div>
+                      </div>
+                      <div class="col-sm-3" >
+                        <div class="form-group">
+                          <label for="exampleSelect1">Status</label> 
+                          <select name="task_status" formControlName="task_status" class="form-control" >
+                          <option value="Pending">Pending</option>
+                          <option value="Inprogress">Inprogress</option>
+                          <option value="Done">Done</option>
+                          </select>
+                        </div>
+                        </div>
+                      
+                      <div class="col-sm-6" >
+                        <div class="form-group">
+                          <label for="exampleSelect1">Task Scheduled Date</label>
+                          <p-calendar placeholder="Scheduled Date" [showIcon]="true" dateFormat="yy-mm-dd"  useUtc hourFormat="24" formControlName="task_scheduled_date" [monthNavigator]="true" [yearNavigator]="true" yearRange="2016:2030"></p-calendar>
+                        </div>
+                      </div>
+                      <div class="col-sm-6" >
+                        <div class="form-group">
+                          <label for="exampleSelect1">Follow Up</label>
+                        
+                          <input type="text" name="follow_up_to" formControlName="follow_up_to" class="form-control" placeholder="Follow Up">
+                        </div>
+                      </div>
+                      
+                                        
+                      <div class="form-group">
+                        <label for="exampleSelect1">Description</label>
+                        <textarea name="task_description" formControlName="task_description"  class="form-control" placeholder="Task Description"></textarea>
+                      </div>
+                      <div class="form-group">
+                        <label for="exampleSelect1">Comment</label>
+                        <textarea name="comment" formControlName="comment"  class="form-control" placeholder="Comment"></textarea>
+                      </div>                                     
+                  </div>
+                </div>
+              </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-white" data-dismiss="modal" (click)="addItemModalClose()" >Close</button>
+                  <button type="submit" class="btn btn-info" data-loading-text="Updating..." id="itemSubmitButton">Save changes</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          </form>
+
+
+          <div class="modal fade" id="devmodalview">
+            <div class="dev-view-modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal" aria-hidden="true" (click)="addItemModalClose()">&times;</button>
+                  <h4 class="modal-title">Add Item</h4>
+                </div>
+
+                <div class="modal-body">
+                  <div class="row">
+                    <div class="col-sm-12">
+                                     
+                  </div>
+                </div>
+              </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-white" data-dismiss="modal" (click)="addItemModalClose()" >Close</button>
+                  <button type="submit" class="btn btn-info" data-loading-text="Updating..." id="itemSubmitButton">Save changes</button>
+                </div>
+              </div>
+            </div>
+          </div>
+                <footer class="panel-footer">
+                  <div class="row">
+                    <div class="col-sm-4 hidden-xs">
+                      <select class="input-sm form-control input-s-sm inline">
+                        <option value="1">Delete selected</option>
+                        <option value="3">Export</option>
+                      </select>
+                      <button class="btn btn-sm btn-white">Apply</button>                  
+                    </div>
+                    <div class="col-sm-4 text-center">
+                      <small class="text-muted inline m-t-sm m-b-sm">showing 20-30 of {{config.totalItems}} items</small>
+                    </div>
+                    <div class="col-sm-4 text-right text-center-xs">     
+                      <div class="has-text-centered">
+    <div class="spinner" [ngClass]="{ 'hidden': !loading }"></div>
+    <pagination-controls (pageChange)="getPage($event)" ></pagination-controls>
+</div> 
+                    </div>
+                  </div>
+                </footer>
+              </section>
+          </div>
+          </div>          
+        </section>
+        <ngx-spinner></ngx-spinner>
