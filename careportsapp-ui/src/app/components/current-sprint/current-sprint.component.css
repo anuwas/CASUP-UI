@@ -1,0 +1,5 @@
+::ng-deep .row-custom{
+    background-color: #c5cac4 !important;
+    color: black;
+    font-weight: 500;
+}
