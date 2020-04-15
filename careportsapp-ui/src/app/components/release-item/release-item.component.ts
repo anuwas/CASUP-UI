@@ -101,6 +101,16 @@ public date: any;
     this.advanceSearchToggleBtnclickEventstats = !this.advanceSearchToggleBtnclickEventstats; 
   }
 
+  getRemoveReleaseItem(releaseItemId){
+  if(confirm("Are you sure to delete this Task "+releaseItemId)) {
+          //console.log("Implement delete functionality here");
+          this.releaseService.deleteReleaseItem(releaseItemId)
+              .subscribe(data => {
+              this.getPage(this.config.currentPage);
+          });
+          }
+  }
+
    modalCloseJquery(){
     setTimeout(function() { 
           this.$('#releasemodal').modal('hide'); 

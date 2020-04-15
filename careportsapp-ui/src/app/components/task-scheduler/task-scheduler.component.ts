@@ -39,7 +39,7 @@ public date: any;
      getPage(page: number) {
       this.spinner.show();
       this.config.currentPage=page;
-      console.log(this.taskSchedulerRequestAttributes);
+      //console.log(this.taskSchedulerRequestAttributes);
       this.taskSchedulerService.getAllScheduledTaskByRequest(this.taskSchedulerRequestAttributes,page).subscribe(data =>{
 
         this.taskSchedulerObjList = this.getScheduledTaskDataContent(data,'content');
@@ -71,11 +71,18 @@ taskSchedulerSaveForm=new FormGroup({
     task_name:new FormControl(),
     task_priority:new FormControl('High'),
     task_status:new FormControl('Pending'),
-    task_scheduled_date:new FormControl(),
+    task_scheduled_date:new FormControl(new Date()),
     follow_up_to:new FormControl(),
     task_description:new FormControl(),
     comment:new FormControl()
   });
+
+  addNewTaskBtnClk(){
+        this.taskSchedulerSaveForm.patchValue({
+         task_priority:'High',
+         task_status:'Pending',
+         task_scheduled_date:new Date()});
+  }
 
    
   taskSchedulerActivitySaveForm=new FormGroup({
@@ -180,7 +187,7 @@ taskSchedulerSaveForm=new FormGroup({
 
   getRemoveTask(itemid){
       if(confirm("Are you sure to delete this Task "+itemid)) {
-        console.log("Implement delete functionality here");
+        //console.log("Implement delete functionality here");
         this.taskSchedulerService.deleteScheduledTask(itemid)
             .subscribe(data => {
             this.getPage(this.config.currentPage);
@@ -189,7 +196,7 @@ taskSchedulerSaveForm=new FormGroup({
     }
 
  getScheduledTaskDataContent(responseData:Object,contentName:any){
-  console.log(responseData[contentName]);
+ // console.log(responseData[contentName]);
     return responseData[contentName];
   }
 

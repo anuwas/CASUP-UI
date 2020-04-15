@@ -1,15 +1,15 @@
 .panel .table-striped > tbody > tr.done > td{
-     background-color: #a6ada5 !important;
+     background-color: #d2d2d2 !important;
      color: black;
      font-weight: 500;
 }
 
 .panel .table-striped > tbody > tr.pending > td{
-     background-color: #f30606bd !important;
+     background-color: #f38e8ebd !important;
      color: black;
      font-weight: 500;
 }
 
 .panel .table-striped > tbody > tr.inprogress > td{
-     background-color: #f9b2b2 !important;
+     background-color: #d1f3db !important;
 }

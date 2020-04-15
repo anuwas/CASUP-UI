@@ -31,22 +31,22 @@
 }
 
 :host /deep/ .table .table-striped > tbody > tr.shared_rca > td{
-     background-color: #1e4c15 !important;
+     background-color: #7bd069 !important;
      color: black;
      font-weight: 500;
 }
 :host /deep/ .table .table-striped > tbody > tr.review_rca > td{
-     background-color: #32921f !important;
+     background-color: #ece697 !important;
      color: black;
      font-weight: 500;
 }
 :host /deep/ .table .table-striped > tbody > tr.completed_rca > td{
-     background-color: #5ed447 !important;
+     background-color: #b9f1ae !important;
      color: black;
      font-weight: 500;
 }
 :host /deep/ .table .table-striped > tbody > tr.inprogress_rca > td{
-     background-color: #99d68d !important;
+     background-color: #f5d9d9 !important;
      color: black;
      font-weight: 500;
 }

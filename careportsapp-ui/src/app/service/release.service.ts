@@ -24,4 +24,8 @@ private baseUrl = '';
   createReleaseItem(item: object): Observable<object> {
     return this.http.post(`${this.baseUrl}`+'/save-release-item', item);
   }
+
+  deleteReleaseItem(releaseItemId: number): Observable<any> {
+    return this.http.delete(`${this.baseUrl}/delete-release-item/${releaseItemId}`, { responseType: 'text' });
+  }
 }
