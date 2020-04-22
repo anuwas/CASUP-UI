@@ -1,0 +1,100 @@
+<section class="scrollable wrapper">
+    <div class="row">
+        <div class="col-md-12">
+            <section class="panel">
+                <header class="panel-heading">
+                  All Active Items
+                </header>
+                <div class="table-responsive">
+                	<button (click)="collapseAll()">Collapse All</button><button (click)="expandAll()">Expand All</button>
+    				<p></p>
+                  <db-angular-tree-grid #angularGrid [data]="devitemObjList" (rowsave)="onRowSave($event)"  (rowdelete)="onRowDelete($event)" (cellclick)="onCellClick($event)" [configs]="configs"></db-angular-tree-grid>
+                </div>
+                <footer class="panel-footer">
+                  <div class="row">
+                  </div>
+                </footer>
+              </section>
+        </div>
+    </div> 
+    <form [formGroup]="taskSchedulerActivitySaveForm" id="taskActivity" (ngSubmit)="saveTaskActivity(taskActivity)">
+          <div class="modal fade" id="devdailystatusmodal">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                   <button type="button" class="close" data-dismiss="modal" aria-hidden="true" (click)="actvivityModalClose()">&times;</button>
+                  <h4 class="modal-title">{{devitemObjActivity.itemNumber}}</h4>
+                  <div>{{devitemObjActivity.itemSubject}}</div>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                      
+                      
+                    </div>       
+                  <section class="scrollable">
+                  <div class="tab-content">
+                    <div class="tab-pane active" id="activity">
+                      <section class="comment-list block">
+                  <article class="comment-item media" id="comment-form">
+                    <a class="pull-left thumb-sm avatar"><img src="assets/images/avatar.jpg" class="img-circle"></a>
+                    <section class="media-body">
+                      
+                        <div class="input-group">
+                          <input type="text" name="activity_current_status " formControlName="activity_current_status"  class="form-control" placeholder="Input your comment here">
+                          
+                          <!-- <textarea name="sup_item_activity" formControlName="sup_item_activity" class="form-control" placeholder="Current Activity"></textarea> -->
+                          <span class="input-group-btn">
+                            <button class="btn btn-primary" type="submit">POST</button>
+                          </span>
+                        </div>
+                        <div >
+                         
+                          <!-- <div class="alert alert-danger" *ngIf = "(SupItemActivity.touched) && (SupItemActivity.invalid)" 
+                style="margin-top: 5px;">
+                  <span *ngIf="SupItemActivity.errors.required">Please insert your activity </span>
+                                      
+                </div> -->
+                          
+                        </div>
+                    </section>
+                  </article> 
+
+                   <article id="comment-id-1" class="comment-item" *ngFor="let itemActivityObj of devItemActivityObjList">
+                    <a class="pull-left thumb-sm avatar">
+                      <img src="assets/images/avatar.jpg" class="img-circle">
+                    </a>
+                    <span class="arrow left"></span>
+                    <section class="comment-body panel">
+                      <header class="panel-heading">
+                        <!-- <a href="javascript:void(0)">APO</a> -->
+                        <label class="label bg-info m-l-xs">{{devitemObjActivity.developerName}}</label> 
+                        <span class="text-muted m-l-sm pull-right">
+                          <i class="fa fa-clock-o"></i>
+                          {{ itemActivityObj.statusDate | date:'EEEE, MMM d, y, h:mm:ss a'}}
+                        </span>
+                      </header>
+                      <div class="panel-body">
+                        <div>{{itemActivityObj.currentStatus}}</div>
+                        <div class="comment-action m-t-sm">
+                          
+                        </div>
+                      </div>
+                    </section>
+                  </article> 
+                                    
+                </section>
+                    </div>
+                    
+                    
+                  </div>
+                </section>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-white" data-dismiss="modal">Close</button>
+                 </div>
+              </div><!-- /.modal-content -->
+            </div><!-- /.modal-dialog -->
+          </div>
+        </form>
+</section>
+<ngx-spinner></ngx-spinner>    

@@ -1,0 +1,13 @@
+::ng-deep .row-custom{
+    background-color: #c5cac4 !important;
+    color: black;
+    font-weight: 500;
+}
+::ng-deep .subItem{
+    background-color: #f3f5f3 !important;
+    color: black;
+    font-weight: 500;
+}
+::ng-deep .devitemdailystatus{
+cursor: pointer;
+}
