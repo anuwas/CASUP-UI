@@ -1,0 +1,34 @@
+::ng-deep .row-custom{
+    background-color: #c5cac4 !important;
+    color: black;
+    font-weight: 500;
+}
+::ng-deep .subItem{
+    background-color: #f3f5f3 !important;
+    color: black;
+    font-weight: 500;
+    font-style: italic;
+}
+::ng-deep .inprogress-subItem{
+    background-color: #caf3d1 !important;
+    color: black;
+    font-weight: 500;
+    font-style: italic;
+}
+::ng-deep .done-subItem{
+    background-color: #54bb66 !important;
+    color: black;
+    font-weight: 500;
+    font-style: italic;
+}
+::ng-deep .block-subItem{
+    background-color: #f76e6e !important;
+    color: black;
+    font-weight: 500;
+    font-style: italic;
+}
+
+
+::ng-deep .devitemdailystatus{
+cursor: pointer;
+}
