@@ -1,0 +1,44 @@
+::ng-deep .row-custom{
+    background-color: #a4a9a3 !important;
+    color: black;
+    font-weight: 500;
+}
+::ng-deep .story-inprogress{
+    background-color: #a4a9a3 !important;
+    color: #0a5201;
+    font-weight: 500;
+}
+::ng-deep .story-done{
+    background-color: #54bb66 !important;
+    color: black;
+    font-weight: 500;
+}
+::ng-deep .subItem{
+    background-color: #f3f5f3 !important;
+    color: black;
+    font-weight: 500;
+    font-style: italic;
+}
+::ng-deep .inprogress-subItem{
+    background-color: #d9e0f9 !important;
+    color: black;
+    font-weight: 500;
+    font-style: italic;
+}
+::ng-deep .done-subItem{
+    background-color: #a4a3e0 !important;
+    color: black;
+    font-weight: 500;
+    font-style: italic;
+}
+::ng-deep .block-subItem{
+    background-color: #f76e6e !important;
+    color: black;
+    font-weight: 500;
+    font-style: italic;
+}
+
+
+::ng-deep .devitemdailystatus{
+cursor: pointer;
+}
